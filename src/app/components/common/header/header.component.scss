@@ -1,0 +1,30 @@
+.container{
+  width: 90%;
+  height: 7rem;
+  background-color: #dcdcdc;
+}
+
+p{
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  color: #6a6e73;
+}
+
+p:hover{ color: #333 }
+
+p::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 1px;
+  background-color: #333;
+  bottom: -30%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+p:hover::after { width: 70% }
+
+img{ cursor: pointer }
