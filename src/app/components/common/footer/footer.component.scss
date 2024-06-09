@@ -1,0 +1,41 @@
+h3{ color: #dcdcdc;}
+
+p{ color: #a7a7a7;}
+
+ul{
+  display: flex;
+  justify-content: space-between;
+  padding: 3rem 8rem;
+}
+
+li{
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.logo-container{
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  font-size: larger;
+  .logo{ width: 4rem; }
+}
+
+.tags{
+  width: 10.15rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .25rem;
+  p{
+    border: 3px solid #7e7e7e;
+    border-radius: 10px;
+    width: min-content;
+    padding: .3rem .7rem;
+    font-size: .7rem;
+  }
+}
+
+.social_media > img{
+    width: 1.5rem;
+  }
