@@ -1,0 +1,34 @@
+.card{
+  background-color: #b3b3b3;
+  width: 17rem;
+  height: 20rem;
+}
+
+.icon-star, .icon-button{
+  font-size: 11px;
+  background-color: white;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.icon-button{
+  border-radius: 50%;
+  padding: 6px;
+}
+
+.icon-star{
+  border-radius: 6px;
+}
+
+h3{
+  font-weight: 500;
+}
+
+span{
+  font-size: 12px;
+}
+
+p{
+  font-size: 10px;
+}
+
