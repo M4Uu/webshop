@@ -1,0 +1,23 @@
+<form
+  class="flex flex-col gap-6 px-16 py-14"
+  [formGroup]="loginForm"
+  (ngSubmit)="onSubmit()"
+>
+  <h1 class="text-center text-4xl font-semibold pb-6 text-white">Login From</h1>
+  <div class="flex flex-col">
+    <input type="email" formControlName="email" placeholder="Your email address">
+    <span class="!text-red-600" [hidden]="email?.valid">Inválido</span>
+  </div>
+  <div class="flex flex-col">
+    <input type="password" formControlName="password" placeholder="Your password">
+    <span class="!text-red-600" [hidden]="password?.valid">Inválido</span>
+  </div>
+  <div class="flex gap-2 items-center">
+    <input type="checkbox" name="checkbox">
+    <span>Acepto los Términos y Condiciones</span>
+  </div>
+  <button class="button py-2" type="submit" [disabled]="loginForm.invalid">
+    Login
+  </button>
+</form>
+

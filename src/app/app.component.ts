@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import AOS from 'aos';
-
-import { HeaderComponent } from './components/common/header/header.component';
-import { FooterComponent } from './components/common/footer/footer.component';
-
 import { BgService } from './core/bg-service/bg.service';
 
 @Component({
@@ -12,8 +8,6 @@ import { BgService } from './core/bg-service/bg.service';
   standalone: true,
   imports: [
     RouterOutlet,
-    HeaderComponent,
-    FooterComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

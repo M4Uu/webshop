@@ -1,45 +1,50 @@
-<section class="columns-2 flex flex-col items-center xl:flex-row gap-14 mx-auto lg:mx-36 my-20">
-  <div class="w-[50%] flex flex-col gap-5 self-center">
-    <h1 class="text-6xl font-semibold">Titulo</h1>
+<main>
+  <app-header/>
+  <section class="columns-2 flex flex-col items-center xl:flex-row gap-14 mx-auto lg:mx-36 my-20">
+    <div class="w-[50%] flex flex-col gap-5 self-center">
+      <h1 class="text-6xl font-semibold">Titulo</h1>
 
-    <p class="text-3xl">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+      <p class="text-3xl">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
 
-    <div class="flex flex-col xl:flex-row gap-8 my-4">
-      <button>Registrate</button>
-      <button>¿Ya tienes cuenta?</button>
+      <div class="flex flex-col xl:flex-row gap-8 my-4">
+        <button>Registrate</button>
+        <button>¿Ya tienes cuenta?</button>
+      </div>
+
+      <span class="text-xl">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</span>
+
+      <p class="text-2xl">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
     </div>
+    <img
+      class="bg-cover w-[50%] bg-center"
+      src="image/image-home.png"
+      alt="image"
+    >
+  </section>
 
-    <span class="text-xl">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</span>
-
-    <p class="text-2xl">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
-  </div>
-  <img
-    class="bg-cover w-[50%] bg-center"
-    src="image/image-home.png"
-    alt="image"
-  >
-</section>
-
-<section class="flex justify-center mb-14">
-  <div class="container-cards py-10 px-5">
-    <h1 class="text-4xl text-white pb-5">¿Qué estás buscando?</h1>
-    <div class="filter">
-      <button class="b-filt">FILT</button>
-      <input type="text" placeholder="plaeholder">
-      <button class="b-fetch">BUS</button>
+  <section class="flex justify-center mb-14">
+    <div class="container-cards py-10 px-5">
+      <h1 class="text-4xl text-white pb-5">¿Qué estás buscando?</h1>
+      <div class="filter">
+        <button class="b-filt">FILT</button>
+        <input type="text" placeholder="plaeholder">
+        <button class="b-fetch">BUS</button>
+      </div>
+      <div class="container">
+        <p-carousel
+          [value]="products"
+          [numVisible]="4"
+          [numScroll]="1"
+          [circular]="false">
+          <ng-template let-product pTemplate="item">
+            <div class=" flex justify-center">
+              <app-card/>
+            </div>
+          </ng-template>
+        </p-carousel>
+      </div>
     </div>
-    <div class="container">
-      <p-carousel
-        [value]="products"
-        [numVisible]="4"
-        [numScroll]="1"
-        [circular]="false">
-        <ng-template let-product pTemplate="item">
-          <div class=" flex justify-center">
-            <app-card/>
-          </div>
-        </ng-template>
-      </p-carousel>
-    </div>
-  </div>
-</section>
+  </section>
+  <app-footer/>
+</main>
+
