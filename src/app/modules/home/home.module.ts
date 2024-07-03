@@ -6,6 +6,7 @@ import { BgService } from '../../core/bg-service/bg.service';
 import { HomeComponent } from './home.component';
 import { HeaderComponent } from '../../components/common/header/header.component';
 import { FooterComponent } from '../../components/common/footer/footer.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { FooterComponent } from '../../components/common/footer/footer.component
     CommonModule,
     CarouselModule,
     CardComponent,
+    RouterModule,
   ]
 })
 export class HomeModule { }

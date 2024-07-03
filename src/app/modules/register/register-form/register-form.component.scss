@@ -1,3 +1,18 @@
 form{
-  color: white
+  color: white;
+}
+
+input{
+  color: black;
+  height: 2.5rem;
+  border-radius: 4px;
+  padding-left: 10px;
+}
+
+button{
+  border-radius: 5px;
+}
+
+.button:active{
+  opacity: 0.8;
 }

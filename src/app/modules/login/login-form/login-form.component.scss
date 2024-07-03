@@ -4,15 +4,16 @@ input{
   padding-left: 10px;
 }
 
-span{
+label{
   color: white;
+  margin-bottom: 4px;
 }
+
+span{ color: white; }
 
 .button{
-  background-color: gray;
   color: white;
-}
+  border-radius: 5px;
+ }
 
-.button:active{
-  opacity: 0.8;
-}
+button:active{ opacity: 0.8; }

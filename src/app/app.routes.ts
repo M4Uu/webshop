@@ -11,7 +11,7 @@ export const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'login', // localhost:4200/
+    path: 'login',
     title: 'Login',
     loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule),
     component: LoginComponent,
