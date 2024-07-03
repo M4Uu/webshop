@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { BgService } from '../../core/bg-service/bg.service';
-import { LoginFormComponent } from './login-form/login-form.component';
+import { BgService } from '../../../core/bg-service/bg.service';
 
 @Component({
   selector: 'app-login',
-  standalone: true,
-  imports: [LoginFormComponent],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  templateUrl: './page.component.html',
+  styleUrl: './page.component.scss'
 })
 export class LoginComponent implements OnInit{
   constructor(private bgService: BgService) {}

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import AOS from 'aos';
 import { BgService } from './core/bg-service/bg.service';
+import { isPlatformBrowser } from '@angular/common';
+
 
 @Component({
   selector: 'app-root',
@@ -15,12 +17,21 @@ import { BgService } from './core/bg-service/bg.service';
 export class AppComponent implements OnInit{
   title = 'test-pnpm';
 
-  constructor(private bgService: BgService) {}
-  ngOnInit() {
-    AOS.init();
+  private dummyContainer!: DocumentFragment;
 
-    this.bgService.background$.subscribe((backgroundImage) => {
-      document.body.style.backgroundImage = `url(${backgroundImage})`;
-    });
+  constructor(
+    private bgService: BgService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
+
+  ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      AOS.init();
+
+      this.bgService.background$.subscribe((backgroundImage) => {
+        document.body.style.backgroundImage = `url(${backgroundImage})`;
+      });
+    }
+
   }
 }
