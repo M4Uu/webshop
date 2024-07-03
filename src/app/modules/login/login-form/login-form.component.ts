@@ -28,7 +28,8 @@ export class LoginFormComponent{
 
   loginForm = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required]
+    password: ['', Validators.required],
+    checkbox: [false, [Validators.required, Validators.requiredTrue]]
   });
 
   onSubmit() {
