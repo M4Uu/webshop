@@ -22,9 +22,11 @@ export class RegisterFormComponent {
     'email': ['', [Validators.required, Validators.email]],
     'password': ['', [Validators.required]],
     'confirm-password': ['', [Validators.required]],
+    'checkbox': [false, [Validators.required, Validators.requiredTrue]]
   })
 
   onSubmit(){
     console.log(this.registerForm.value);
+    this.registerForm.reset();
   }
 }

@@ -30,9 +30,13 @@
     <input type="password" formControlName="confirm-password" id="confirm-password">
   </div>
 
+  <div class="flex gap-2 items-center">
+    <input type="checkbox" formControlName="checkbox">
+    <span>Acepto los Términos y Condiciones</span>
+  </div>
   <button
     [class.button]="registerForm.valid"
-    class="font-semibold tracking-wider py-3 mt-5 bg-gray-400"
+    class="font-semibold tracking-wider py-3 bg-gray-400"
     type="submit"
     [disabled]="registerForm.invalid"
   >
