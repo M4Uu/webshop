@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-
 @Component({
   selector: 'app-login-form',
   standalone: true,
@@ -13,7 +12,15 @@ import { ReactiveFormsModule } from '@angular/forms';
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss'
 })
+
+@Injectable({
+  providedIn: 'root'
+})
+
 export class LoginFormComponent{
+  constructor(
+    private formBuilder: FormBuilder,
+  ) {}
 
   get email(){
     return this.loginForm.get('email');
@@ -22,9 +29,6 @@ export class LoginFormComponent{
   get password(){
     return this.loginForm.get('password');
   }
-
-
-  constructor(private formBuilder: FormBuilder) {}
 
   loginForm = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],

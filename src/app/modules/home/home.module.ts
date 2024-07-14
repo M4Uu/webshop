@@ -22,6 +22,7 @@ import { RouterModule } from '@angular/router';
     CarouselModule,
     CardComponent,
     RouterModule,
-  ]
+  ],
+  exports: [HomeComponent]
 })
 export class HomeModule { }
