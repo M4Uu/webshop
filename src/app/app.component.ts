@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, PLATFORM_ID} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import AOS from 'aos';
-import { BgService } from './core/bg-service/bg.service';
+import { BgService } from './global/bg-service/bg.service';
 import { isPlatformBrowser } from '@angular/common';
 
 

@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { BgService } from '../../core/bg-service/bg.service';
+import { BgService } from '../../global/bg-service/bg.service';
 import { Router } from '@angular/router';
 
 @Component({
