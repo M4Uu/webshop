@@ -4,12 +4,12 @@ export interface LoginInf {
 }
 
 export interface UserInfo {
-  user_id?: string | null | undefined,
-  user_name: string | null | undefined,
-  email_address: string | null | undefined,
-  first_name: string | null | undefined,
-  last_name: string | null | undefined,
-  pswd: string | null | undefined,
-  created_ad?: string | null | undefined,
-  checkbox?: boolean | null | undefined,
+  user_id?: string | null,
+  user_name?: string | null,
+  email_address?: string | null,
+  first_name?: string | null,
+  last_name?: string | null,
+  pswd: string | null,
+  created_ad?: string | null,
+  checkbox?: boolean | null,
 }

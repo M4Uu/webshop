@@ -21,12 +21,22 @@ export class RegisterFormComponent {
   ){}
 
   registerUser() {
-    this.registerForm.reset()
     this.register.registerUser(this.parseToAPIReg(this.registerForm))
-    .subscribe(
-      value => {
-      // Se almacena el usuario creado en LocaStorage para mantenerlo logeado
+    .subscribe({
+      next: (response) => {
+        // Se almacena el usuario creado en LocaStorage para mantenerlo logeado
+        console.log("Usuario registrado con éxito:", response);
+        this.registerForm.reset()
       },
+      error: (err) => {
+        // Manejo del error
+        console.error("Error al registrar usuario,", err);
+      },
+      complete: () => {
+        // Opcional: MAneja la finalización de la llamada
+        console.log("La solicitud de registro se ha completado");
+      }
+    }
     )
   }
 
@@ -50,7 +60,6 @@ export class RegisterFormComponent {
     this.registerUser()
     // Crear home para usuarios logeados
     // this.router.navigate(['/home'])
-    console.log('¡Se ha registrado correctamente!')
   }
 
   parseToAPIReg(form : FormGroup){

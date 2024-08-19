@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { UsersService } from './users.service';
 import { HttpClientModule } from '@angular/common/http';
-import { LoginInf, RegisterInfo } from '../user.interface';
+import { LoginInf, UserInfo } from '../user.interface';
 
 describe('UsersService', () => {
   let service: UsersService;
@@ -34,7 +34,7 @@ describe('UsersService', () => {
 
   // Register test
   it('Debe crear un usuario y devolverlo', (done: DoneFn) => {
-    let inf : RegisterInfo = {
+    let inf : UserInfo = {
       user_name : "M4Uu",
       email_address : "cruzmlathulerie@gmail.com",
       first_name : "Cruz",
