@@ -38,9 +38,24 @@ importers:
       '@angular/ssr':
         specifier: ^18.0.2
         version: 18.0.3(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))
+      '@ngrx/effects':
+        specifier: ^18.0.2
+        version: 18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(@ngrx/store@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(rxjs@7.8.1)
+      '@ngrx/router-store':
+        specifier: ^18.0.2
+        version: 18.0.2(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(@angular/router@18.0.2(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(@angular/platform-browser@18.0.2(@angular/animations@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)))(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)))(rxjs@7.8.1))(@ngrx/store@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(rxjs@7.8.1)
+      '@ngrx/store':
+        specifier: ^18.0.2
+        version: 18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1)
+      '@ngrx/store-devtools':
+        specifier: ^18.0.2
+        version: 18.0.2(@ngrx/store@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(rxjs@7.8.1)
       aos:
         specifier: ^2.3.4
         version: 2.3.4
+      cliui:
+        specifier: ^8.0.1
+        version: 8.0.1
       express:
         specifier: ^4.18.2
         version: 4.19.2
@@ -1313,6 +1328,39 @@ packages:
     resolution: {integrity: sha512-O+6Gs8UeDbyFpbSh2CPEz/UOrrdWPTBYNblZK5CxxLisYt4kGX3Sc+czffFonyjiGSq3jWLwJS/CCJc7tBr4sQ==}
     cpu: [x64]
     os: [win32]
+
+  '@ngrx/effects@18.0.2':
+    resolution: {integrity: sha512-YojXcOD9Lsq4kl2HCjENccyUM/mOlgBdtddsg9j/ojzSUgu3ZuBVKLN3atrL2TJYkbMX1MN0RzafSkL3TPGFIA==}
+    peerDependencies:
+      '@angular/core': ^18.0.0
+      '@ngrx/store': 18.0.2
+      rxjs: ^6.5.3 || ^7.5.0
+
+  '@ngrx/operators@18.0.1':
+    resolution: {integrity: sha512-M+QMrHNKgcuiLaRGZxJ4aQi5/OCRfKC4+T/63dsHyLFZ53/FFpF6a/ytSO1Q+tzOplZ5o99S+i8FVaZqNQ3LmQ==}
+    peerDependencies:
+      rxjs: ^6.5.3 || ^7.4.0
+
+  '@ngrx/router-store@18.0.2':
+    resolution: {integrity: sha512-jUrQ/uJJ53x8O1XbN2YxH2GpRREZlwS5gRxlCoc4fWL4Us/uS1/K6+QfRmKBPtpTKBIixqsOb+dIUV5iwBrivA==}
+    peerDependencies:
+      '@angular/common': ^18.0.0
+      '@angular/core': ^18.0.0
+      '@angular/router': ^18.0.0
+      '@ngrx/store': 18.0.2
+      rxjs: ^6.5.3 || ^7.5.0
+
+  '@ngrx/store-devtools@18.0.2':
+    resolution: {integrity: sha512-NcfVGUOGNvl1luV+Lt8KDqqwuwNYYaSbEuGi4mq70Hb4ws3sO6BFL9v+AeHLCQ51vKccL/cYqDNMYe4QMD7UaA==}
+    peerDependencies:
+      '@ngrx/store': 18.0.2
+      rxjs: ^6.5.3 || ^7.5.0
+
+  '@ngrx/store@18.0.2':
+    resolution: {integrity: sha512-ajwv0+njsO4vzArp9esnFvs1wyUb1U1W8E8LSCKrcW2hWWo9o1Pezj+JRsdQwatxHfrrPFuTDyajsl6GQM/JSA==}
+    peerDependencies:
+      '@angular/core': ^18.0.0
+      rxjs: ^6.5.3 || ^7.5.0
 
   '@ngtools/webpack@18.0.3':
     resolution: {integrity: sha512-wYskgAomDgyBJ8fsP+jfb0rt1t5OpNx4EXEzZo37Nxb04P5CkW+9yQ/xuhPMF8hO/dfKL1k/BKAKUeOOUQmAIA==}
@@ -5685,6 +5733,40 @@ snapshots:
 
   '@msgpackr-extract/msgpackr-extract-win32-x64@3.0.2':
     optional: true
+
+  '@ngrx/effects@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(@ngrx/store@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(rxjs@7.8.1)':
+    dependencies:
+      '@angular/core': 18.0.2(rxjs@7.8.1)(zone.js@0.14.7)
+      '@ngrx/operators': 18.0.1(rxjs@7.8.1)
+      '@ngrx/store': 18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1)
+      rxjs: 7.8.1
+      tslib: 2.6.3
+
+  '@ngrx/operators@18.0.1(rxjs@7.8.1)':
+    dependencies:
+      rxjs: 7.8.1
+      tslib: 2.6.3
+
+  '@ngrx/router-store@18.0.2(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(@angular/router@18.0.2(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(@angular/platform-browser@18.0.2(@angular/animations@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)))(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)))(rxjs@7.8.1))(@ngrx/store@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(rxjs@7.8.1)':
+    dependencies:
+      '@angular/common': 18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1)
+      '@angular/core': 18.0.2(rxjs@7.8.1)(zone.js@0.14.7)
+      '@angular/router': 18.0.2(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(@angular/platform-browser@18.0.2(@angular/animations@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)))(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)))(rxjs@7.8.1)
+      '@ngrx/store': 18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1)
+      rxjs: 7.8.1
+      tslib: 2.6.3
+
+  '@ngrx/store-devtools@18.0.2(@ngrx/store@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(rxjs@7.8.1)':
+    dependencies:
+      '@ngrx/store': 18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1)
+      rxjs: 7.8.1
+      tslib: 2.6.3
+
+  '@ngrx/store@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1)':
+    dependencies:
+      '@angular/core': 18.0.2(rxjs@7.8.1)(zone.js@0.14.7)
+      rxjs: 7.8.1
+      tslib: 2.6.3
 
   '@ngtools/webpack@18.0.3(@angular/compiler-cli@18.0.2(@angular/compiler@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)))(typescript@5.4.5))(typescript@5.4.5)(webpack@5.91.0(esbuild@0.21.3))':
     dependencies:

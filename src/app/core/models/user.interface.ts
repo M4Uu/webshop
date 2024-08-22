@@ -9,7 +9,7 @@ export interface UserInfo {
   email_address?: string | null,
   first_name?: string | null,
   last_name?: string | null,
-  pswd: string | null,
+  pswd?: string | null,
   created_ad?: string | null,
   checkbox?: boolean | null,
 }

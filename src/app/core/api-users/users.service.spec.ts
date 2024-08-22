@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { UsersService } from './users.service';
 import { HttpClientModule } from '@angular/common/http';
-import { LoginInf, UserInfo } from '../user.interface';
+import { LoginInf, UserInfo } from '../models/user.interface';
 
 describe('UsersService', () => {
   let service: UsersService;
