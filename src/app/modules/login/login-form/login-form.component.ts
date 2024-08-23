@@ -1,7 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, Injectable } from '@angular/core';
+import { Component, inject, Injectable, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { LoginInf, UserInfo } from '../../../core/models/user.interface';
+import { Store } from '@ngrx/store';
+import { selectFeatureUser } from '../../../store/selects/user.select';
+import { UserActions } from '../../../store/actions/user.action';
 @Component({
   selector: 'app-login-form',
   standalone: true,
@@ -17,10 +22,15 @@ import { ReactiveFormsModule } from '@angular/forms';
   providedIn: 'root'
 })
 
-export class LoginFormComponent{
-  constructor(
-    private formBuilder: FormBuilder,
-  ) {}
+export class LoginFormComponent implements OnInit{
+  formBuilder = inject(FormBuilder)
+  store = inject(Store)
+
+  user$?: Observable<UserInfo | undefined>
+
+  ngOnInit(): void {
+    this.user$ = this.store.select(selectFeatureUser)
+  }
 
   get email(){
     return this.loginForm.get('email');
@@ -37,9 +47,18 @@ export class LoginFormComponent{
   });
 
   onSubmit() {
-    console.log(this.loginForm.value);
+    this.store.dispatch(
+      UserActions.login({ payload: this.parseAPILog() })
+    )
+    this.user$?.subscribe(value => console.log(value))
   }
 
-
+  parseAPILog() {
+    const r: LoginInf = {
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password
+    }
+    return r;
+  }
 
 }

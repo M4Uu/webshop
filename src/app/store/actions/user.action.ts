@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from "@ngrx/store";
-import { UserInfo } from "../../core/models/user.interface";
+import { LoginInf, UserInfo } from "../../core/models/user.interface";
 
 
 export const UserActions = createActionGroup({
@@ -7,7 +7,7 @@ export const UserActions = createActionGroup({
   events: {
     // acciones
     register: props<{ payload: UserInfo }>(),
-    login: props<{ payload: UserInfo }>(),
+    login: props<{ payload: LoginInf }>(),
     upload: props<{ payload: UserInfo }>(),
     unlogin: emptyProps(),
 
