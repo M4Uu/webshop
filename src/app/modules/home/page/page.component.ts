@@ -1,13 +1,13 @@
 import { Component, OnInit} from '@angular/core';
-import { BgService } from '../../global/bg-service/bg.service';
+import { BgService } from '../../../global/bg-service/bg.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  templateUrl: './page.component.html',
+  styleUrl: './page.component.scss'
 })
-export class HomeComponent implements OnInit{
+export class PageComponent implements OnInit{
   constructor(
     private bgService: BgService,
     private router: Router,

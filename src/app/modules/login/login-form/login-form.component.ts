@@ -7,6 +7,7 @@ import { LoginInf, UserInfo } from '../../../core/models/user.interface';
 import { Store } from '@ngrx/store';
 import { selectFeatureUser } from '../../../store/selects/user.select';
 import { UserActions } from '../../../store/actions/user.action';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login-form',
   standalone: true,
@@ -25,6 +26,7 @@ import { UserActions } from '../../../store/actions/user.action';
 export class LoginFormComponent implements OnInit{
   formBuilder = inject(FormBuilder)
   store = inject(Store)
+  router = inject(Router)
 
   user$?: Observable<UserInfo | undefined>
 
@@ -51,6 +53,7 @@ export class LoginFormComponent implements OnInit{
       UserActions.login({ payload: this.parseAPILog() })
     )
     this.user$?.subscribe(value => console.log(value))
+    this.router.navigate(['/homelogin'])
   }
 
   parseAPILog() {

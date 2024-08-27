@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit} from '@angular/core';
+import { Component, inject, Injectable, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -18,7 +18,9 @@ import { selectFeatureUser } from '../../../store/selects/user.select';
   templateUrl: './register-form.component.html',
   styleUrl: './register-form.component.scss'
 })
+
 export class RegisterFormComponent implements OnInit{
+
   formBuilder = inject(FormBuilder)
   router = inject(Router)
   store = inject(Store)
@@ -39,7 +41,7 @@ export class RegisterFormComponent implements OnInit{
   //       console.error("Error al registrar usuario,", err);
   //     },
   //     complete: () => {
-  //       // Opcional: MAneja la finalización de la llamada
+  //       // Opcional: Maneja la finalización de la llamada
   //       console.log("La solicitud de registro se ha completado");
   //     }
   //   })
@@ -56,7 +58,7 @@ export class RegisterFormComponent implements OnInit{
     this.user$?.subscribe(value => {
       console.log(value);
     })
-
+    this.router.navigate(['/homelogin'])
   }
 
   passwordMatchValidator(group: FormGroup){

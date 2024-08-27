@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { CarouselModule } from 'primeng/carousel';
 import { CardComponent } from '../../components/molecules/card/card.component';
 import { BgService } from '../../global/bg-service/bg.service';
-import { HomeComponent } from './home.component';
+import { PageComponent } from './page/page.component';
 import { HeaderComponent } from '../../components/common/header/header.component';
 import { FooterComponent } from '../../components/common/footer/footer.component';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    HomeComponent
+    PageComponent
   ],
   providers: [
     BgService
@@ -23,6 +23,6 @@ import { RouterModule } from '@angular/router';
     CardComponent,
     RouterModule,
   ],
-  exports: [HomeComponent]
+  exports: [PageComponent]
 })
 export class HomeModule { }

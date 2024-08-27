@@ -2,7 +2,7 @@ import { inject, Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { UsersService } from "../../core/api-users/users.service";
 import { UserActions } from "../actions/user.action";
-import { catchError, first, map, mergeMap } from "rxjs";
+import { catchError, filter, first, map, mergeMap } from "rxjs";
 
 @Injectable()
 export class UserEffects {

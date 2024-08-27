@@ -6,7 +6,8 @@ import { BgService } from '../../../global/bg-service/bg.service';
   templateUrl: './page.component.html',
   styleUrl: './page.component.scss'
 })
-export class RegisterComponent {
+
+export class PageComponent {
   constructor(private bgService: BgService) {}
 
   ngOnInit() {
