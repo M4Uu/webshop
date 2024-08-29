@@ -51,16 +51,6 @@ export class RegisterFormComponent implements OnInit{
       this.user$ = this.store.select(selectFeatureUser)
   }
 
-  registerUser(){
-    this.store.dispatch(
-      UserActions.register({ payload: this.parseToAPIReg(this.registerForm)})
-    )
-    this.user$?.subscribe(value => {
-      console.log(value);
-    })
-    this.router.navigate(['/homelogin'])
-  }
-
   passwordMatchValidator(group: FormGroup){
     const password = group.get('pswd')?.value
     const confirmPassword = group.get('confirm-password')?.value
@@ -78,9 +68,10 @@ export class RegisterFormComponent implements OnInit{
   })
 
   onSubmit(){
-    this.registerUser()
-    // Crear home para usuarios logeados
-    // this.router.navigate(['/home'])
+    this.store.dispatch(UserActions.register({ payload: this.parseToAPIReg(this.registerForm)}))
+    this.store.dispatch(UserActions.protected())
+    this.user$?.subscribe(value => console.log(value))
+    this.router.navigate(['/homelogin'])
   }
 
   parseToAPIReg(form : FormGroup){

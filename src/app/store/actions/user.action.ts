@@ -11,8 +11,12 @@ export const UserActions = createActionGroup({
     upload: props<{ payload: UserInfo }>(),
     unlogin: emptyProps(),
 
+    // protected
+    protected: emptyProps(),
+
     // carga de datos
     loadData: props<{ payload: UserInfo }>(),
-    errorData: props<{ error: string }>()
+    errorData: props<{ error: string }>(),
+    successData: props<{ success: string }>()
   }
 })

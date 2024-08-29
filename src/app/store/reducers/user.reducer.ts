@@ -9,10 +9,12 @@ export const userReducer = createReducer(
   // Acciones
   on(UserActions.register, state => ({ ...state })),
   on(UserActions.login, state => ({ ...state })),
+  on(UserActions.protected, state => ({ ...state })),
   on(UserActions.upload, state => ({ ...state })),
   on(UserActions.unlogin, state => ({ ...state, user: undefined })),
 
   // Carga de datos
   on(UserActions.loadData, (state, { payload }) => ({ ...state, user: payload })),
   on(UserActions.errorData, (state, { error }) => ({ ...state, error })),
+  on(UserActions.successData, (state, { success }) => ({ ...state, success })),
 )

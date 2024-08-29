@@ -2,7 +2,7 @@ import { inject, Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { UsersService } from "../../core/api-users/users.service";
 import { UserActions } from "../actions/user.action";
-import { catchError, filter, first, map, mergeMap } from "rxjs";
+import { catchError, delay, first, map, mergeMap, of } from "rxjs";
 
 @Injectable()
 export class UserEffects {
@@ -11,20 +11,31 @@ export class UserEffects {
 
   register$ = createEffect(() => this.actions$.pipe(
     ofType(UserActions.register),
-    first(),
     mergeMap(action => this.ApiUser.registerUser(action.payload)
     .pipe(
-      map(payload => UserActions.loadData({ payload })),
-      catchError(err => [UserActions.errorData({ error: err.message })])
-    )))
-  )
+      map(() => UserActions.successData({ success: 'User logged succesfully' })),
+      catchError(error => of(UserActions.errorData({ error: error.message })))
+    )),
+    catchError(error => of(UserActions.errorData({ error: error.message })))
+  ))
+
   login$ = createEffect(() => this.actions$.pipe(
     ofType(UserActions.login),
-    first(),
     mergeMap(action => this.ApiUser.loginUser(action.payload)
     .pipe(
+      map(() => UserActions.successData({ success: 'User logged succesfully' })),
+      catchError(error => of(UserActions.errorData({ error: error.message })))
+    )),
+    catchError(error => of(UserActions.errorData({ error: error.message })))
+  ))
+
+  protected$ = createEffect(() => this.actions$.pipe(
+    ofType(UserActions.protected),
+    delay(1000),
+    mergeMap(() => this.ApiUser.protectedUser()
+    .pipe(
       map(payload => UserActions.loadData({ payload })),
-      catchError(err => [UserActions.errorData({ error: err.message })])
+      catchError(error => of(UserActions.errorData({ error: error.message })))
     )))
   )
 }

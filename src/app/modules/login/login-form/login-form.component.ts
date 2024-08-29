@@ -49,11 +49,10 @@ export class LoginFormComponent implements OnInit{
   });
 
   onSubmit() {
-    this.store.dispatch(
-      UserActions.login({ payload: this.parseAPILog() })
-    )
+    this.store.dispatch(UserActions.login({ payload: this.parseAPILog() }))
+    this.store.dispatch(UserActions.protected())
     this.user$?.subscribe(value => console.log(value))
-    this.router.navigate(['/homelogin'])
+    // this.router.navigate(['/homelogin'])
   }
 
   parseAPILog() {
