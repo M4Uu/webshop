@@ -16,7 +16,7 @@ export const UserActions = createActionGroup({
 
     // carga de datos
     loadData: props<{ payload: UserInfo }>(),
-    errorData: props<{ error: string }>(),
-    successData: props<{ success: string }>()
+    errorData: props<{ message: string }>(),
+    successData: props<{ message: string }>()
   }
 })

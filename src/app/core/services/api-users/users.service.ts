@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { LoginInf, UserInfo } from '../models/user.interface';
+import { LoginInf, UserInfo } from '../../models/user.interface';
 // import { API_KEY } from '../../env/config'
 
 @Injectable({
@@ -24,6 +24,8 @@ export class UsersService {
   }
 
   protectedUser() : Observable<UserInfo>{
+    // const params = new HttpParams().set('type', input)
     return this.http.get<UserInfo>(this.apiUrl + "/protected", { withCredentials: true })
   }
+
 }

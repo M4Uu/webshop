@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Injectable, OnInit} from '@angular/core';
+import { Component, inject, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { UserActions } from '../../../store/actions/user.action';
-import { UsersService } from '../../../core/api-users/users.service';
 import { Observable } from 'rxjs';
 import { UserInfo } from '../../../core/models/user.interface';
-import { selectFeatureUser } from '../../../store/selects/user.select';
+import { selectUser, selectUserMessage } from '../../../store/selects/user.select';
+import { log } from 'console';
 @Component({
   selector: 'app-register-form',
   standalone: true,
@@ -26,29 +26,10 @@ export class RegisterFormComponent implements OnInit{
   store = inject(Store)
 
   user$?: Observable<UserInfo | undefined>
-
-  // register = inject(UsersService)
-  // registerUser() {
-  //   this.register.registerUser(this.parseToAPIReg(this.registerForm))
-  //   .subscribe({
-  //     next: (response) => {
-  //       // Se almacena el usuario creado en LocaStorage para mantenerlo logeado
-  //       console.log("Usuario registrado con éxito:", response);
-  //       this.registerForm.reset()
-  //     },
-  //     error: (err) => {
-  //       // Manejo del error
-  //       console.error("Error al registrar usuario,", err);
-  //     },
-  //     complete: () => {
-  //       // Opcional: Maneja la finalización de la llamada
-  //       console.log("La solicitud de registro se ha completado");
-  //     }
-  //   })
-  // }
+  message$?: Observable<string | undefined>
 
   ngOnInit(): void {
-      this.user$ = this.store.select(selectFeatureUser)
+    this.message$ = this.store.select(selectUserMessage)
   }
 
   passwordMatchValidator(group: FormGroup){
@@ -58,31 +39,29 @@ export class RegisterFormComponent implements OnInit{
   }
 
   registerForm = this.formBuilder.group({
-    'first_name': ['', [Validators.required]],
-    'last_name': ['', [Validators.required]],
-    'user_name': ['', [Validators.required]],
-    'email_address': ['', [Validators.required, Validators.email]],
-    'pswd': ['', [Validators.required]],
-    'confirm_password': ['', [Validators.required, this.passwordMatchValidator]],
-    'checkbox': [false, [Validators.required, Validators.requiredTrue]]
+    'first_name': ['test', [Validators.required]],
+    'last_name': ['test', [Validators.required]],
+    'user_name': ['test', [Validators.required]],
+    'email_address': ['test@gmail.com', [Validators.required, Validators.email]],
+    'pswd': ['1234', [Validators.required]],
+    'confirm_password': ['1234', [Validators.required, this.passwordMatchValidator]],
+    'checkbox': [true, [Validators.required, Validators.requiredTrue]]
   })
 
   onSubmit(){
-    this.store.dispatch(UserActions.register({ payload: this.parseToAPIReg(this.registerForm)}))
-    this.store.dispatch(UserActions.protected())
-    this.user$?.subscribe(value => console.log(value))
-    this.router.navigate(['/homelogin'])
-  }
-
-  parseToAPIReg(form : FormGroup){
-    return {
-      user_id: form.value.user_id,
-      user_name: form.value.user_name,
-      email_address: form.value.email_address,
-      first_name: form.value.first_name,
-      last_name: form.value.last_name,
-      pswd: form.value.pswd
-
-    }
+    this.store.dispatch(UserActions.register({ payload: this.registerForm.value}))
+    this.message$?.subscribe(value => {
+      const msg = value?.replace(/.*:\s*/, '')
+      switch (msg) {
+        case 'Cannot read properties of null (reading \'status\')':
+          this.router.navigate(['/'])
+          console.log('User successfully registered');
+          break;
+        case '406 Not Acceptable':
+          console.log('This user has already been registered, please create a new user or loggin');
+          break;
+      }
+    })
+    // this.store.dispatch(UserActions.protected())
   }
 }

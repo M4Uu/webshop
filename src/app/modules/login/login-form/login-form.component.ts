@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Injectable, OnInit } from '@angular/core';
+import { Component, ElementRef, inject, Injectable, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { LoginInf, UserInfo } from '../../../core/models/user.interface';
+import { UserInfo } from '../../../core/models/user.interface';
 import { Store } from '@ngrx/store';
-import { selectFeatureUser } from '../../../store/selects/user.select';
 import { UserActions } from '../../../store/actions/user.action';
 import { Router } from '@angular/router';
+import { selectUser } from '../../../store/selects/user.select';
 @Component({
   selector: 'app-login-form',
   standalone: true,
@@ -23,16 +23,16 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 
-export class LoginFormComponent implements OnInit{
+export class LoginFormComponent{
   formBuilder = inject(FormBuilder)
   store = inject(Store)
   router = inject(Router)
 
-  user$?: Observable<UserInfo | undefined>
+  // user$?: Observable<UserInfo | undefined>
 
-  ngOnInit(): void {
-    this.user$ = this.store.select(selectFeatureUser)
-  }
+  // ngOnInit(): void {
+  //     this.user$ = this.store.select(selectUser)
+  // }
 
   get email(){
     return this.loginForm.get('email');
@@ -43,24 +43,15 @@ export class LoginFormComponent implements OnInit{
   }
 
   loginForm = this.formBuilder.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
-    checkbox: [false, [Validators.required, Validators.requiredTrue]]
+    email: ['test@gmail.com', [Validators.required, Validators.email]],
+    password: ['1234', Validators.required],
+    checkbox: [true, [Validators.required, Validators.requiredTrue]]
   });
 
+  @ViewChild('MyButton') ButtonRef?: ElementRef
+
   onSubmit() {
-    this.store.dispatch(UserActions.login({ payload: this.parseAPILog() }))
+    this.store.dispatch(UserActions.login({ payload: this.loginForm.value }))
     this.store.dispatch(UserActions.protected())
-    this.user$?.subscribe(value => console.log(value))
-    // this.router.navigate(['/homelogin'])
   }
-
-  parseAPILog() {
-    const r: LoginInf = {
-      email: this.loginForm.value.email,
-      password: this.loginForm.value.password
-    }
-    return r;
-  }
-
 }

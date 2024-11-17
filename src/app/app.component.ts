@@ -4,7 +4,6 @@ import AOS from 'aos';
 import { BgService } from './global/bg-service/bg.service';
 import { isPlatformBrowser } from '@angular/common';
 
-
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -17,20 +16,20 @@ import { isPlatformBrowser } from '@angular/common';
 export class AppComponent implements OnInit{
   title = 'test-pnpm';
 
-  private dummyContainer!: DocumentFragment;
-
   constructor(
     private bgService: BgService,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
   ) {}
 
   ngOnInit() {
+
     if (isPlatformBrowser(this.platformId)) {
       AOS.init();
 
       this.bgService.background$.subscribe((backgroundImage) => {
         document.body.style.backgroundImage = `url(${backgroundImage})`;
       });
+
     }
 
   }

@@ -3,11 +3,11 @@ import * as Home from './modules/home/page/page.component';
 import * as Login from './modules/login/page/page.component';
 import * as Register from './modules/register/page/page.component';
 import * as HomeLogin from './modules/homelogin/page/page.component';
-import { authGuard } from './core/guards/auth/auth.guard';
+// import { authGuard } from './core/guards/auth/auth.guard';
 
 export const routes: Routes = [
   {
-    path: 'home', // localhost:4200/
+    path: '',
     title: 'Home',
     loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule),
     component: Home.PageComponent,
@@ -17,23 +17,20 @@ export const routes: Routes = [
     title: 'Login',
     loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule),
     component: Login.PageComponent,
+    // canDeactivate: [authGuard]
   },
   {
     path: 'register',
     title: 'Register',
     loadChildren: () => import('./modules/register/register.module').then(m => m.RegisterModule),
     component: Register.PageComponent,
+    // canDeactivate: [authGuard]
   },
   {
     path: 'homelogin',
     title: 'HomeLogin',
     loadChildren: () => import('./modules/homelogin/homelogin.module').then(m => m.HomeloginModule),
     component: HomeLogin.PageComponent,
-    canActivate: [authGuard]
-  },
-  {
-    path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
+    // canActivate: [authGuard]
   }
 ];
