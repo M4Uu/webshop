@@ -5,9 +5,8 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { UserActions } from '../../../store/actions/user.action';
 import { Observable } from 'rxjs';
-import { UserInfo } from '../../../core/models/user.interface';
-import { selectUser, selectUserMessage } from '../../../store/selects/user.select';
-import { log } from 'console';
+import { selectUserMessage } from '../../../store/selects/user.select';
+import { LoggedService } from '../../../core/services/loggedUser/logged.service';
 @Component({
   selector: 'app-register-form',
   standalone: true,
@@ -19,16 +18,17 @@ import { log } from 'console';
   styleUrl: './register-form.component.scss'
 })
 
-export class RegisterFormComponent implements OnInit{
+export class RegisterFormComponent {
 
   formBuilder = inject(FormBuilder)
   router = inject(Router)
   store = inject(Store)
+  logged = inject(LoggedService)
 
-  user$?: Observable<UserInfo | undefined>
   message$?: Observable<string | undefined>
 
   ngOnInit(): void {
+    this.logged.ViewUserLogged()
     this.message$ = this.store.select(selectUserMessage)
   }
 

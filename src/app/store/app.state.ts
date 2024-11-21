@@ -1,4 +1,6 @@
+import { MetaReducer } from "@ngrx/store";
 import { UserState } from "../core/models/user.state";
+import { resetStateMetaReducer } from "./meta-reducers/user.meta-reducer";
 import { userReducer } from "./reducers/user.reducer";
 import { selectUser } from "./selects/user.select";
 
@@ -11,3 +13,8 @@ export const userFeature = {
   reducer: userReducer,
   extraSelectors: selectUser
 }
+
+export const metaReducers: MetaReducer<any>[] =
+[
+  resetStateMetaReducer,
+];

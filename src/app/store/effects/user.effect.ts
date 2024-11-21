@@ -18,8 +18,8 @@ export class UserEffects {
     ofType(UserActions.register),
     mergeMap(action => this.ApiUser.registerUser(action.payload)
     .pipe(
-      tap(response => UserActions.successData({ message: response.status })),
-      catchError(error => of(UserActions.errorData({ message: error.message })))
+      map(response => UserActions.messageResponse({ message: response.status })),
+      catchError(error => of(UserActions.messageResponse({ message: error.message })))
     )),
   ))
 
@@ -27,28 +27,18 @@ export class UserEffects {
     ofType(UserActions.login),
     mergeMap(action => this.ApiUser.loginUser(action.payload)
     .pipe(
-      map(() => UserActions.successData({ message: 'User logged succesfully' })),
-      catchError(error => of(UserActions.errorData({ message: error.message })))
+      map(response => UserActions.messageResponse({ message: response.status })),
+      catchError(error => of(UserActions.messageResponse({ message: error.message })))
     )),
   ))
 
   protected$ = createEffect(() => this.actions$.pipe(
-    ofType(UserActions.protected),
     delay(1000),
+    ofType(UserActions.protected),
     mergeMap(() => this.ApiUser.protectedUser()
     .pipe(
       map(payload => UserActions.loadData({ payload })),
-      catchError(error => of(UserActions.errorData({ message: error.message })))
+      catchError(error => of(UserActions.unlogin({ message: error.message })))
     )))
-  )
-
-  redirectURL$ = createEffect(() => this.actions$.pipe(
-      ofType(UserActions.loadData),
-      tap(() => {
-        this.store.select(selectUser).subscribe(user => {
-          if (user) this.router.navigate(['/homelogin'])
-        });
-      })
-    ), {dispatch : false}
   )
 }

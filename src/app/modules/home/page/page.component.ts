@@ -1,6 +1,7 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, inject, OnInit} from '@angular/core';
 import { BgService } from '../../../global/bg-service/bg.service';
 import { Router } from '@angular/router';
+import { LoggedService } from '../../../core/services/loggedUser/logged.service';
 
 @Component({
   selector: 'app-home',
@@ -8,12 +9,12 @@ import { Router } from '@angular/router';
   styleUrl: './page.component.scss'
 })
 export class PageComponent implements OnInit{
-  constructor(
-    private bgService: BgService,
-    private router: Router,
-  ) {}
+  bgService = inject(BgService)
+  router = inject(Router)
+  logged = inject(LoggedService)
 
   ngOnInit() {
+    this.logged.ViewUserLogged()
     this.bgService.setBackground('/image/bg-home.jpg');
   }
 

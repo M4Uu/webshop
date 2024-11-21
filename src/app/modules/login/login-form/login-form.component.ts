@@ -2,12 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, Injectable, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { UserInfo } from '../../../core/models/user.interface';
 import { Store } from '@ngrx/store';
 import { UserActions } from '../../../store/actions/user.action';
 import { Router } from '@angular/router';
-import { selectUser } from '../../../store/selects/user.select';
+import { LoggedService } from '../../../core/services/loggedUser/logged.service';
 @Component({
   selector: 'app-login-form',
   standalone: true,
@@ -27,12 +25,11 @@ export class LoginFormComponent{
   formBuilder = inject(FormBuilder)
   store = inject(Store)
   router = inject(Router)
+  logged = inject(LoggedService)
 
-  // user$?: Observable<UserInfo | undefined>
-
-  // ngOnInit(): void {
-  //     this.user$ = this.store.select(selectUser)
-  // }
+  ngOnInit(): void {
+    this.logged.ViewUserLogged()
+  }
 
   get email(){
     return this.loginForm.get('email');
@@ -53,5 +50,6 @@ export class LoginFormComponent{
   onSubmit() {
     this.store.dispatch(UserActions.login({ payload: this.loginForm.value }))
     this.store.dispatch(UserActions.protected())
+    this.router.navigate(['/homelogin'])
   }
 }

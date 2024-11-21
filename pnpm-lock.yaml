@@ -60,14 +60,23 @@ importers:
         specifier: ^16.4.5
         version: 16.4.5
       express:
-        specifier: ^4.18.2
-        version: 4.19.2
+        specifier: ^4.21.1
+        version: 4.21.1
+      jwt-decode:
+        specifier: ^4.0.0
+        version: 4.0.0
+      ngx-cookie-service:
+        specifier: ^18.0.0
+        version: 18.0.0(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))
       primeng:
         specifier: ^17.18.1
         version: 17.18.1(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(@angular/forms@18.0.2(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(@angular/platform-browser@18.0.2(@angular/animations@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)))(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)))(rxjs@7.8.1))(rxjs@7.8.1)(zone.js@0.14.7)
       rxjs:
         specifier: ~7.8.0
         version: 7.8.1
+      test-pnpm:
+        specifier: 'file:'
+        version: 'file:'
       tslib:
         specifier: ^2.3.0
         version: 2.6.3
@@ -1866,6 +1875,10 @@ packages:
     resolution: {integrity: sha512-ml9pReCu3M61kGlqoTm2umSXTlRTuGTx0bfYj+uIUKKYycG5NtSbeetV3faSU6R7ajOPw0g/J1PvK4qNy7s5bA==}
     engines: {node: '>= 0.8', npm: 1.2.8000 || >= 1.4.16}
 
+  body-parser@1.20.3:
+    resolution: {integrity: sha512-7rAxByjUMqQ3/bHJy7D6OGXvx/MMc4IqBn/X0fcM1QUcAItpZrBEYhWGem+tzXH90c+G01ypMcYJBO9Y30203g==}
+    engines: {node: '>= 0.8', npm: 1.2.8000 || >= 1.4.16}
+
   bonjour-service@1.2.1:
     resolution: {integrity: sha512-oSzCS2zV14bh2kji6vNe7vrpJYCHGvcZnlffFQ1MEoX/WOeQ/teD8SYWKR942OI3INjq8OMNJlbPK5LLLUxFDw==}
 
@@ -2059,6 +2072,10 @@ packages:
     resolution: {integrity: sha512-U71cyTamuh1CRNCfpGY6to28lxvNwPG4Guz/EVjgf3Jmzv0vlDp1atT9eS5dDjMYHucpHbWns6Lwf3BKz6svdw==}
     engines: {node: '>= 0.6'}
 
+  cookie@0.7.1:
+    resolution: {integrity: sha512-6DnInpx7SJ2AK3+CTUE/ZM0vWTUboZCegxhC2xiIydHR9jNuTAASBrfEpHhiGOZw/nX51bHt6YQl8jsGo4y/0w==}
+    engines: {node: '>= 0.6'}
+
   copy-anything@2.0.6:
     resolution: {integrity: sha512-1j20GZTsvKNkc4BY3NpMOM8tt///wY3FpIzozTOFO2ffuZcV61nojHXVKIy3WM+7ADCy5FVhdZYHYDdgTU0yJw==}
 
@@ -2135,6 +2152,15 @@ packages:
 
   debug@4.3.5:
     resolution: {integrity: sha512-pt0bNEmneDIvdL1Xsd9oDQ/wrQRkXDT4AUWlNZNPKvW5x/jyO9VFXkJUP07vQ2upmw5PlaITaPKc31jK13V+jg==}
+    engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+
+  debug@4.3.7:
+    resolution: {integrity: sha512-Er2nc/H7RrMXZBFCEim6TCmMk02Z8vLC2Rbi1KEBggpo0fS6l0S1nnapwmIi3yW/+GOJap1Krg4w0Hg80oCqgQ==}
     engines: {node: '>=6.0'}
     peerDependencies:
       supports-color: '*'
@@ -2246,6 +2272,10 @@ packages:
 
   encodeurl@1.0.2:
     resolution: {integrity: sha512-TPJXq8JqFaVYm2CWmPvnP2Iyo4ZSM7/QKcSmuMLDObfpH5fi7RUGmd/rTDf+rut/saiDiQEeVTNgAmJEdAOx0w==}
+    engines: {node: '>= 0.8'}
+
+  encodeurl@2.0.0:
+    resolution: {integrity: sha512-Q0n9HRi4m6JuGIV1eFlmvJB7ZEVxu93IrMyiMsGC0lrMJMWzRgx6WGquyfQgZVb31vhGgXnfmPNNXmxnOkRBrg==}
     engines: {node: '>= 0.8'}
 
   encoding@0.1.13:
@@ -2368,6 +2398,10 @@ packages:
     resolution: {integrity: sha512-5T6nhjsT+EOMzuck8JjBHARTHfMht0POzlA60WV2pMD3gyXw2LZnZ+ueGdNxG+0calOJcWKbpFcuzLZ91YWq9Q==}
     engines: {node: '>= 0.10.0'}
 
+  express@4.21.1:
+    resolution: {integrity: sha512-YSFlK1Ee0/GC8QaO91tHcDxJiE/X4FbpAyQWkxAvG6AXCuR65YzK8ua6D9hvi/TzUfZMpc+BwuM1IPw8fmQBiQ==}
+    engines: {node: '>= 0.10.0'}
+
   extend@3.0.2:
     resolution: {integrity: sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==}
 
@@ -2402,6 +2436,10 @@ packages:
 
   finalhandler@1.2.0:
     resolution: {integrity: sha512-5uXcUVftlQMFnWC9qu/svkWv3GTd2PfUhK/3PLkYNAe7FbqJMt3515HaxE6eRL74GdsriiwujiawdaB1BpEISg==}
+    engines: {node: '>= 0.8'}
+
+  finalhandler@1.3.1:
+    resolution: {integrity: sha512-6BN9trH7bp3qvnrRyzsBz+g3lZxTNZTbVO2EV1CS0WIcDbawYVdYvGflME/9QP0h0pYlCDBCTjYa9nZzMDpyxQ==}
     engines: {node: '>= 0.8'}
 
   find-cache-dir@4.0.0:
@@ -2877,6 +2915,10 @@ packages:
     resolution: {integrity: sha512-POQXvpdL69+CluYsillJ7SUhKvytYjW9vG/GKpnf+xP8UWgYEM/RaMzHHofbALDiKbbP1W8UEYmgGl39WkPZsg==}
     engines: {'0': node >= 0.2.0}
 
+  jwt-decode@4.0.0:
+    resolution: {integrity: sha512-+KJGIyHgkGuIq3IEBNftfhW/LfWhXUIY6OmyVWjliu5KH1y0fw7VQ8YndE2O4qZdMSd9SqbnC8GOcZEy0Om7sA==}
+    engines: {node: '>=18'}
+
   karma-chrome-launcher@3.2.0:
     resolution: {integrity: sha512-rE9RkUPI7I9mAxByQWkGJFXfFD6lE4gC5nPuZdobf/QdTEJI6EU4yIay/cfU/xV4ZxlM5JiTv7zWYgA64NpS5Q==}
 
@@ -3022,6 +3064,9 @@ packages:
 
   merge-descriptors@1.0.1:
     resolution: {integrity: sha512-cCi6g3/Zr1iqQi6ySbseM1Xvooa98N0w31jzUYrXPX2xqObmFGHJ0tQ5u74H3mVh7wLouTseZyYIq39g8cNp1w==}
+
+  merge-descriptors@1.0.3:
+    resolution: {integrity: sha512-gaNvAS7TZ897/rVaZ0nMtAyxNyi/pdbjbAwUpFQpN70GqnVfOiXpeUUMKRBmzXaSQ8DdTX4/0ms62r2K+hE6mQ==}
 
   merge-stream@2.0.0:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
@@ -3175,6 +3220,12 @@ packages:
   neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
 
+  ngx-cookie-service@18.0.0:
+    resolution: {integrity: sha512-hkkUckzZTXXWtFgvVkT2hg6mwYMLXioXDZWBsVCOy9gYkADjsj0N5VViO7eo2izQ0VcMPd/Etog1trf/T4oZMQ==}
+    peerDependencies:
+      '@angular/common': ^18.0.0-rc.0
+      '@angular/core': ^18.0.0-rc.0
+
   nice-napi@1.0.2:
     resolution: {integrity: sha512-px/KnJAJZf5RuBGcfD+Sp2pAKq0ytz8j+1NehvgIGFkvtvFrDM3T8E4x/JJODXK9WZow8RRGrbA9QQ3hs+pDhA==}
     os: ['!win32']
@@ -3269,8 +3320,9 @@ packages:
     resolution: {integrity: sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw==}
     engines: {node: '>= 6'}
 
-  object-inspect@1.13.1:
-    resolution: {integrity: sha512-5qoj1RUiKOMsCCNLV1CBiPYE10sziTsnmNxkAI/rZhiD63CF7IqdFGC/XzjWjpSgLf0LxXX3bDFIh0E18f6UhQ==}
+  object-inspect@1.13.3:
+    resolution: {integrity: sha512-kDCGIbxkDSXE3euJZZXzc6to7fCrKHNI/hSRQnRuQ+BWjFNzZwiFF8fj/6o2t2G9/jTj8PSIYTfCLelLZEeRpA==}
+    engines: {node: '>= 0.4'}
 
   obuf@1.1.2:
     resolution: {integrity: sha512-PX1wu0AmAdPqOL1mWhqmlOd8kOIZQwGZw6rh7uby9fTc5lhaOWFLX3I6R1hrF9k3zUY40e6igsLGkDXK92LJNg==}
@@ -3393,6 +3445,9 @@ packages:
   path-scurry@1.11.1:
     resolution: {integrity: sha512-Xa4Nw17FS9ApQFJ9umLiJS4orGjm7ZzwUrwamcGQuHSzDyth9boKDaycYdDcZDuqYATXw4HFXgaqWTctW/v1HA==}
     engines: {node: '>=16 || 14 >=14.18'}
+
+  path-to-regexp@0.1.10:
+    resolution: {integrity: sha512-7lf7qcQidTku0Gu3YDPc8DJ1q7OOucfa/BSsIwjuh56VU7katFvuM8hULfkwB3Fns/rsVF7PwPKVw1sl5KQS9w==}
 
   path-to-regexp@0.1.7:
     resolution: {integrity: sha512-5DFkuoqlv1uYQKxy8omFBeJPQcdoE07Kv2sferDCrAq1ohOU+MSDswDIbnx3YAM60qIOnYa53wBhXW0EbMonrQ==}
@@ -3561,6 +3616,10 @@ packages:
 
   qs@6.11.0:
     resolution: {integrity: sha512-MvjoMCJwEarSbUYk5O+nmoSzSutSsTwF85zcHPQ9OrlFoZOYIjaqBAJIqIXjptyD5vThxGq52Xu/MaJzRkIk4Q==}
+    engines: {node: '>=0.6'}
+
+  qs@6.13.0:
+    resolution: {integrity: sha512-+38qI9SOr8tfZ4QmJNplMUxqjbe7LKvvZgWdExBOmd+egZTtjLB67Gu0HRX3u/XOq7UU2Nx6nsjvS16Z9uwfpg==}
     engines: {node: '>=0.6'}
 
   queue-microtask@1.2.3:
@@ -3763,6 +3822,10 @@ packages:
     resolution: {integrity: sha512-qqWzuOjSFOuqPjFe4NOsMLafToQQwBSOEpS+FwEt3A2V3vKubTquT3vmLTQpFgMXp8AlFWFuP1qKaJZOtPpVXg==}
     engines: {node: '>= 0.8.0'}
 
+  send@0.19.0:
+    resolution: {integrity: sha512-dW41u5VfLXu8SJh5bwRmyYUbAoSB3c9uQh6L8h/KtsFREPWpbX1lrljJo186Jc4nmci/sGUZ9a0a0J2zgfq2hw==}
+    engines: {node: '>= 0.8.0'}
+
   serialize-javascript@6.0.2:
     resolution: {integrity: sha512-Saa1xPByTTq2gdeFZYLLo+RFE35NHZkAbqZeWNd3BpzppeVisAqpDjcp8dyf6uIvEqJRd46jemmyA4iFIeVk8g==}
 
@@ -3772,6 +3835,10 @@ packages:
 
   serve-static@1.15.0:
     resolution: {integrity: sha512-XGuRDNjXUijsUL0vl6nSD7cwURuzEgglbOaFuZM9g3kwDXOWVTck0jLzjPzGD+TazWbboZYu52/9/XPdUgne9g==}
+    engines: {node: '>= 0.8.0'}
+
+  serve-static@1.16.2:
+    resolution: {integrity: sha512-VqpjJZKadQB/PEbEwvFdO43Ax5dFBZ2UECszz8bQ7pi7wt//PWe1P6MN7eCnjsatYtBT6EuiClbjSWP2WrIoTw==}
     engines: {node: '>= 0.8.0'}
 
   set-function-length@1.2.2:
@@ -4000,6 +4067,9 @@ packages:
   test-exclude@6.0.0:
     resolution: {integrity: sha512-cAGWPIyOHU6zlmg88jwm7VRyXnMN7iV68OGAbYDk/Mh/xC/pzVPlQtY6ngoIH/5/tciuhGfvESU8GrHrcxD56w==}
     engines: {node: '>=8'}
+
+  'test-pnpm@file:':
+    resolution: {directory: '', type: directory}
 
   thenify-all@1.6.0:
     resolution: {integrity: sha512-RNxQH/qI8/t3thXJDwcstUO4zeqo64+Uy/+sNVRBx4Xn2OX+OZ9oP+iJnNFqplFra2ZUVeKCSa2oVWi3T4uVmA==}
@@ -4661,7 +4731,7 @@ snapshots:
       '@babel/traverse': 7.24.7
       '@babel/types': 7.24.7
       convert-source-map: 2.0.0
-      debug: 4.3.5
+      debug: 4.3.7
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.1
@@ -4681,7 +4751,7 @@ snapshots:
       '@babel/traverse': 7.24.7
       '@babel/types': 7.24.7
       convert-source-map: 2.0.0
-      debug: 4.3.5
+      debug: 4.3.7
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.1
@@ -4701,7 +4771,7 @@ snapshots:
       '@babel/traverse': 7.24.7
       '@babel/types': 7.24.7
       convert-source-map: 2.0.0
-      debug: 4.3.5
+      debug: 4.3.7
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.1
@@ -4772,7 +4842,7 @@ snapshots:
       '@babel/core': 7.24.5
       '@babel/helper-compilation-targets': 7.24.7
       '@babel/helper-plugin-utils': 7.24.7
-      debug: 4.3.5
+      debug: 4.3.7
       lodash.debounce: 4.0.8
       resolve: 1.22.8
     transitivePeerDependencies:
@@ -5487,7 +5557,7 @@ snapshots:
       '@babel/helper-split-export-declaration': 7.24.7
       '@babel/parser': 7.24.7
       '@babel/types': 7.24.7
-      debug: 4.3.5
+      debug: 4.3.7
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
@@ -6164,7 +6234,7 @@ snapshots:
 
   agent-base@7.1.1:
     dependencies:
-      debug: 4.3.5
+      debug: 4.3.7
     transitivePeerDependencies:
       - supports-color
 
@@ -6336,6 +6406,23 @@ snapshots:
       iconv-lite: 0.4.24
       on-finished: 2.4.1
       qs: 6.11.0
+      raw-body: 2.5.2
+      type-is: 1.6.18
+      unpipe: 1.0.0
+    transitivePeerDependencies:
+      - supports-color
+
+  body-parser@1.20.3:
+    dependencies:
+      bytes: 3.1.2
+      content-type: 1.0.5
+      debug: 2.6.9
+      depd: 2.0.0
+      destroy: 1.2.0
+      http-errors: 2.0.0
+      iconv-lite: 0.4.24
+      on-finished: 2.4.1
+      qs: 6.13.0
       raw-body: 2.5.2
       type-is: 1.6.18
       unpipe: 1.0.0
@@ -6543,6 +6630,8 @@ snapshots:
 
   cookie@0.6.0: {}
 
+  cookie@0.7.1: {}
+
   copy-anything@2.0.6:
     dependencies:
       is-what: 3.14.1
@@ -6629,6 +6718,10 @@ snapshots:
   debug@4.3.5:
     dependencies:
       ms: 2.1.2
+
+  debug@4.3.7:
+    dependencies:
+      ms: 2.1.3
 
   default-browser-id@5.0.0: {}
 
@@ -6720,6 +6813,8 @@ snapshots:
 
   encodeurl@1.0.2: {}
 
+  encodeurl@2.0.0: {}
+
   encoding@0.1.13:
     dependencies:
       iconv-lite: 0.6.3
@@ -6736,7 +6831,7 @@ snapshots:
       base64id: 2.0.0
       cookie: 0.4.2
       cors: 2.8.5
-      debug: 4.3.5
+      debug: 4.3.7
       engine.io-parser: 5.2.2
       ws: 8.11.0
     transitivePeerDependencies:
@@ -6907,6 +7002,42 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  express@4.21.1:
+    dependencies:
+      accepts: 1.3.8
+      array-flatten: 1.1.1
+      body-parser: 1.20.3
+      content-disposition: 0.5.4
+      content-type: 1.0.5
+      cookie: 0.7.1
+      cookie-signature: 1.0.6
+      debug: 2.6.9
+      depd: 2.0.0
+      encodeurl: 2.0.0
+      escape-html: 1.0.3
+      etag: 1.8.1
+      finalhandler: 1.3.1
+      fresh: 0.5.2
+      http-errors: 2.0.0
+      merge-descriptors: 1.0.3
+      methods: 1.1.2
+      on-finished: 2.4.1
+      parseurl: 1.3.3
+      path-to-regexp: 0.1.10
+      proxy-addr: 2.0.7
+      qs: 6.13.0
+      range-parser: 1.2.1
+      safe-buffer: 5.2.1
+      send: 0.19.0
+      serve-static: 1.16.2
+      setprototypeof: 1.2.0
+      statuses: 2.0.1
+      type-is: 1.6.18
+      utils-merge: 1.0.1
+      vary: 1.1.2
+    transitivePeerDependencies:
+      - supports-color
+
   extend@3.0.2: {}
 
   external-editor@3.1.0:
@@ -6963,6 +7094,18 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  finalhandler@1.3.1:
+    dependencies:
+      debug: 2.6.9
+      encodeurl: 2.0.0
+      escape-html: 1.0.3
+      on-finished: 2.4.1
+      parseurl: 1.3.3
+      statuses: 2.0.1
+      unpipe: 1.0.0
+    transitivePeerDependencies:
+      - supports-color
+
   find-cache-dir@4.0.0:
     dependencies:
       common-path-prefix: 3.0.0
@@ -6982,9 +7125,9 @@ snapshots:
 
   flatted@3.3.1: {}
 
-  follow-redirects@1.15.6(debug@4.3.5):
+  follow-redirects@1.15.6(debug@4.3.7):
     optionalDependencies:
-      debug: 4.3.5
+      debug: 4.3.7
 
   foreground-child@3.1.1:
     dependencies:
@@ -7141,14 +7284,14 @@ snapshots:
   http-proxy-agent@7.0.2:
     dependencies:
       agent-base: 7.1.1
-      debug: 4.3.5
+      debug: 4.3.7
     transitivePeerDependencies:
       - supports-color
 
   http-proxy-middleware@2.0.6(@types/express@4.17.21):
     dependencies:
       '@types/http-proxy': 1.17.14
-      http-proxy: 1.18.1(debug@4.3.5)
+      http-proxy: 1.18.1(debug@4.3.7)
       is-glob: 4.0.3
       is-plain-obj: 3.0.0
       micromatch: 4.0.7
@@ -7160,18 +7303,18 @@ snapshots:
   http-proxy-middleware@3.0.0:
     dependencies:
       '@types/http-proxy': 1.17.14
-      debug: 4.3.5
-      http-proxy: 1.18.1(debug@4.3.5)
+      debug: 4.3.7
+      http-proxy: 1.18.1(debug@4.3.7)
       is-glob: 4.0.3
       is-plain-obj: 3.0.0
       micromatch: 4.0.7
     transitivePeerDependencies:
       - supports-color
 
-  http-proxy@1.18.1(debug@4.3.5):
+  http-proxy@1.18.1(debug@4.3.7):
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.15.6(debug@4.3.5)
+      follow-redirects: 1.15.6(debug@4.3.7)
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
@@ -7179,7 +7322,7 @@ snapshots:
   https-proxy-agent@7.0.4:
     dependencies:
       agent-base: 7.1.1
-      debug: 4.3.5
+      debug: 4.3.7
     transitivePeerDependencies:
       - supports-color
 
@@ -7407,6 +7550,8 @@ snapshots:
 
   jsonparse@1.3.1: {}
 
+  jwt-decode@4.0.0: {}
+
   karma-chrome-launcher@3.2.0:
     dependencies:
       which: 1.3.1
@@ -7448,7 +7593,7 @@ snapshots:
       dom-serialize: 2.2.1
       glob: 7.2.3
       graceful-fs: 4.2.11
-      http-proxy: 1.18.1(debug@4.3.5)
+      http-proxy: 1.18.1(debug@4.3.7)
       isbinaryfile: 4.0.10
       lodash: 4.17.21
       log4js: 6.9.1
@@ -7555,7 +7700,7 @@ snapshots:
   log4js@6.9.1:
     dependencies:
       date-format: 4.0.14
-      debug: 4.3.5
+      debug: 4.3.7
       flatted: 3.3.1
       rfdc: 1.3.1
       streamroller: 3.1.5
@@ -7609,6 +7754,8 @@ snapshots:
       tslib: 2.6.3
 
   merge-descriptors@1.0.1: {}
+
+  merge-descriptors@1.0.3: {}
 
   merge-stream@2.0.0: {}
 
@@ -7748,6 +7895,12 @@ snapshots:
 
   neo-async@2.6.2: {}
 
+  ngx-cookie-service@18.0.0(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)):
+    dependencies:
+      '@angular/common': 18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1)
+      '@angular/core': 18.0.2(rxjs@7.8.1)(zone.js@0.14.7)
+      tslib: 2.6.3
+
   nice-napi@1.0.2:
     dependencies:
       node-addon-api: 3.2.1
@@ -7856,7 +8009,7 @@ snapshots:
 
   object-hash@3.0.0: {}
 
-  object-inspect@1.13.1: {}
+  object-inspect@1.13.3: {}
 
   obuf@1.1.2: {}
 
@@ -8002,6 +8155,8 @@ snapshots:
       lru-cache: 10.2.2
       minipass: 7.1.2
 
+  path-to-regexp@0.1.10: {}
+
   path-to-regexp@0.1.7: {}
 
   path-type@4.0.0: {}
@@ -8133,6 +8288,10 @@ snapshots:
   qjobs@1.2.0: {}
 
   qs@6.11.0:
+    dependencies:
+      side-channel: 1.0.6
+
+  qs@6.13.0:
     dependencies:
       side-channel: 1.0.6
 
@@ -8350,6 +8509,24 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  send@0.19.0:
+    dependencies:
+      debug: 2.6.9
+      depd: 2.0.0
+      destroy: 1.2.0
+      encodeurl: 1.0.2
+      escape-html: 1.0.3
+      etag: 1.8.1
+      fresh: 0.5.2
+      http-errors: 2.0.0
+      mime: 1.6.0
+      ms: 2.1.3
+      on-finished: 2.4.1
+      range-parser: 1.2.1
+      statuses: 2.0.1
+    transitivePeerDependencies:
+      - supports-color
+
   serialize-javascript@6.0.2:
     dependencies:
       randombytes: 2.1.0
@@ -8372,6 +8549,15 @@ snapshots:
       escape-html: 1.0.3
       parseurl: 1.3.3
       send: 0.18.0
+    transitivePeerDependencies:
+      - supports-color
+
+  serve-static@1.16.2:
+    dependencies:
+      encodeurl: 2.0.0
+      escape-html: 1.0.3
+      parseurl: 1.3.3
+      send: 0.19.0
     transitivePeerDependencies:
       - supports-color
 
@@ -8405,7 +8591,7 @@ snapshots:
       call-bind: 1.0.7
       es-errors: 1.3.0
       get-intrinsic: 1.2.4
-      object-inspect: 1.13.1
+      object-inspect: 1.13.3
 
   signal-exit@3.0.7: {}
 
@@ -8428,7 +8614,7 @@ snapshots:
 
   socket.io-adapter@2.5.4:
     dependencies:
-      debug: 4.3.5
+      debug: 4.3.7
       ws: 8.11.0
     transitivePeerDependencies:
       - bufferutil
@@ -8438,7 +8624,7 @@ snapshots:
   socket.io-parser@4.2.4:
     dependencies:
       '@socket.io/component-emitter': 3.1.2
-      debug: 4.3.5
+      debug: 4.3.7
     transitivePeerDependencies:
       - supports-color
 
@@ -8447,7 +8633,7 @@ snapshots:
       accepts: 1.3.8
       base64id: 2.0.0
       cors: 2.8.5
-      debug: 4.3.5
+      debug: 4.3.7
       engine.io: 6.5.4
       socket.io-adapter: 2.5.4
       socket.io-parser: 4.2.4
@@ -8465,7 +8651,7 @@ snapshots:
   socks-proxy-agent@8.0.3:
     dependencies:
       agent-base: 7.1.1
-      debug: 4.3.5
+      debug: 4.3.7
       socks: 2.8.3
     transitivePeerDependencies:
       - supports-color
@@ -8513,7 +8699,7 @@ snapshots:
 
   spdy-transport@3.0.0:
     dependencies:
-      debug: 4.3.5
+      debug: 4.3.7
       detect-node: 2.1.0
       hpack.js: 2.1.6
       obuf: 1.1.2
@@ -8524,7 +8710,7 @@ snapshots:
 
   spdy@4.0.2:
     dependencies:
-      debug: 4.3.5
+      debug: 4.3.7
       handle-thing: 2.0.1
       http-deceiver: 1.2.7
       select-hose: 2.0.0
@@ -8547,7 +8733,7 @@ snapshots:
   streamroller@3.1.5:
     dependencies:
       date-format: 4.0.14
-      debug: 4.3.5
+      debug: 4.3.7
       fs-extra: 8.1.0
     transitivePeerDependencies:
       - supports-color
@@ -8670,6 +8856,34 @@ snapshots:
       glob: 7.2.3
       minimatch: 3.1.2
 
+  'test-pnpm@file:':
+    dependencies:
+      '@angular/animations': 18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))
+      '@angular/common': 18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1)
+      '@angular/compiler': 18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))
+      '@angular/core': 18.0.2(rxjs@7.8.1)(zone.js@0.14.7)
+      '@angular/forms': 18.0.2(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(@angular/platform-browser@18.0.2(@angular/animations@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)))(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)))(rxjs@7.8.1)
+      '@angular/platform-browser': 18.0.2(@angular/animations@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)))(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))
+      '@angular/platform-browser-dynamic': 18.0.2(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/compiler@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(@angular/platform-browser@18.0.2(@angular/animations@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)))(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)))
+      '@angular/platform-server': 18.0.2(@angular/animations@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)))(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/compiler@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(@angular/platform-browser@18.0.2(@angular/animations@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)))(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)))
+      '@angular/router': 18.0.2(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(@angular/platform-browser@18.0.2(@angular/animations@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)))(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)))(rxjs@7.8.1)
+      '@angular/ssr': 18.0.3(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))
+      '@ngrx/effects': 18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(@ngrx/store@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(rxjs@7.8.1)
+      '@ngrx/router-store': 18.0.2(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(@angular/router@18.0.2(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(@angular/platform-browser@18.0.2(@angular/animations@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)))(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)))(rxjs@7.8.1))(@ngrx/store@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(rxjs@7.8.1)
+      '@ngrx/store': 18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1)
+      '@ngrx/store-devtools': 18.0.2(@ngrx/store@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(rxjs@7.8.1)
+      aos: 2.3.4
+      cliui: 8.0.1
+      dotenv: 16.4.5
+      express: 4.19.2
+      ngx-cookie-service: 18.0.0(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))
+      primeng: 17.18.1(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(@angular/forms@18.0.2(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(@angular/platform-browser@18.0.2(@angular/animations@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)))(@angular/common@18.0.2(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7))(rxjs@7.8.1))(@angular/core@18.0.2(rxjs@7.8.1)(zone.js@0.14.7)))(rxjs@7.8.1))(rxjs@7.8.1)(zone.js@0.14.7)
+      rxjs: 7.8.1
+      tslib: 2.6.3
+      zone.js: 0.14.7
+    transitivePeerDependencies:
+      - supports-color
+
   thenify-all@1.6.0:
     dependencies:
       thenify: 3.3.1
@@ -8713,7 +8927,7 @@ snapshots:
   tuf-js@2.2.1:
     dependencies:
       '@tufjs/models': 2.0.1
-      debug: 4.3.5
+      debug: 4.3.7
       make-fetch-happen: 13.0.1
     transitivePeerDependencies:
       - supports-color
@@ -8839,7 +9053,7 @@ snapshots:
       compression: 1.7.4
       connect-history-api-fallback: 2.0.0
       default-gateway: 6.0.3
-      express: 4.19.2
+      express: 4.21.1
       graceful-fs: 4.2.11
       html-entities: 2.5.2
       http-proxy-middleware: 2.0.6(@types/express@4.17.21)
