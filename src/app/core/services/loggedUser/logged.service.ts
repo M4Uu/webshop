@@ -1,6 +1,4 @@
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { UserInfo } from '../../models/user.interface';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { selectUser } from '../../../store/selects/user.select';
@@ -25,5 +23,4 @@ export class LoggedService {
       }
     });
   }
-
 }

@@ -41,4 +41,13 @@ export class UserEffects {
       catchError(error => of(UserActions.unlogin({ message: error.message })))
     )))
   )
+
+  logout$ = createEffect(() => this.actions$.pipe(
+    ofType(UserActions.unlogin),
+    mergeMap(() => this.ApiUser.logoutUser()
+    .pipe(
+      map(response => UserActions.messageResponse({ message: response.status })),
+      catchError(error => of(UserActions.messageResponse({ message: error.message })))
+    )),
+  ))
 }

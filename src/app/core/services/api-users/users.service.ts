@@ -28,4 +28,8 @@ export class UsersService {
     return this.http.get<UserInfo>(this.apiUrl + "/protected", { withCredentials: true })
   }
 
+  logoutUser() : Observable<any> {
+    return this.http.get<UserInfo>(this.apiUrl + "/logout", { withCredentials: true })
+  }
+
 }

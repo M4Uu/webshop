@@ -1,6 +1,6 @@
 import { Component, inject, OnInit} from '@angular/core';
-import { BgService } from '../../../global/bg-service/bg.service';
 import { Router } from '@angular/router';
+import { BgService } from '../../../global/bg-service/bg.service';
 import { LoggedService } from '../../../core/services/loggedUser/logged.service';
 
 @Component({

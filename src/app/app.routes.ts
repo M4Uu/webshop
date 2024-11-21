@@ -29,6 +29,11 @@ export const routes: Routes = [
     title: 'HomeLogin',
     loadChildren: () => import('./modules/homelogin/homelogin.module').then(m => m.HomeloginModule),
     component: HomeLogin.PageComponent,
-    canActivate: [authGuard]
+    // canActivate: [authGuard]
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    redirectTo: ''
   }
 ];
