@@ -1,0 +1,67 @@
+.home-page{
+  color: white;
+  @apply bg-black;
+}
+
+section{
+  box-sizing: border-box;
+  min-height: 100vh;
+  user-select: none;
+  /* padding: 20px; */
+}
+
+#section1{
+  background-image: linear-gradient(
+    rgba(0,0,0,0),
+    rgba(0,0,0,1)
+    ), url('../../../../../../public/image/homev2/local2.webp');
+  background-size: cover;
+}
+
+#section2{
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0,0,0) 0%,
+    rgba(12, 12, 34) 4  0%,
+    rgba(19, 20, 42,0.4) 70%,
+    rgba(26, 26, 51,0.4) 100%
+  );
+}
+
+#section3{
+  height: auto !important;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(33, 33, 59,0.4) 0%,
+    rgba(50, 49, 78,0.8) 40%,
+    rgba(78, 76, 107,0.9) 100%
+  );
+}
+
+.title {
+  text-shadow: 0.5rem 0.5rem 0px rgba(0, 0, 0, 0.5);
+  cursor: default;
+}
+
+
+.img-about{
+  border-radius: 2rem 0 2rem 0;
+}
+
+.rounded-top{
+  border-radius: .5rem 0 0 .5rem;
+}
+
+.rounded-bottom{
+  border-radius: 0 .5rem .5rem 0;
+}
+
+@media (max-width: 1024px) {
+  .rounded-top{
+    border-radius: .5rem .5rem 0 0;
+  }
+
+  .rounded-bottom{
+    border-radius: 0 0 .5rem .5rem;
+  }
+}

@@ -1,0 +1,47 @@
+<div class="about-container">
+  <section class="flex h-auto flex-col py-20 items-center justify-center gap-14 bg-slate-50">
+    <div class="flex flex-col items-center justify-center text-center gap-3">
+      <span>Bienvenido a Beronica Mercado</span>
+      <h1 class="font-bold w-[21rem] lg:w-auto text-4xl">El mejor sitio para tu educación</h1>
+      <span class="lg:w-[25rem]">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
+    </div>
+
+    <div class="flex gap-5 flex-col lg:flex-row">
+      <app-about-card *ngFor="let card of textCards" [data]="card" class="w-[20rem] cursor-pointer"></app-about-card>
+    </div>
+  </section>
+
+  <section class="flex h-auto py-20 flex-col items-center justify-center gap-12 bg-slate-200">
+    <!-- Sección de productos educativos -->
+    <div class="w-[75vw] flex flex-col lg:flex-row gap-20">
+      <div class="lg:w-[50%] flex flex-col gap-4">
+        <h1 class="font-bold text-2xl">Somos líderes en productos de educación</h1>
+        <div class="w-[5rem] h-[.2rem] bg-blue-500"></div>
+        <p class="text-lg/8">Sed ut perspiciatis unde omnis iste natus error sit voluptatem...</p>
+      </div>
+      <div class="lg:w-[50%] flex justify-center items-center">
+        <img src="/assets/about-image.jpg" alt="about-image" class="rounded-lg shadow-xl">
+      </div>
+    </div>
+
+    <!-- Sección de historia -->
+    <div class="w-[75vw] flex gap-20">
+      <div class="flex flex-col gap-4">
+        <h1 class="font-bold text-2xl">Nuestra historia</h1>
+        <div class="w-[5rem] h-[.2rem] bg-blue-500"></div>
+        <p class="text-lg/8">Sed ut perspiciatis unde omnis iste natus error sit voluptatem...</p>
+      </div>
+    </div>
+
+    <!-- Sección de equipo -->
+    <div class="w-[75vw] flex gap-20">
+      <div class="flex flex-col gap-4">
+        <h1 class="font-bold text-2xl">Nuestro equipo</h1>
+        <div class="w-[5rem] h-[.2rem] bg-blue-500"></div>
+        <div class="flex gap-10 flex-col lg:flex-row">
+          <app-members-card *ngFor="let member of teamMembers" [data]="member" class="w-[17rem] cursor-pointer"></app-members-card>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

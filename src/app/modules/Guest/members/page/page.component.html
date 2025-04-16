@@ -1,0 +1,29 @@
+<div class="members-container">
+  <section class="flex h-auto flex-col items-center justify-center gap-52 my-40">
+    <div *ngFor="let member of members" class="flex items-center flex-col lg:flex-row lg:w-[55vw] lg:h-[15rem] gap-10">
+      <div class="flex flex-col gap-10 w-[70%]">
+        <h1 class="font-bold text-2xl">{{member.name}}</h1>
+        <p>{{member.content}}</p>
+      </div>
+
+      <div class="lg:w-[30%] h-full border border-black">
+        <img class="h-full w-full object-cover" [src]="member.img" [alt]="member.name + ' image'"/>
+
+        <div class="flex justify-between gap-5 lg:gap-0 px-5 mt-5">
+          <a [href]="member.social.instagram" target="_blank">
+            <mat-icon class="text-2xl cursor-pointer">instagram</mat-icon>
+          </a>
+          <a [href]="member.social.linkedin" target="_blank">
+            <mat-icon class="text-2xl cursor-pointer">linkedin</mat-icon>
+          </a>
+          <a [href]="'mailto:' + member.social.email" target="_blank">
+            <mat-icon class="text-2xl cursor-pointer">mail</mat-icon>
+          </a>
+          <a [href]="'https://wa.me/' + member.social.whatsapp" target="_blank">
+            <mat-icon class="text-2xl cursor-pointer">whatsapp</mat-icon>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
