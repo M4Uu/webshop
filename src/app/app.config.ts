@@ -20,6 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     provideStore({user: userReducer}, {metaReducers}),
     provideState(userFeature),
-    provideEffects(UserEffects), provideAnimationsAsync(), provideAnimationsAsync()
+    provideEffects(UserEffects),
+    provideAnimationsAsync(),
 ]
 };

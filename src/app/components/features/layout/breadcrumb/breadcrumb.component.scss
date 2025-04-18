@@ -1,0 +1,21 @@
+#container{
+  background-image: linear-gradient(
+    rgba(0,0,0,0),
+    rgba(0,0,0,0.8)
+    ), url('@images/local2.webp');
+  background-size: cover;
+  background-position: center;
+}
+
+:host ::ng-deep{
+  .p-breadcrumb {
+    width: auto;
+    background-color: transparent;
+    .p-menuitem-icon,
+    .p-menuitem-text,
+    .p-menuitem-separator{
+      color:white;
+    }
+  }
+}
+

@@ -1,9 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PageComponent } from './page/page.component';
-import { AboutCardComponent } from '../../../components/shared/about-card/about-card.component';
-import { MembersCardComponent } from '../../../components/shared/members-card/members-card.component';
+import { RouterModule, Routes } from '@angular/router';
+import { CardModule } from 'primeng/card';
+import { DialogModule } from 'primeng/dialog';
 
+const routes: Routes = [
+  {
+    path: '',
+    title: 'About',
+    component: PageComponent
+  }
+];
 
 
 @NgModule({
@@ -11,9 +19,10 @@ import { MembersCardComponent } from '../../../components/shared/members-card/me
     PageComponent
   ],
   imports: [
+    RouterModule.forChild(routes),
     CommonModule,
-    MembersCardComponent,
-    AboutCardComponent,
+    CardModule,
+    DialogModule,
   ]
 })
 export class AboutModule { }

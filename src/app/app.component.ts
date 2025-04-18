@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject, PLATFORM_ID} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import AOS from 'aos';
-import { BgService } from './global/bg-service/bg.service';
 import { isPlatformBrowser } from '@angular/common';
+import { PrimeNGConfig } from 'primeng/api';
+import AOS from 'aos';
 
 @Component({
   selector: 'app-root',
@@ -17,8 +17,8 @@ export class AppComponent implements OnInit{
   title = 'test-pnpm';
 
   constructor(
-    private bgService: BgService,
     @Inject(PLATFORM_ID) private platformId: Object,
+    private primengConfig: PrimeNGConfig
   ) {}
 
   ngOnInit() {
@@ -26,10 +26,7 @@ export class AppComponent implements OnInit{
     if (isPlatformBrowser(this.platformId)) {
       AOS.init();
 
-      this.bgService.background$.subscribe((backgroundImage) => {
-        document.body.style.backgroundImage = `url(${backgroundImage})`;
-      });
-
+      this.primengConfig.ripple = true;
     }
 
   }

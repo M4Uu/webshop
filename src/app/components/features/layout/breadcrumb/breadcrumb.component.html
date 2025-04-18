@@ -1,0 +1,9 @@
+@if(visible){
+<section
+  id="container"
+  class="flex flex-col justify-center items-center mt-[4rem] h-[20rem] gap-10"
+>
+  <span class="text-4xl font-bold text-white tracking-[.25em]" [textContent]="title"></span>
+  <p-breadcrumb class="max-w-full" [model]="items" [home]="home"/>
+</section>
+}

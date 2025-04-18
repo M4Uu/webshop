@@ -1,9 +1,7 @@
 import { Component, inject, Input } from '@angular/core';
-import { trigger, transition, style, animate } from '@angular/animations';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
-import { OverlayModule } from '@angular/cdk/overlay';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from '../../AuthUser/login/login.component';
@@ -18,19 +16,7 @@ import { RegisterComponent } from '../../AuthUser/register/register.component';
     CommonModule,
     MatIconModule,
     MatDialogModule,
-    OverlayModule,
     RouterModule
-  ],
-  animations: [
-    trigger('menuAnimation', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'scale(0.95)' }),
-        animate('100ms ease-out', style({ opacity: 1, transform: 'scale(1)' }))
-      ]),
-      transition(':leave', [
-        animate('75ms ease-in', style({ opacity: 0, transform: 'scale(0.95)' }))
-      ])
-    ])
   ]
 })
 export class NavbarComponent {
@@ -44,7 +30,7 @@ export class NavbarComponent {
     { name: 'Inicio', href: '/' },
     { name: '¿Quienes somos?', href: 'about' },
     { name: 'Ofrecemos', href: 'weoffer' },
-    { name: 'Miembros', href: 'members' },
+    // { name: 'Miembros', href: 'members' },
     { name: 'Contacto', href: 'contact' },
   ];
 

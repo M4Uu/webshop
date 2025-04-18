@@ -42,9 +42,12 @@
               }
             ],
             "styles": [
+              "src/styles.scss",
               "@angular/material/prebuilt-themes/azure-blue.css",
-              "./node_modules/leaflet/dist/leaflet.css",
-              "src/styles.scss"
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "./node_modules/leaflet/dist/leaflet.css"
             ],
             "scripts": [],
             "server": "src/main.server.ts",

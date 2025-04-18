@@ -1,13 +1,19 @@
 <div class="about-container">
   <section class="flex h-auto flex-col py-20 items-center justify-center gap-14 bg-slate-50">
     <div class="flex flex-col items-center justify-center text-center gap-3">
-      <span>Bienvenido a Beronica Mercado</span>
-      <h1 class="font-bold w-[21rem] lg:w-auto text-4xl">El mejor sitio para tu educación</h1>
+      <span class="text-lg">Bienvenido a Julias Gioielli</span>
+      <h1 class="!text-5xl ">Tú mejor aliado para la moda</h1>
       <span class="lg:w-[25rem]">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
     </div>
 
     <div class="flex gap-5 flex-col lg:flex-row">
-      <app-about-card *ngFor="let card of textCards" [data]="card" class="w-[20rem] cursor-pointer"></app-about-card>
+
+      <p-card *ngFor="let card of textCards" class="w-[20rem] cursor-pointer" [header]="card.title">
+        <ng-template pTemplate="header">
+          <img alt="Card" class="w-full rounded-t-md" src="https://primefaces.org/cdn/primereact/images/usercard.png" alt="about-image"/>
+        </ng-template>
+        <p class="m-0">{{card.content}}</p>
+      </p-card>
     </div>
   </section>
 
@@ -15,19 +21,19 @@
     <!-- Sección de productos educativos -->
     <div class="w-[75vw] flex flex-col lg:flex-row gap-20">
       <div class="lg:w-[50%] flex flex-col gap-4">
-        <h1 class="font-bold text-2xl">Somos líderes en productos de educación</h1>
+        <h1 class="!text-5xl">Somos líderes en productos para tu vestir</h1>
         <div class="w-[5rem] h-[.2rem] bg-blue-500"></div>
         <p class="text-lg/8">Sed ut perspiciatis unde omnis iste natus error sit voluptatem...</p>
       </div>
       <div class="lg:w-[50%] flex justify-center items-center">
-        <img src="/assets/about-image.jpg" alt="about-image" class="rounded-lg shadow-xl">
+        <img src="assets/images/test.webp" alt="about-image" class="rounded-lg shadow-xl">
       </div>
     </div>
 
     <!-- Sección de historia -->
     <div class="w-[75vw] flex gap-20">
       <div class="flex flex-col gap-4">
-        <h1 class="font-bold text-2xl">Nuestra historia</h1>
+        <h1 class="!text-5xl">Nuestra historia</h1>
         <div class="w-[5rem] h-[.2rem] bg-blue-500"></div>
         <p class="text-lg/8">Sed ut perspiciatis unde omnis iste natus error sit voluptatem...</p>
       </div>
@@ -36,12 +42,28 @@
     <!-- Sección de equipo -->
     <div class="w-[75vw] flex gap-20">
       <div class="flex flex-col gap-4">
-        <h1 class="font-bold text-2xl">Nuestro equipo</h1>
+        <h1 class="!text-5xl">Nuestro equipo</h1>
         <div class="w-[5rem] h-[.2rem] bg-blue-500"></div>
-        <div class="flex gap-10 flex-col lg:flex-row">
-          <app-members-card *ngFor="let member of teamMembers" [data]="member" class="w-[17rem] cursor-pointer"></app-members-card>
+        <div class="flex gap-5 flex-col lg:flex-row">
+          <p-card (click)="showDialog(member)" *ngFor="let member of teamMembers" class="w-[18rem] cursor-pointer" [header]="member.title">
+            <ng-template pTemplate="header">
+              <img class="w-full rounded-t-md" [src]="member.img" alt="about-image"/>
+            </ng-template>
+          </p-card>
         </div>
       </div>
     </div>
   </section>
+  <p-dialog [modal]="true" [(visible)]="visible" position="left">
+    <ng-template pTemplate="header">
+      <span class="ml-2 font-bold text-xl">{{member.title}}</span>
+    </ng-template>
+    <div class="w-[30rem] flex flex-col items-center">
+      <img class="w-[20rem] rounded-md mb-5" [src]="member.img" alt="about-image"/>
+      <p class="w-[25rem]">
+        {{member.content}}
+      </p>
+    </div>
+  </p-dialog>
 </div>
+

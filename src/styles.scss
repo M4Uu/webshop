@@ -2,13 +2,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "primeicons/primeicons.css";
 
 body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 100vh;
   background-attachment: fixed;
+}
+
+h1{
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 ::-webkit-scrollbar {
