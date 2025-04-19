@@ -1,14 +1,14 @@
 <div class="about-container">
   <section class="flex h-auto flex-col py-20 items-center justify-center gap-14 bg-slate-50">
     <div class="flex flex-col items-center justify-center text-center gap-3">
-      <span class="text-lg">Bienvenido a Julias Gioielli</span>
-      <h1 class="!text-5xl ">Tú mejor aliado para la moda</h1>
-      <span class="lg:w-[25rem]">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
+      <span class="text-lg" data-aos="fade-down">Bienvenido a Julias Gioielli</span>
+      <h1 class="!text-5xl" data-aos="fade-down" data-aos-delay="150">Tú mejor aliado para la moda</h1>
+      <span class="lg:w-[25rem]" data-aos="fade-down" data-aos-delay="300">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
     </div>
 
     <div class="flex gap-5 flex-col lg:flex-row">
 
-      <p-card *ngFor="let card of textCards" class="w-[20rem] cursor-pointer" [header]="card.title">
+      <p-card data-aos="flip-right" *ngFor="let card of textCards" class="w-[20rem] cursor-pointer" [header]="card.title">
         <ng-template pTemplate="header">
           <img alt="Card" class="w-full rounded-t-md" src="https://primefaces.org/cdn/primereact/images/usercard.png" alt="about-image"/>
         </ng-template>
@@ -20,18 +20,18 @@
   <section class="flex h-auto py-20 flex-col items-center justify-center gap-12 bg-slate-200">
     <!-- Sección de productos educativos -->
     <div class="w-[75vw] flex flex-col lg:flex-row gap-20">
-      <div class="lg:w-[50%] flex flex-col gap-4">
+      <div data-aos="fade-down" class="lg:w-[50%] flex flex-col gap-4">
         <h1 class="!text-5xl">Somos líderes en productos para tu vestir</h1>
         <div class="w-[5rem] h-[.2rem] bg-blue-500"></div>
         <p class="text-lg/8">Sed ut perspiciatis unde omnis iste natus error sit voluptatem...</p>
       </div>
-      <div class="lg:w-[50%] flex justify-center items-center">
+      <div data-aos="zoom-in" data-aos-delay="300" class="lg:w-[50%] flex justify-center items-center">
         <img src="assets/images/test.webp" alt="about-image" class="rounded-lg shadow-xl">
       </div>
     </div>
 
     <!-- Sección de historia -->
-    <div class="w-[75vw] flex gap-20">
+    <div data-aos="fade-down" class="w-[75vw] flex gap-20">
       <div class="flex flex-col gap-4">
         <h1 class="!text-5xl">Nuestra historia</h1>
         <div class="w-[5rem] h-[.2rem] bg-blue-500"></div>
@@ -42,10 +42,12 @@
     <!-- Sección de equipo -->
     <div class="w-[75vw] flex gap-20">
       <div class="flex flex-col gap-4">
-        <h1 class="!text-5xl">Nuestro equipo</h1>
-        <div class="w-[5rem] h-[.2rem] bg-blue-500"></div>
+        <div data-aos="fade-down" class="flex flex-col gap-4">
+          <h1 class="!text-5xl">Nuestro equipo</h1>
+          <div class="w-[5rem] h-[.2rem] bg-blue-500"></div>
+        </div>
         <div class="flex gap-5 flex-col lg:flex-row">
-          <p-card (click)="showDialog(member)" *ngFor="let member of teamMembers" class="w-[18rem] cursor-pointer" [header]="member.title">
+          <p-card data-aos="flip-left" [attr.data-aos-delay]="200*teamMembers.indexOf(member)" (click)="showDialog(member)" *ngFor="let member of teamMembers" class="w-[18rem] cursor-pointer" [header]="member.title">
             <ng-template pTemplate="header">
               <img class="w-full rounded-t-md" [src]="member.img" alt="about-image"/>
             </ng-template>

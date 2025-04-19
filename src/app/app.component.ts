@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, PLATFORM_ID} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { PrimeNGConfig } from 'primeng/api';
-import AOS from 'aos';
+import { AosService } from './global/aos-service/aosservice.service';
 
 @Component({
   selector: 'app-root',
@@ -18,13 +18,18 @@ export class AppComponent implements OnInit{
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    private primengConfig: PrimeNGConfig
+    private primengConfig: PrimeNGConfig,
+    private aosService: AosService,
   ) {}
 
   ngOnInit() {
 
     if (isPlatformBrowser(this.platformId)) {
-      AOS.init();
+      this.aosService.init();
+
+      window.addEventListener('load', () => {
+        setTimeout(() => this.aosService.refresh(), 500);
+      });
 
       this.primengConfig.ripple = true;
     }

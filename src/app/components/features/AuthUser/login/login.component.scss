@@ -1,0 +1,51 @@
+.input{
+  @apply
+    px-[1rem] py-[.5rem]
+    rounded-full
+    border border-gray-800
+    shadow-md
+  ;
+}
+
+.button{
+  @apply
+    bg-gray-500
+    transition-colors
+    ease-in
+  ;
+}
+
+.button-invalid{
+  @apply
+  bg-gray-400
+    transition-colors
+    ease-in
+  ;
+}
+
+.button:hover{
+  @apply
+    text-white
+    transition-colors
+    ease-in
+  ;
+}
+
+.button-invalid:hover{
+  @apply
+    text-black
+    transition-colors
+    ease-in
+  ;
+}
+
+.button:active{
+  @apply
+    text-black
+    bg-white
+    border
+    border-black
+    transition-colors
+    ease-in
+  ;
+}

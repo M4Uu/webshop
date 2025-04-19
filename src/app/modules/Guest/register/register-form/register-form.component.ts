@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit} from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { UserActions } from '../../../store/actions/user.action';
+import { UserActions } from '@store/actions/user.action';
 import { Observable } from 'rxjs';
-import { selectUserMessage } from '../../../store/selects/user.select';
-import { LoggedService } from '../../../core/services/loggedUser/logged.service';
+import { selectUserMessage } from '@store/selects/user.select';
+import { LoggedService } from '@core/services/loggedUser/logged.service';
 @Component({
   selector: 'app-register-form',
   standalone: true,

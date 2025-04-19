@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { BgService } from '../../../global/bg-service/bg.service';
 
 @Component({
   selector: 'app-page',
@@ -8,9 +7,7 @@ import { BgService } from '../../../global/bg-service/bg.service';
 })
 
 export class PageComponent {
-  constructor(private bgService: BgService) {}
 
   ngOnInit() {
-    this.bgService.setBackground('/image/bg-register.jpg');
   }
 }

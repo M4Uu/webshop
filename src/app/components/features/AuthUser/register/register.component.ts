@@ -43,6 +43,7 @@ export class RegisterComponent {
   passwordMatchValidator(group: FormGroup){
     const password = group.get('pswd')?.value
     const confirmPassword = group.get('confirm-password')?.value
+    console.log(confirmPassword, ' ', password);
     return password === confirmPassword ? null : { mismatch: true }
   }
 
@@ -51,8 +52,8 @@ export class RegisterComponent {
     'last_name': ['test', [Validators.required]],
     'user_name': ['test', [Validators.required]],
     'email_address': ['test@gmail.com', [Validators.required, Validators.email]],
-    'pswd': ['1234', [Validators.required]],
-    'confirm_password': ['1234', [Validators.required, this.passwordMatchValidator]],
+    'pswd': ['123', [Validators.required]],
+    'confirm_password': ['123', [Validators.required, this.passwordMatchValidator]],
     'checkbox': [true, [Validators.required, Validators.requiredTrue]]
   })
 
@@ -74,6 +75,7 @@ export class RegisterComponent {
           break;
       }
     })
-    // this.store.dispatch(UserActions.protected())
+    // this.dialogRef.close(this.registerForm.value);
+    this.store.dispatch(UserActions.protected())
   }
 }

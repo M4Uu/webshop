@@ -1,7 +1,7 @@
 <div class="weoffer-container">
   <section class="h-auto flex justify-center items-center flex-col">
     <div class="flex flex-wrap h-full w-[80vw] py-[5rem] justify-center gap-[5rem]">
-      <div *ngFor="let product of products"
+      <div data-aos="flip-left" [attr.data-aos-delay]="100*products.indexOf(product)" *ngFor="let product of products"
            class="flex flex-col justify-center items-center w-[18rem] gap-3">
         <mat-icon class="">menu_book</mat-icon>
         <h1 class="!font-bold !text-lg">{{product.title}}</h1>
@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <div class="w-full flex font-bold items-center h-[10rem] justify-between bg-green-500 px-[1rem] gap-[1rem] lg:px-[5rem]">
+    <div data-aos="fade-up" data-aos-duration="3000" class="w-full flex font-bold items-center h-[10rem] justify-between bg-green-500 px-[1rem] gap-[1rem] lg:px-[5rem]">
       <span class="text-xl w-[15rem] lg:w-auto lg:text-2xl">Puedes encontrar estos productos y más al ingresar</span>
       <p-button
         label="Ingresa"
