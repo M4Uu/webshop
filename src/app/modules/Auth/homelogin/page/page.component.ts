@@ -1,7 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UserActions } from '../../../store/actions/user.action';
+import { UserActions } from '@store/actions/user.action';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { selectUserMessage } from '@app/store/selects/user.select';
 
 @Component({
   selector: 'app-page',
@@ -10,14 +12,21 @@ import { Router } from '@angular/router';
   templateUrl: './page.component.html',
   styleUrl: './page.component.scss'
 })
-export class PageComponent {
+export class PageComponent implements OnInit{
 
   store = inject(Store)
   router = inject(Router)
 
+  private message$?: Observable< string | undefined>
+
+  ngOnInit(): void {
+    this.message$ = this.store.select(selectUserMessage);
+  }
+
   onClick(){
-    this.store.dispatch(UserActions.unlogin({ message: 'Sesion close succesfuly' }))
-    console.log('log out.');
+    this.store.dispatch(UserActions.unlogin())
+    console.log('Log out');
+    this.message$?.subscribe(m => m && console.log('Debug: ',m));
     this.router.navigate(['/'])
   }
 }

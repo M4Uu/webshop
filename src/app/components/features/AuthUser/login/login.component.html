@@ -3,9 +3,10 @@
   (ngSubmit)="onSubmit()"
   class="flex flex-col gap-4 p-[3rem]"
 >
+  <p-toast />
   <div class="flex justify-between items-center mb-4">
     <h1 class="!text-2xl !font-semibold">INICIAR SESIÓN</h1>
-    <button mat-icon-button (click)="closeDialog()">
+    <button mat-icon-button (click)="closeDialog()" type="button">
       <mat-icon>close</mat-icon>
     </button>
   </div>

@@ -1,15 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit} from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { UserActions } from '../../../../store/actions/user.action';
+import { UserActions } from '@store/actions/user.action';
 import { Observable } from 'rxjs';
-import { selectUserMessage } from '../../../../store/selects/user.select';
-import { LoggedService } from '../../../../core/services/loggedUser/logged.service';
+import { selectUserMessage } from '@store/selects/user.select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-register-form',
@@ -20,7 +21,9 @@ import { MatDialogRef } from '@angular/material/dialog';
     MatIconModule,
     MatFormFieldModule,
     ReactiveFormsModule,
+    ToastModule,
   ],
+  providers: [MessageService],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
@@ -30,20 +33,18 @@ export class RegisterComponent {
   formBuilder = inject(FormBuilder)
   router = inject(Router)
   store = inject(Store)
-  logged = inject(LoggedService)
   dialogRef = inject(MatDialogRef);
+  messageService = inject(MessageService);
 
-  message$?: Observable<string | undefined>
+  message$?: Observable< string | undefined>
 
   ngOnInit(): void {
-    this.logged.ViewUserLogged()
     this.message$ = this.store.select(selectUserMessage)
   }
 
   passwordMatchValidator(group: FormGroup){
     const password = group.get('pswd')?.value
     const confirmPassword = group.get('confirm-password')?.value
-    console.log(confirmPassword, ' ', password);
     return password === confirmPassword ? null : { mismatch: true }
   }
 
@@ -58,8 +59,9 @@ export class RegisterComponent {
   })
 
   closeDialog() {
-    this.dialogRef.close(this.registerForm.value);
+    this.dialogRef.close(null);
   }
+
 
   onSubmit(){
     this.store.dispatch(UserActions.register({ payload: this.registerForm.value}))
@@ -69,13 +71,19 @@ export class RegisterComponent {
         case 'Cannot read properties of null (reading \'status\')':
           this.router.navigate(['/'])
           console.log('User successfully registered');
+          this.messageService.add({ severity: 'success', summary: 'Registrado', detail: 'Usuario registrado correctamente.', life: 3000 });
+          this.dialogRef.close(this.registerForm.value);
           break;
         case '406 Not Acceptable':
+          this.messageService.add({ severity: 'alert', summary: 'Alert', detail: 'Este usuario ya está registrado, por favor, cree un nuevo usuario o inicie sesión.', life: 3000 });
           console.log('This user has already been registered, please create a new user or loggin');
+          break;
+        case '0 undefined':
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 });
+          console.log('Error conecting with the server');
           break;
       }
     })
-    // this.dialogRef.close(this.registerForm.value);
-    this.store.dispatch(UserActions.protected())
+    // this.store.dispatch(UserActions.protected())
   }
 }

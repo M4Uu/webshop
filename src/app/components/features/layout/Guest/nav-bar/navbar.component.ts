@@ -4,8 +4,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from '../../AuthUser/login/login.component';
-import { RegisterComponent } from '../../AuthUser/register/register.component';
+import { LoginComponent } from '@features/AuthUser/login/login.component';
+import { RegisterComponent } from '@features/AuthUser/register/register.component';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-navbar',
@@ -16,7 +17,8 @@ import { RegisterComponent } from '../../AuthUser/register/register.component';
     CommonModule,
     MatIconModule,
     MatDialogModule,
-    RouterModule
+    RouterModule,
+    ButtonModule,
   ]
 })
 export class NavbarComponent {
@@ -38,12 +40,11 @@ export class NavbarComponent {
     const dialogRef = this.dialog.open(LoginComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log('Datos del login:', result);
-        // Aquí puedes manejar el login
+        // console.log('Datos del login:', result);
+        // Manejo de Login
       }
     });
     this.isUserMenuOpen = false;
-    // this.router.navigate(['/login']);
   }
 
   openRegisterModal() {
@@ -51,12 +52,11 @@ export class NavbarComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log('Datos del registro:', result);
-        // Manejo de Login
+        // console.log('Datos del registro:', result);
+        // Manejo de Registro
       }
     });
     this.isUserMenuOpen = false;
-    // this.router.navigate(['/register']);
   }
 
   isCurrent(href: string): boolean {

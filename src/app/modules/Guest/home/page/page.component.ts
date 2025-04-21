@@ -13,15 +13,6 @@ export class PageComponent{
     logged = inject(LoggedService);
     aosService = inject(AosService);
     ngOnInit() {
-      this.logged.ViewUserLogged();
-      this.aosService.refresh();
-    }
-
-    // Apertura de modales o navegación
-    navigateRegister() {
-      this.router.navigate(['/register'])
-    }
-    navigateLogin() {
-      this.router.navigate(['/login'])
+      // this.logged.ViewUserLogged();
     }
 }

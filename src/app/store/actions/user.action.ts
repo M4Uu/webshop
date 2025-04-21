@@ -9,7 +9,7 @@ export const UserActions = createActionGroup({
     register: props<{ payload: UserInfo }>(),
     login: props<{ payload: LoginInf }>(),
     upload: props<{ payload: UserInfo }>(),
-    unlogin: props<{ message: string }>(),
+    unlogin: emptyProps(),
 
     // protected
     protected: emptyProps(),

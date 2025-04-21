@@ -1,14 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PageComponent } from './page/page.component';
+import { RouterModule, Routes } from '@angular/router';
 
-
+const routes: Routes = [
+  {
+    path: '',
+    title: 'Portal Usuario',
+    component: PageComponent
+  }
+];
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    PageComponent
+    PageComponent,
+    RouterModule.forChild(routes)
   ]
 })
 export class HomeloginModule { }

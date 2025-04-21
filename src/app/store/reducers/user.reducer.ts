@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store"
 import { UserActions } from "../actions/user.action"
-import { UserState } from "../../core/models/user.state"
+import { UserState } from "@core/models/user.state"
 
 export const initalState: Readonly<UserState> = {}
 
@@ -11,7 +11,7 @@ export const userReducer = createReducer(
   on(UserActions.login, state => ({ ...state })),
   on(UserActions.protected, state => ({ ...state })),
   on(UserActions.upload, state => ({ ...state })),
-  on(UserActions.unlogin, (state, { message }) => ({ ...state, message })),
+  on(UserActions.unlogin, (state) => ({ ...state })),
 
   // Carga de datos
   on(UserActions.loadData, (state, { payload }) => ({ ...state, user: payload })),

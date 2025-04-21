@@ -9,26 +9,26 @@ import { LoginInf, UserInfo } from '../../models/user.interface';
 })
 export class UsersService {
   private apiUrl = 'http://localhost:1234/users'
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  loginUser(user: LoginInf) : Observable<any> {
+  loginUser(user: LoginInf): Observable<any> {
     return this.http.post(this.apiUrl + "/login", user, { withCredentials: true })
   }
 
-  registerUser(input : UserInfo) : Observable<any> {
+  registerUser(input: UserInfo): Observable<any> {
     return this.http.post(this.apiUrl + "/register", input, { withCredentials: true })
   }
 
-  uploadUser(input : UserInfo) : Observable<any> {
+  uploadUser(input: UserInfo): Observable<any> {
     return this.http.patch<UserInfo>(this.apiUrl + "/upload", input, { withCredentials: true })
   }
 
-  protectedUser() : Observable<UserInfo>{
+  protectedUser(): Observable<UserInfo> {
     // const params = new HttpParams().set('type', input)
     return this.http.get<UserInfo>(this.apiUrl + "/protected", { withCredentials: true })
   }
 
-  logoutUser() : Observable<any> {
+  logoutUser(): Observable<any> {
     return this.http.get<UserInfo>(this.apiUrl + "/logout", { withCredentials: true })
   }
 

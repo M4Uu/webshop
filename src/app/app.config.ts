@@ -10,6 +10,7 @@ import { provideEffects } from '@ngrx/effects';
 import { UserEffects } from './store/effects/user.effect';
 import { userReducer } from './store/reducers/user.reducer';
 import { metaReducers } from './store/app.state';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,5 +21,6 @@ export const appConfig: ApplicationConfig = {
     provideStore({user: userReducer}, {metaReducers}),
     provideState(userFeature),
     provideEffects(UserEffects),
+    provideAnimations(),
 ]
 };
