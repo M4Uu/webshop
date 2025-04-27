@@ -5,12 +5,13 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { UserActions } from '@store/actions/user.action';
 import { Observable } from 'rxjs';
-import { selectUserMessage } from '@store/selects/user.select';
+import { selectStatusResponse } from '@store/selects/user.select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { R } from '@app/global/schema/schema.response';
 
 @Component({
   selector: 'app-register-form',
@@ -36,10 +37,10 @@ export class RegisterComponent {
   dialogRef = inject(MatDialogRef);
   messageService = inject(MessageService);
 
-  message$?: Observable< string | undefined>
+  status$?: Observable<R | undefined>
 
   ngOnInit(): void {
-    this.message$ = this.store.select(selectUserMessage)
+    this.status$ = this.store.select(selectStatusResponse)
   }
 
   passwordMatchValidator(group: FormGroup){
@@ -65,25 +66,23 @@ export class RegisterComponent {
 
   onSubmit(){
     this.store.dispatch(UserActions.register({ payload: this.registerForm.value}))
-    this.message$?.subscribe(value => {
-      const msg = value?.replace(/.*:\s*/, '')
-      switch (msg) {
-        case 'Cannot read properties of null (reading \'status\')':
+    this.status$?.subscribe(value => {
+      switch (value?.status.statusCode) {
+        case 200:
           this.router.navigate(['/'])
           console.log('User successfully registered');
           this.messageService.add({ severity: 'success', summary: 'Registrado', detail: 'Usuario registrado correctamente.', life: 3000 });
           this.dialogRef.close(this.registerForm.value);
           break;
-        case '406 Not Acceptable':
+        case 406:
           this.messageService.add({ severity: 'alert', summary: 'Alert', detail: 'Este usuario ya está registrado, por favor, cree un nuevo usuario o inicie sesión.', life: 3000 });
           console.log('This user has already been registered, please create a new user or loggin');
           break;
-        case '0 undefined':
+        case 500:
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 });
           console.log('Error conecting with the server');
           break;
       }
     })
-    // this.store.dispatch(UserActions.protected())
   }
 }

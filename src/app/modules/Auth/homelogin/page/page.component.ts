@@ -3,7 +3,8 @@ import { Store } from '@ngrx/store';
 import { UserActions } from '@store/actions/user.action';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { selectUserMessage } from '@app/store/selects/user.select';
+import { selectStatusResponse } from '@app/store/selects/user.select';
+import { R } from '@app/global/schema/schema.response';
 
 @Component({
   selector: 'app-page',
@@ -17,16 +18,14 @@ export class PageComponent implements OnInit{
   store = inject(Store)
   router = inject(Router)
 
-  private message$?: Observable< string | undefined>
+  private status$?: Observable<R | undefined>
 
   ngOnInit(): void {
-    this.message$ = this.store.select(selectUserMessage);
+    this.status$ = this.store.select(selectStatusResponse);
   }
 
   onClick(){
     this.store.dispatch(UserActions.unlogin())
-    console.log('Log out');
-    this.message$?.subscribe(m => m && console.log('Debug: ',m));
     this.router.navigate(['/'])
   }
 }

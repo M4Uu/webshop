@@ -9,10 +9,10 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { Observable, Subject, takeUntil } from 'rxjs';
-import { selectUser, selectUserMessage } from '@app/store/selects/user.select';
+import { filter, firstValueFrom, Observable, Subject, take, takeUntil, tap } from 'rxjs';
+import { selectUser, selectStatusResponse } from '@app/store/selects/user.select';
 import { UserInfo } from '@app/core/models/user.interface';
-
+import { R } from "@global/schema/schema.response";
 
 @Component({
   selector: 'app-login-form',
@@ -39,14 +39,16 @@ export class LoginComponent {
   dialogRef = inject(MatDialogRef);
   messageService = inject(MessageService);
 
-  private message$?: Observable< string | undefined>
-  private user$?: Observable<UserInfo | undefined>
+  private status$: Observable<R | undefined> = this.store.select(selectStatusResponse);
+  private user$: Observable<UserInfo | undefined> = this.store.select(selectUser);
 
   private destroy$ = new Subject<void>();
 
   ngOnInit(): void {
-    this.message$ = this.store.select(selectUserMessage);
-    this.user$ = this.store.select(selectUser);
+    this.status$.subscribe(status => {
+      status && console.log(`Status: ${status?.status.statusCode} - ${status?.status.message}`)
+      this.store.dispatch(UserActions.clearStatus());
+    });
   }
 
   get email() {
@@ -63,45 +65,37 @@ export class LoginComponent {
     checkbox: [true, []]
   });
 
-  onSubmit() {
-    if (this.loginForm.valid) {
-      this.store.dispatch(UserActions.login({ payload: this.loginForm.value }));
-      this.message$
-        ?.pipe(takeUntil(this.destroy$))
-        ?.subscribe(value => {
-          const msg = value?.replace(/.*:\s*/, '')
-          switch (msg) {
-            case 'Cannot read properties of null (reading \'status\')':
-              console.log('Successful login.');
-              this.store.dispatch(UserActions.protected());
-              this.message$?.subscribe(value => {
-                switch (msg) {
-                  case 'Cannot read properties of null (reading \'status\')':
-                    this.user$
-                      ?.pipe(takeUntil(this.destroy$))
-                      ?.subscribe(user => {
-                        if (user) {
-                          console.log('Successful credential verification.');
-                          this.dialogRef.close(null);
-                          this.router.navigate(['/home']);
-                          this.destroy$.next();
-                        }
-                      });
-                    break;
-                }
-              });
-              this.destroy$.complete();
-              break;
-            case '404 (Not Found)':
-              this.messageService.add({ severity: 'alert', summary: 'Alert', detail: 'Clave o Correo inválidos.', life: 3000 });
-              console.log('No se reconoce los datos aportados');
-              break;
-            case '0 undefined':
-              this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 });
-              console.log('Error conecting with the server');
-              break;
-          }
-        })
+  async onSubmit(){
+    this.store.dispatch(UserActions.login({ payload: this.loginForm.value }));
+    try{
+      const status = await firstValueFrom(
+        this.status$.pipe(
+          filter(s => !!s?.status?.statusCode),
+          takeUntil(this.destroy$)
+        )
+      );
+      switch(status?.status.statusCode){
+        case 200:
+          const user = await firstValueFrom(
+            this.user$.pipe(
+              filter(u => !!u),
+              takeUntil(this.destroy$)
+            )
+          );
+          break;
+        case 404:
+          this.messageService.add({ severity: 'alert', summary: 'Alert', detail: 'Clave o Correo inválidos.', life: 3000 });
+          break;
+        case 500:
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 });
+          break;
+      }
+
+      this.dialogRef.close();
+      this.router.navigate(['/home']);
+      this.destroy$.complete();
+    }catch(e){
+      console.error('Login error:', e);
     }
   }
 
