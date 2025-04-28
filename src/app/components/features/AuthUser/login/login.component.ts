@@ -13,6 +13,7 @@ import { filter, firstValueFrom, Observable, Subject, take, takeUntil, tap } fro
 import { selectUser, selectStatusResponse } from '@app/store/selects/user.select';
 import { UserInfo } from '@app/core/models/user.interface';
 import { R } from "@global/schema/schema.response";
+import { emailFormatValidator } from '../validators.form';
 
 @Component({
   selector: 'app-login-form',
@@ -46,7 +47,20 @@ export class LoginComponent {
 
   ngOnInit(): void {
     this.status$.subscribe(status => {
-      status && console.log(`Status: ${status?.status.statusCode} - ${status?.status.message}`)
+      if (status) {
+        console.log(`[Status]\ncode: ${status?.status.statusCode}\nmessage: ${status?.status.message}`);
+        switch (status.status.statusCode) {
+          case 404:
+            this.messageService.add({ severity: 'alert', summary: 'Alert', detail: 'Clave o Correo inválidos.', life: 3000 });
+            break;
+          case 500:
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error en el servidor, por favor, solicite al servicio técnico atención para su caso.', life: 3000 });
+            break;
+          case 0:
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 });
+            break;
+        }
+      }
       this.store.dispatch(UserActions.clearStatus());
     });
   }
@@ -60,41 +74,39 @@ export class LoginComponent {
   }
 
   loginForm = this.formBuilder.group({
-    email: ['test@gmail.com', [Validators.required, Validators.email]],
-    password: ['123', Validators.required],
+    email: ['test@gmail.com', [
+      Validators.required,
+      emailFormatValidator()
+    ]],
+    password: ['123lLoo.PP',[
+      Validators.required
+    ]],
     checkbox: [true, []]
   });
 
-  async onSubmit(){
+  async onSubmit() {
     this.store.dispatch(UserActions.login({ payload: this.loginForm.value }));
-    try{
-      const status = await firstValueFrom(
+    try {
+      await firstValueFrom(
         this.status$.pipe(
           filter(s => !!s?.status?.statusCode),
           takeUntil(this.destroy$)
         )
       );
-      switch(status?.status.statusCode){
-        case 200:
-          const user = await firstValueFrom(
-            this.user$.pipe(
-              filter(u => !!u),
-              takeUntil(this.destroy$)
-            )
-          );
-          break;
-        case 404:
-          this.messageService.add({ severity: 'alert', summary: 'Alert', detail: 'Clave o Correo inválidos.', life: 3000 });
-          break;
-        case 500:
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 });
-          break;
-      }
 
-      this.dialogRef.close();
-      this.router.navigate(['/home']);
-      this.destroy$.complete();
-    }catch(e){
+      const user = await firstValueFrom(
+        this.user$.pipe(
+          filter(u => !!u),
+          takeUntil(this.destroy$)
+        )
+      )
+
+      if (user) {
+        this.dialogRef.close();
+        this.router.navigate(['/home']);
+        this.destroy$.complete();
+      }
+    } catch (e) {
       console.error('Login error:', e);
     }
   }

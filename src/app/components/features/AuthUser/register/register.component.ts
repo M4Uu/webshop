@@ -12,6 +12,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { R } from '@app/global/schema/schema.response';
+import { emailFormatValidator, nameValidator, passwordMatchValidator, strongPasswordValidator } from '../validators.form';
 
 @Component({
   selector: 'app-register-form',
@@ -36,28 +37,35 @@ export class RegisterComponent {
   store = inject(Store)
   dialogRef = inject(MatDialogRef);
   messageService = inject(MessageService);
-
-  status$?: Observable<R | undefined>
+  status$?: Observable<R | undefined> = this.store.select(selectStatusResponse);
 
   ngOnInit(): void {
-    this.status$ = this.store.select(selectStatusResponse)
-  }
-
-  passwordMatchValidator(group: FormGroup){
-    const password = group.get('pswd')?.value
-    const confirmPassword = group.get('confirm-password')?.value
-    return password === confirmPassword ? null : { mismatch: true }
+    this.status$?.subscribe(status => {
+      status && console.log(`[Status]\ncode: ${status?.status.statusCode}\nmessage: ${status?.status.message}`);
+    })
   }
 
   registerForm = this.formBuilder.group({
-    'first_name': ['test', [Validators.required]],
-    'last_name': ['test', [Validators.required]],
+    'first_name': ['test', [
+      Validators.required,
+      nameValidator()
+    ]],
+    'last_name': ['test', [
+      Validators.required,
+      nameValidator()
+    ]],
     'user_name': ['test', [Validators.required]],
-    'email_address': ['test@gmail.com', [Validators.required, Validators.email]],
-    'pswd': ['123', [Validators.required]],
-    'confirm_password': ['123', [Validators.required, this.passwordMatchValidator]],
+    'email_address': ['test@gmail.com', [
+      Validators.required,
+      emailFormatValidator()
+    ]],
+    'pswd': ['123lLoo.PP', [
+      Validators.required,
+      // Validators.minLength(8),
+    ]],
+    'confirm_password': ['123lLoo.PP', [Validators.required]],
     'checkbox': [true, [Validators.required, Validators.requiredTrue]]
-  })
+  }, { validator: passwordMatchValidator })
 
   closeDialog() {
     this.dialogRef.close(null);
@@ -69,18 +77,17 @@ export class RegisterComponent {
     this.status$?.subscribe(value => {
       switch (value?.status.statusCode) {
         case 200:
-          this.router.navigate(['/'])
-          console.log('User successfully registered');
           this.messageService.add({ severity: 'success', summary: 'Registrado', detail: 'Usuario registrado correctamente.', life: 3000 });
           this.dialogRef.close(this.registerForm.value);
           break;
         case 406:
           this.messageService.add({ severity: 'alert', summary: 'Alert', detail: 'Este usuario ya está registrado, por favor, cree un nuevo usuario o inicie sesión.', life: 3000 });
-          console.log('This user has already been registered, please create a new user or loggin');
           break;
         case 500:
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error en el servidor, por favor, solicite al servicio técnico atención para su caso o vuelva a intentarlo en un momento.', life: 3000 });
+          break;
+        case 0:
           this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 });
-          console.log('Error conecting with the server');
           break;
       }
     })

@@ -22,7 +22,7 @@ export class UserEffects {
     const finalMessage = backendMessage || fallbackMessage;
     let status: R = {
       status : {
-        statusCode: error.error?.statusCode,
+        statusCode: error.status,
         message: finalMessage
       }
     };

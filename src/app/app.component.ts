@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, PLATFORM_ID} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { PrimeNGConfig } from 'primeng/api';
 import { AosService } from './global/aos-service/aosservice.service';
 
@@ -8,6 +8,7 @@ import { AosService } from './global/aos-service/aosservice.service';
   selector: 'app-root',
   standalone: true,
   imports: [
+    CommonModule,
     RouterOutlet,
   ],
   templateUrl: './app.component.html',

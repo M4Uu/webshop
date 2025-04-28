@@ -1,36 +1,36 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { map, switchMap, take, timer } from 'rxjs';
+import { BehaviorSubject, catchError, delayWhen, filter, finalize, map, of, race, switchMap, take, tap, timeout, timer } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { UserActions } from '../../../store/actions/user.action';
-import { selectUser } from '../../../store/selects/user.select';
+import { UserActions } from '@store/actions/user.action';
+import { selectUser } from '@store/selects/user.select';
 
-export const authGuard: CanActivateFn = (route, state) => {
-  const store = inject(Store)
-  const router = inject(Router)
-  if (typeof localStorage !== 'undefined'){
-    store.select(selectUser).pipe(
-      take(1),
-      map(user => {
-        if(user === undefined) {
-          store.dispatch(UserActions.protected())
-        }
-      })
-    )
-  }
+export const authGuard: CanActivateFn = () => {
+  const store = inject(Store);
+  const router = inject(Router);
+  const loading$ = new BehaviorSubject<boolean>(true);
 
-  return timer(1000).pipe(
-    switchMap(() => {
+  return store.select(selectUser).pipe(
+    switchMap(user => {
+      if (user) return of(true);
+
+      store.dispatch(UserActions.protected());
       return store.select(selectUser).pipe(
+        filter(u => u !== undefined),
         take(1),
-        map(user => {
-          if(user) {
-            return true
-          }
-          router.navigate(['/login'])
-          return false
-        })
-      )
+        timeout(3000),
+        map(u => !!u),
+        tap(authorized => {
+          if (!authorized) router.navigate(['/']);
+        }),
+        finalize(() => loading$.next(false))
+      );
+    }),
+    // Oculta la ruta hasta terminar la verificación
+    delayWhen(() => loading$.pipe(filter(loading => !loading))),
+    catchError(() => {
+      router.navigate(['/']);
+      return of(false);
     })
-  )
+  );
 };

@@ -12,19 +12,33 @@
   </div>
 
   <div class="flex flex-col gap-5">
-    <input
-      class="input"
-      type="email"
-      formControlName="email"
-      id="email"
-      placeholder="Correo electróncio"
-    />
-    <input
-      class="input"
-      type="password"
-      formControlName="password"
-      placeholder="Contraseña"
-    />
+    <div class="input-container">
+      <span *ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched">
+        El correo es obligatorio.
+      </span>
+
+      <span *ngIf="loginForm.get('email')?.errors?.['invalidEmail']">
+        Formato de correo inválido.
+      </span>
+      <input
+        class="input"
+        type="email"
+        formControlName="email"
+        id="email"
+        placeholder="Correo electróncio"
+      />
+    </div>
+    <div class="input-container">
+      <span *ngIf="loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched">
+        La contraseña es requerida.
+      </span>
+      <input
+        class="input"
+        type="password"
+        formControlName="password"
+        placeholder="Contraseña"
+      />
+    </div>
   </div>
 
   <div class="flex gap-2 items-center">

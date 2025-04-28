@@ -12,48 +12,94 @@
   </div>
 
   <div class="flex flex-col gap-5">
-    <input
-      class="input"
-      type="text"
-      formControlName="first_name"
-      id="name"
-      placeholder="Nombre"
-    />
-    <input
-      class="input"
-      type="text"
-      formControlName="last_name"
-      id="last-name"
-      placeholder="Apellido"
-    />
-    <input
-      class="input"
-      type="text"
-      formControlName="user_name"
-      id="user-name"
-      placeholder="Nombre de Usuario"
-    />
-    <input
-      class="input"
-      type="email"
-      formControlName="email_address"
-      id="email"
-      placeholder="Correo electrónico"
-    />
-    <input
-      class="input"
-      type="password"
-      formControlName="pswd"
-      id="password"
-      placeholder="Contraseña"
-    />
-    <input
-      class="input"
-      type="password"
-      formControlName="confirm_password"
-      id="confirm-password"
-      placeholder="Confirmar contraseña"
-    />
+    <div class="input-container">
+      <span *ngIf="registerForm.get('first_name')?.errors?.['required'] && registerForm.get('first_name')?.touched">
+        El nombre es requerido.
+      </span>
+      <span *ngIf="registerForm.get('first_name')?.errors?.['invalidName']">
+        Solo se permiten letras y espacios.
+      </span>
+      <input
+        class="input"
+        type="text"
+        formControlName="first_name"
+        id="name"
+        placeholder="Nombre"
+      />
+    </div>
+    <div class="input-container">
+      <span *ngIf="registerForm.get('last_name')?.errors?.['required'] && registerForm.get('last_name')?.touched">
+        El apellido es requerido.
+      </span>
+      <span *ngIf="registerForm.get('last_name')?.errors?.['invalidName']">
+        Solo se permiten letras y espacios.
+      </span>
+      <input
+        class="input"
+        type="text"
+        formControlName="last_name"
+        id="last-name"
+        placeholder="Apellido"
+      />
+    </div>
+    <div class="input-container">
+      <span *ngIf="registerForm.get('user-name')?.errors?.['required'] && registerForm.get('user-name')?.touched">
+        El nombre de usuario es requerido.
+      </span>
+      <input
+        class="input"
+        type="text"
+        formControlName="user_name"
+        id="user-name"
+        placeholder="Nombre de Usuario"
+      />
+    </div>
+    <div class="input-container">
+      <span *ngIf="registerForm.get('email_address')?.errors?.['required'] && registerForm.get('email_address')?.touched">
+        El correo es obligatorio.
+      </span>
+
+      <span *ngIf="registerForm.get('email_address')?.errors?.['invalidEmail']">
+        {{"Formato de correo inválido (ej: usuario@dominio.com)."}}
+      </span>
+      <input
+        class="input"
+        type="email"
+        formControlName="email_address"
+        id="email"
+        placeholder="Correo electrónico"
+      />
+    </div>
+    <div class="input-container">
+      <span *ngIf="registerForm.get('pswd')?.errors?.['required'] && registerForm.get('pswd')?.touched">
+        La contraseña es requerida.
+      </span>
+      <span *ngIf="registerForm.get('pswd')?.errors?.['weakPassword']">
+        La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y caracteres especiales.
+      </span>
+      <input
+        class="input"
+        type="password"
+        formControlName="pswd"
+        id="password"
+        placeholder="Contraseña"
+      />
+    </div>
+    <div class="input-container">
+      <span *ngIf="registerForm.get('confirm_password')?.errors?.['required'] && registerForm.get('confirm_password')?.touched">
+        Confirma tu contraseña.
+      </span>
+      <span *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('confirm_password')?.touched">
+        Las contraseñas no coinciden.
+      </span>
+      <input
+        class="input"
+        type="password"
+        formControlName="confirm_password"
+        id="confirm-password"
+        placeholder="Confirmar contraseña"
+      />
+    </div>
   </div>
   <div
     *ngIf="registerForm.get('confirm-password')?.hasError('mistmatch')"

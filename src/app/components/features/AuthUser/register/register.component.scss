@@ -49,3 +49,17 @@
     ease-in
   ;
 }
+
+.input-container{
+  @apply
+    flex
+    flex-col
+  ;
+  span{
+    @apply
+      text-sm
+      pl-[1rem]
+      text-red-500
+    ;
+  }
+}

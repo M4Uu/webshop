@@ -5,11 +5,11 @@ import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideState, provideStore } from '@ngrx/store';
-import { userFeature} from './store/app.state';
+import { userFeature} from '@store/app.state';
 import { provideEffects } from '@ngrx/effects';
-import { UserEffects } from './store/effects/user.effect';
-import { userReducer } from './store/reducers/user.reducer';
-import { metaReducers } from './store/app.state';
+import { UserEffects } from '@store/effects/user.effect';
+import { userReducer } from '@store/reducers/user.reducer';
+import { metaReducers } from '@store/app.state';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
