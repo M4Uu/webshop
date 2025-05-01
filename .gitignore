@@ -42,4 +42,4 @@ testem.log
 Thumbs.db
 
 # ENV
-/src/enviroment
+# /src/enviroment
