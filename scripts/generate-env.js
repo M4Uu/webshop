@@ -8,4 +8,4 @@ const envContent = `export const environment = {
 };
 `;
 
-fs.writeFileSync('./src/environments/environment.prod.ts', envContent);
+fs.writeFileSync('../src/environments/environment.prod.ts', envContent);
