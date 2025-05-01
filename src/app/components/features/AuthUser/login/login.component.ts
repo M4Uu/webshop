@@ -9,7 +9,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { filter, firstValueFrom, Observable, Subject, take, takeUntil, tap } from 'rxjs';
+import { filter, firstValueFrom, Observable, Subject, take, takeUntil, tap, timeout } from 'rxjs';
 import { selectUser, selectStatusResponse } from '@app/store/selects/user.select';
 import { UserInfo } from '@app/core/models/user.interface';
 import { R } from "@global/schema/schema.response";
@@ -41,7 +41,6 @@ export class LoginComponent {
   messageService = inject(MessageService);
 
   private status$: Observable<R | undefined> = this.store.select(selectStatusResponse);
-  private user$: Observable<UserInfo | undefined> = this.store.select(selectUser);
 
   private destroy$ = new Subject<void>();
 
@@ -87,22 +86,16 @@ export class LoginComponent {
   async onSubmit() {
     this.store.dispatch(UserActions.login({ payload: this.loginForm.value }));
     try {
-      await firstValueFrom(
+      const status = await firstValueFrom(
         this.status$.pipe(
           filter(s => !!s?.status?.statusCode),
-          takeUntil(this.destroy$)
+          take(1),
+          timeout(5000)
         )
       );
 
-      const user = await firstValueFrom(
-        this.user$.pipe(
-          filter(u => !!u),
-          takeUntil(this.destroy$)
-        )
-      )
-
-      if (user) {
-        this.dialogRef.close();
+      if (status?.status.statusCode === 200) {
+        this.dialogRef.close(true);
         this.router.navigate(['/home']);
         this.destroy$.complete();
       }
@@ -112,6 +105,6 @@ export class LoginComponent {
   }
 
   closeDialog() {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 }

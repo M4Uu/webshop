@@ -78,7 +78,7 @@ export class RegisterComponent {
       switch (value?.status.statusCode) {
         case 200:
           this.messageService.add({ severity: 'success', summary: 'Registrado', detail: 'Usuario registrado correctamente.', life: 3000 });
-          this.dialogRef.close(this.registerForm.value);
+          this.dialogRef.close();
           break;
         case 406:
           this.messageService.add({ severity: 'alert', summary: 'Alert', detail: 'Este usuario ya está registrado, por favor, cree un nuevo usuario o inicie sesión.', life: 3000 });

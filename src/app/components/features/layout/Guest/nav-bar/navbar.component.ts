@@ -7,6 +7,11 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from '@features/AuthUser/login/login.component';
 import { RegisterComponent } from '@features/AuthUser/register/register.component';
 import { ButtonModule } from 'primeng/button';
+import { Store } from '@ngrx/store';
+import { UserActions } from '@app/store/actions/user.action';
+import { Observable } from 'rxjs';
+import { UserInfo } from '@app/core/models/user.interface';
+import { selectUser } from '@app/store/selects/user.select';
 
 @Component({
   selector: 'app-navbar',
@@ -24,9 +29,13 @@ import { ButtonModule } from 'primeng/button';
 export class NavbarComponent implements OnInit{
   @Input() currentPath: string = '';
   dialog = inject(MatDialog);
+  store = inject(Store);
   router = inject(Router);
   isMobileMenuOpen = false;
   isUserMenuOpen = false;
+
+  private user$: Observable<UserInfo | undefined> = this.store.select(selectUser);
+  public menuUsers:any;
 
   navigation = [
     { name: 'Inicio', href: '/' },
@@ -36,6 +45,7 @@ export class NavbarComponent implements OnInit{
   ];
 
   ngOnInit(): void {
+    this.user$.subscribe(u => this.menuUsers = u)
     // const dialogRef = this.dialog.open(LoginComponent);
   }
 
@@ -53,5 +63,10 @@ export class NavbarComponent implements OnInit{
 
   isCurrent(href: string): boolean {
     return href === this.currentPath;
+  }
+
+  closeSesion(){
+    this.store.dispatch(UserActions.unlogin())
+    this.router.navigate(['/'])
   }
 }

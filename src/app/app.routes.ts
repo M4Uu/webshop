@@ -17,6 +17,7 @@ export const routes: Routes = [
   // Auth
   {
     path: '',
+    component: MainLayoutComponent,
     children: [
       { path: 'home',loadChildren: () => import('./modules/Auth/homelogin/homelogin.module').then(m => m.HomeloginModule) },
     ],
