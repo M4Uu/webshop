@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoginInf, UserInfo } from '../../models/user.interface';
 import { P, R } from '@app/global/schema/schema.response';
-import { environment } from 'src/environments/environments.prod';
+import { environment } from 'src/environments/environments';
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +24,9 @@ export class UsersService {
     return this.http.patch<R>(this.apiUrl + "/upload", input, { withCredentials: true })
   }
 
-  protectedUser(): Observable<HttpResponse<P>> {
+  protectedUser(): Observable<any> {
     // const params = new HttpParams().set('type', input)
-    return this.http.get<P>(this.apiUrl + "/protected", { withCredentials: true, observe: 'response' })
+    return this.http.get<P>(this.apiUrl + "/protected", { withCredentials: true })
   }
 
   logoutUser(): Observable<any> {
