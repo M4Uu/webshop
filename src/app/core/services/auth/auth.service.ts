@@ -18,9 +18,7 @@ export class AuthService {
     if (session) {
       const user = JSON.parse(session);
       this.store.dispatch(UserActions.rehydrateSession({ payload: user }));
-      return true;
     }
-    return false;
   }
 
   clearSession(): void {

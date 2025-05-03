@@ -18,7 +18,7 @@ export const authGuard: CanActivateFn = (route, state) => {
       if (user) return of(true);
 
       // Caso 2: Verificar sessionStorage primero
-      if(authService.loadSession()) return of(true);
+      authService.loadSession();
 
       // Caso 3: Último recurso - Petición al backend
       store.dispatch(UserActions.protected());
