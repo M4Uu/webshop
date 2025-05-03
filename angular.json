@@ -71,7 +71,8 @@
                   "maximumError": "4kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "allowedCommonJsDependencies": ["dotenv"]
             },
             "development": {
               "optimization": false,

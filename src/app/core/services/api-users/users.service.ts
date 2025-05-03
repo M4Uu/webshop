@@ -3,13 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoginInf, UserInfo } from '../../models/user.interface';
 import { P, R } from '@app/global/schema/schema.response';
-import { environment } from 'src/environments/environments.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
-  private apiUrl = environment.apiUrl + '/users';
+  private apiUrl = process.env['API_URL_PROD'] + '/users';
   constructor(private http: HttpClient) { }
 
   loginUser(user: LoginInf): Observable<HttpResponse<R>> {
