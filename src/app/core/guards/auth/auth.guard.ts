@@ -18,13 +18,15 @@ export const authGuard: CanActivateFn = (route, state) => {
       if (user) return of(true);
 
       // Caso 2: Verificar sessionStorage primero
-      authService.loadSession();
+      if(authService.loadSession()) return of(true);
+
       // Caso 3: Último recurso - Petición al backend
       store.dispatch(UserActions.protected());
 
       return store.select(selectUser).pipe(
         filter(u => u !== undefined),
         take(1),
+        timeout(3000),
         map(u => !!u),
         catchError(() => of(false))
       );
@@ -32,7 +34,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     tap(authorized => {
       if (!authorized) {
         authService.clearSession();
-        router.navigate(['/login'], {
+        router.navigate(['/'], {
           queryParams: { returnUrl: state.url }
         });
       }
