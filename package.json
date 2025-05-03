@@ -4,8 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "devBuild": "ng build",
-    "build": "pnpm install -g @angular/cli && pnpm install && ng build --configuration=production",
+    "dev": "ng build",
+    "buildDev": "ng build --configuration=production",
+    "build": "node ./generate-env.js && ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:test-pnpm": "node dist/test-pnpm/server/server.mjs"
