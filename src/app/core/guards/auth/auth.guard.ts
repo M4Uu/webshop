@@ -25,7 +25,6 @@ export const authGuard: CanActivateFn = (route, state) => {
       return store.select(selectUser).pipe(
         filter(u => u !== undefined),
         take(1),
-        timeout(5000),
         map(u => !!u),
         catchError(() => of(false))
       );
