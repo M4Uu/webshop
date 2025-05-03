@@ -34,9 +34,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     tap(authorized => {
       if (!authorized) {
         authService.clearSession();
-        router.navigate(['/'], {
-          queryParams: { returnUrl: state.url }
-        });
+        router.navigate(['/']);
       }
     })
   );
