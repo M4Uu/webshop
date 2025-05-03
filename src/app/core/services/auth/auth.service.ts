@@ -9,12 +9,12 @@ export class AuthService {
   private store = inject(Store)
 
   saveSession(user: UserInfo): void {
-    sessionStorage.setItem(this.SESSION_KEY, JSON.stringify(user));
+    localStorage.setItem(this.SESSION_KEY, JSON.stringify(user));
     this.store.dispatch(UserActions.loginSuccess({ payload: user }));
   }
 
   loadSession(): void {
-    const session = sessionStorage.getItem(this.SESSION_KEY);
+    const session = localStorage.getItem(this.SESSION_KEY);
     if (session) {
       const user = JSON.parse(session);
       this.store.dispatch(UserActions.rehydrateSession({ payload: user }));
