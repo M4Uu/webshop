@@ -1,6 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Component, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
-import * as L from 'leaflet';
 
 @Component({
   selector: 'app-map',
@@ -28,8 +27,6 @@ export class MapComponent implements AfterViewInit {
     const iconRetinaUrl = 'assets/leaflet/marker-icon-2x.png';
     const iconUrl = 'assets/leaflet/marker-icon.png';
     const shadowUrl = 'assets/leaflet/marker-shadow.png';
-
-    L.DomEvent.skipClick = false;
 
     L.Icon.Default.mergeOptions({
       iconRetinaUrl,
