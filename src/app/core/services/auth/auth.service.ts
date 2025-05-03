@@ -13,7 +13,7 @@ export class AuthService {
     this.store.dispatch(UserActions.loginSuccess({ payload: user }));
   }
 
-  loadSession(): boolean {
+  loadSession(): void {
     const session = sessionStorage.getItem(this.SESSION_KEY);
     if (session) {
       const user = JSON.parse(session);
