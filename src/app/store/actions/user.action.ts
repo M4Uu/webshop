@@ -7,13 +7,15 @@ export const UserActions = createActionGroup({
   events: {
     // acciones
     register: props<{ payload: UserInfo }>(),
-    login: props<{ payload: LoginInf }>(),
     upload: props<{ payload: UserInfo }>(),
+    login: props<{ payload: LoginInf }>(),
     unlogin: emptyProps(),
     clearStatus: emptyProps(),
 
-    // protected
+    // Session
     protected: emptyProps(),
+    loginSuccess: props<{ payload: UserInfo }>(),
+    rehydrateSession: props<{ payload: UserInfo }>(),
 
     // carga de datos
     loadData: props<{ payload: UserInfo, status: R }>(),

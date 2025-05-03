@@ -21,6 +21,15 @@ export const userReducer = createReducer(
     user: payload,
     status: status
   })),
+  on(UserActions.loginSuccess, (state, {payload}) => ({
+    ...state,
+    user: payload
+  })),
+  on(UserActions.rehydrateSession, (state, {payload}) => ({
+    ...state,
+    user: payload
+  })),
+
 
   on(UserActions.messageResponse, (state, { status }) => ({
     ...state,
