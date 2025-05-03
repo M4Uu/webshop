@@ -8,6 +8,7 @@ import { Router } from "@angular/router";
 import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { P, R } from "@global/schema/schema.response";
 import { UserInfo } from "@app/core/models/user.interface";
+import { AuthService } from "@app/core/services/auth/auth.service";
 
 @Injectable()
 export class UserEffects {
@@ -15,6 +16,7 @@ export class UserEffects {
   ApiUser = inject(UsersService)
   store = inject(Store)
   router = inject(Router)
+  authService = inject(AuthService)
 
   ApiError = (error: HttpErrorResponse) => {
     const backendMessage = error.error?.message;
@@ -36,6 +38,7 @@ export class UserEffects {
       : status = { status: {statusCode: 200, message:  `${message} sucess`} };
       // if(message === 'Login')
       //   this.store.dispatch(UserActions.protected());
+      if(message === 'Log out') this.authService.clearSession();
     return UserActions.messageResponse({status: status});
   }
 
@@ -47,6 +50,7 @@ export class UserEffects {
         message: response.body?.status.message as string
       }
     }
+    this.authService.saveSession(payload);
     return UserActions.loadData({payload: payload, status: status});
   }
 
