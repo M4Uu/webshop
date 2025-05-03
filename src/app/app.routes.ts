@@ -18,7 +18,7 @@ export const routes: Routes = [
   {
     path: '',
     component: MainLayoutComponent,
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
     children: [
       { path: 'home',loadChildren: () => import('./modules/Auth/homelogin/homelogin.module').then(m => m.HomeloginModule) },
     ],

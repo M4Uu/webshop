@@ -34,8 +34,8 @@ export class UserEffects {
     response.body ?
       status = { status: response.body.status }
       : status = { status: {statusCode: 200, message:  `${message} sucess`} };
-      if(message === 'Login')
-        this.store.dispatch(UserActions.protected());
+      // if(message === 'Login')
+      //   this.store.dispatch(UserActions.protected());
     return UserActions.messageResponse({status: status});
   }
 
