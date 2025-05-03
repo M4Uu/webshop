@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environments.prod';
   providedIn: 'root'
 })
 export class UsersService {
-  private apiUrl = environment.apiUrl + '/users';
+  private apiUrl = 'https://webshop-backend-i8ee.onrender.com/api' + '/users';
   constructor(private http: HttpClient) { }
 
   loginUser(user: LoginInf): Observable<HttpResponse<R>> {
