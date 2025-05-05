@@ -12,6 +12,7 @@ import { UserActions } from '@app/store/actions/user.action';
 import { Observable } from 'rxjs';
 import { UserInfo } from '@app/core/models/user.interface';
 import { selectUser } from '@app/store/selects/user.select';
+import { AuthService } from '@app/core/services/auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -31,6 +32,8 @@ export class NavbarComponent implements OnInit{
   dialog = inject(MatDialog);
   store = inject(Store);
   router = inject(Router);
+  authService = inject(AuthService)
+
   isMobileMenuOpen = false;
   isUserMenuOpen = false;
 
@@ -67,6 +70,7 @@ export class NavbarComponent implements OnInit{
 
   closeSesion(){
     this.store.dispatch(UserActions.unlogin())
+    this.authService.clearSession();
     this.router.navigate(['/'])
   }
 }
