@@ -33,6 +33,8 @@ export class AuthService {
   }
 
   clearSession(): void {
-    sessionStorage.removeItem(this.SESSION_KEY);
+    if(isPlatformBrowser(this.platformId)){
+      localStorage.removeItem(this.SESSION_KEY);
+    }
   }
 }
