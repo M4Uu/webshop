@@ -19,25 +19,7 @@ export class MapComponent implements AfterViewInit {
 
   private async initializeMap(): Promise<void> {
     const L = await import('leaflet');
-    this.fixLeafletIcons(L);
     this.createMap(L);
-  }
-
-  private fixLeafletIcons(L: any): void {
-    const iconRetinaUrl = 'assets/leaflet/marker-icon-2x.png';
-    const iconUrl = 'assets/leaflet/marker-icon.png';
-    const shadowUrl = 'assets/leaflet/marker-shadow.png';
-
-    L.Icon.Default.mergeOptions({
-      iconRetinaUrl,
-      iconUrl,
-      shadowUrl,
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      tooltipAnchor: [16, -28],
-      shadowSize: [41, 41]
-    });
   }
 
   private createMap(L: any): void {
