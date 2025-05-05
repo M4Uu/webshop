@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { BgService } from '../../../../global/bg-service/bg.service';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +6,7 @@ import { BgService } from '../../../../global/bg-service/bg.service';
   styleUrl: './page.component.scss'
 })
 export class PageComponent implements OnInit{
-  constructor(private bgService: BgService) {}
 
   ngOnInit() {
-    this.bgService.setBackground('/image/bg-login.jpg');
   }
 }

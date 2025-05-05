@@ -6,7 +6,6 @@ import { PageComponent } from './page/page.component';
 
 @NgModule({
   declarations: [
-    PageComponent
   ],
   imports: [
     CommonModule,

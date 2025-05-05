@@ -1,5 +1,4 @@
 import { inject, Injectable } from '@angular/core';
-import { UserInfo } from '@app/core/models/user.interface';
 import { UserActions } from '@app/store/actions/user.action';
 import { Store } from '@ngrx/store';
 
@@ -8,16 +7,20 @@ export class AuthService {
   private readonly SESSION_KEY = 'session_data';
   private store = inject(Store)
 
-  saveSession(user: UserInfo): void {
-    localStorage.setItem(this.SESSION_KEY, JSON.stringify(user));
-    this.store.dispatch(UserActions.loginSuccess({ payload: user }));
+  saveSession(payload: any, status: any): void {
+    const sessionData = {
+      payload,
+      status
+    }
+    localStorage.setItem(this.SESSION_KEY, JSON.stringify(sessionData));
+    this.store.dispatch(UserActions.loginSuccess({ payload: payload }));
   }
 
   loadSession(): void {
     const session = localStorage.getItem(this.SESSION_KEY);
     if (session) {
-      const user = JSON.parse(session);
-      this.store.dispatch(UserActions.rehydrateSession({ payload: user }));
+      const data = JSON.parse(session);
+      this.store.dispatch(UserActions.rehydrateSession({ payload: data?.payload, status: data?.status }));
     }
   }
 

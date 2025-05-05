@@ -41,7 +41,7 @@ export class RegisterComponent {
 
   ngOnInit(): void {
     this.status$?.subscribe(status => {
-      status && console.log(`[Status]\ncode: ${status?.status.statusCode}\nmessage: ${status?.status.message}`);
+      status && console.log(`[Status]\ncode: ${status?.status?.statusCode}\nmessage: ${status?.status?.message}`);
     })
   }
 
@@ -75,7 +75,7 @@ export class RegisterComponent {
   onSubmit(){
     this.store.dispatch(UserActions.register({ payload: this.registerForm.value}))
     this.status$?.subscribe(value => {
-      switch (value?.status.statusCode) {
+      switch (value?.status?.statusCode) {
         case 200:
           this.messageService.add({ severity: 'success', summary: 'Registrado', detail: 'Usuario registrado correctamente.', life: 3000 });
           this.dialogRef.close();

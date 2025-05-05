@@ -47,8 +47,8 @@ export class LoginComponent {
   ngOnInit(): void {
     this.status$.subscribe(status => {
       if (status) {
-        console.log(`[Status]\ncode: ${status?.status.statusCode}\nmessage: ${status?.status.message}`);
-        switch (status.status.statusCode) {
+        console.log(`[Status]\ncode: ${status?.status?.statusCode}\nmessage: ${status?.status?.message}`);
+        switch (status.status?.statusCode) {
           case 404:
             this.messageService.add({ severity: 'alert', summary: 'Alert', detail: 'Clave o Correo inválidos.', life: 3000 });
             break;
@@ -94,7 +94,7 @@ export class LoginComponent {
         )
       );
 
-      if (status?.status.statusCode === 200) {
+      if (status?.status?.statusCode === 200) {
         this.dialogRef.close(true);
         this.router.navigate(['/home']);
         this.destroy$.complete();

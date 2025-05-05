@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from "@ngrx/store";
-import { LoginInf, UserInfo } from "../../core/models/user.interface";
+import { LoginInf, SessionInfo, UserInfo } from "../../core/models/user.interface";
 import { R } from "@global/schema/schema.response";
 
 export const UserActions = createActionGroup({
@@ -15,10 +15,10 @@ export const UserActions = createActionGroup({
     // Session
     protected: emptyProps(),
     loginSuccess: props<{ payload: UserInfo }>(),
-    rehydrateSession: props<{ payload: UserInfo }>(),
+    rehydrateSession: props<{ payload: UserInfo, status: R }>(),
 
     // carga de datos
-    loadData: props<{ payload: UserInfo, status: R }>(),
+    loadData: props<{ payload: SessionInfo, status: R }>(),
     messageResponse: props<{ status: R }>()
   }
 })

@@ -2,12 +2,11 @@ import { inject, Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { UsersService } from "@core/services/api-users/users.service";
 import { UserActions } from "../actions/user.action";
-import { catchError, delay, map, mergeMap, Observable, of, tap } from "rxjs";
+import { catchError, map, mergeMap, of, tap } from "rxjs";
 import { Store } from "@ngrx/store";
 import { Router } from "@angular/router";
 import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
-import { P, R } from "@global/schema/schema.response";
-import { UserInfo } from "@app/core/models/user.interface";
+import { R } from "@global/schema/schema.response";
 import { AuthService } from "@app/core/services/auth/auth.service";
 
 @Injectable()
@@ -23,7 +22,7 @@ export class UserEffects {
     const fallbackMessage = error.message || 'Error desconocido';
     const finalMessage = backendMessage || fallbackMessage;
     let status: R = {
-      status : {
+      status: {
         statusCode: error.status,
         message: finalMessage
       }
@@ -35,61 +34,59 @@ export class UserEffects {
     let status: R;
     response.body ?
       status = { status: response.body.status }
-      : status = { status: {statusCode: 200, message:  `${message} sucess`} };
-      // if(message === 'Login')
-      //   this.store.dispatch(UserActions.protected());
-      if(message === 'Log out') this.authService.clearSession();
-    return UserActions.messageResponse({status: status});
-  }
-
-  ApiProtected = (response: HttpResponse<P>) =>{
-    const payload = response.body?.payload as UserInfo
-    const status = {
-      status: {
-        statusCode: response.body?.status.statusCode as number,
-        message: response.body?.status.message as string
-      }
-    }
-    this.authService.saveSession(payload);
-    return UserActions.loadData({payload: payload, status: status});
+      : status = { status: { statusCode: 200, message: `${message} sucess` } };
+    if (message === 'Login')
+      this.store.dispatch(UserActions.protected());
+    if (message === 'Log out') this.authService.clearSession();
+    return UserActions.messageResponse({ status: status });
   }
 
   protected$ = createEffect(() => this.actions$.pipe(
     ofType(UserActions.protected),
-    mergeMap(() => this.ApiUser.protectedUser()
-    .pipe(
-      map((response: HttpResponse<P>) => this.ApiProtected(response)),
-      // map(payload => UserActions.loadData({ payload })),
+    mergeMap(() => this.ApiUser.protectedUser().pipe(
+      tap(response => {
+        response.payload &&
+          this.authService.saveSession(response.payload, response.status);
+      }),
+      map(response => {
+        if (!response.payload) {
+          throw new Error('Payload is undefined');
+        }
+        return UserActions.loadData({
+          payload: response.payload,
+          status: response.status
+        });
+      }),
       catchError((error: HttpErrorResponse) => this.ApiError(error))
-    )))
-  )
+    ))
+  ));
 
   register$ = createEffect(() => this.actions$.pipe(
     ofType(UserActions.register),
     mergeMap((action: any) => this.ApiUser.registerUser(action.payload)
-    .pipe(
-      map((response: HttpResponse<R>) => this.ApiResponse(response, 'Register')),
-      catchError((error: HttpErrorResponse) => this.ApiError(error))
-    )),
+      .pipe(
+        map((response: HttpResponse<R>) => this.ApiResponse(response, 'Register')),
+        catchError((error: HttpErrorResponse) => this.ApiError(error))
+      )),
   ))
 
   // TO DO: Es necesario cambiar el como se recibe y se manejan las reespuestas HTTP, de momento se hace por medio de Strings, pero el manejo de errores debe realizarse por sus respuestas numéricas (status: 200, 500, 401, etc.)
   login$ = createEffect(() => this.actions$.pipe(
     ofType(UserActions.login),
     mergeMap(action => this.ApiUser.loginUser(action.payload)
-    .pipe(
-      // map(response => UserActions.messageResponse({ message: response.status })),
-      map((response: HttpResponse<R>) => this.ApiResponse(response, 'Login')),
-      catchError((error: HttpErrorResponse) => this.ApiError(error))
-    )),
+      .pipe(
+        // map(response => UserActions.messageResponse({ message: response.status })),
+        map((response: HttpResponse<R>) => this.ApiResponse(response, 'Login')),
+        catchError((error: HttpErrorResponse) => this.ApiError(error))
+      )),
   ))
 
   logout$ = createEffect(() => this.actions$.pipe(
     ofType(UserActions.unlogin),
     mergeMap(() => this.ApiUser.logoutUser()
-    .pipe(
-      map((response: HttpResponse<R>) => this.ApiResponse(response, 'Log out')),
-      catchError((error: HttpErrorResponse) => this.ApiError(error))
-    )),
+      .pipe(
+        map((response: HttpResponse<R>) => this.ApiResponse(response, 'Log out')),
+        catchError((error: HttpErrorResponse) => this.ApiError(error))
+      )),
   ))
 }

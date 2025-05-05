@@ -1,4 +1,4 @@
-import { UserInfo } from "@app/core/models/user.interface"
+import { SessionInfo, UserInfo } from "@app/core/models/user.interface"
 
 export interface R{
   status: {
@@ -7,7 +7,7 @@ export interface R{
   }
 }
 
-export interface P{
+export interface E{
   payload: UserInfo
   status: {
     statusCode: number,
