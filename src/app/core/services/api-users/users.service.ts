@@ -8,7 +8,8 @@ import { R } from '@app/global/schema/schema.response';
   providedIn: 'root'
 })
 export class UsersService {
-  private apiUrl = 'https://webshop-backend-i8ee.onrender.com/api' + '/users';
+  private apiUrl = 'http://localhost:1234/api' + '/users';
+  // private apiUrl = 'https://webshop-backend-i8ee.onrender.com/api' + '/users';
   constructor(private http: HttpClient) { }
 
   loginUser(user: LoginInf): Observable<HttpResponse<R>> {

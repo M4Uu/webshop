@@ -27,7 +27,7 @@ import { AuthService } from '@app/core/services/auth/auth.service';
     ButtonModule,
   ]
 })
-export class NavbarComponent implements OnInit{
+export class NavbarComponent implements OnInit {
   @Input() currentPath: string = '';
   dialog = inject(MatDialog);
   store = inject(Store);
@@ -38,7 +38,7 @@ export class NavbarComponent implements OnInit{
   isUserMenuOpen = false;
 
   private user$: Observable<UserInfo | undefined> = this.store.select(selectUser);
-  public menuUsers:any;
+  public menuUsers: any;
 
   navigation = [
     { name: 'Inicio', href: '/' },
@@ -68,7 +68,7 @@ export class NavbarComponent implements OnInit{
     return href === this.currentPath;
   }
 
-  closeSesion(){
+  closeSesion() {
     this.store.dispatch(UserActions.unlogin())
     this.authService.clearSession();
     this.router.navigate(['/'])

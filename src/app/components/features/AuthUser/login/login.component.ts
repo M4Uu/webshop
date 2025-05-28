@@ -50,13 +50,13 @@ export class LoginComponent {
         console.log(`[Status]\ncode: ${status?.status?.statusCode}\nmessage: ${status?.status?.message}`);
         switch (status.status?.statusCode) {
           case 404:
-            this.messageService.add({ severity: 'alert', summary: 'Alert', detail: 'Clave o Correo inválidos.', life: 3000 });
+            this.messageService.add({ severity: 'contrast', summary: 'Alert', detail: 'Clave o Correo inválidos.', life: 3000 });
             break;
           case 500:
-            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error en el servidor, por favor, solicite al servicio técnico atención para su caso.', life: 3000 });
+            this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Error en el servidor, por favor, solicite al servicio técnico atención para su caso.', life: 3000 });
             break;
           case 0:
-            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 });
+            this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 });
             break;
         }
       }
@@ -73,11 +73,11 @@ export class LoginComponent {
   }
 
   loginForm = this.formBuilder.group({
-    email: ['test@gmail.com', [
+    email: ['cruzmlathulerie@gmail.com', [
       Validators.required,
       emailFormatValidator()
     ]],
-    password: ['123lLoo.PP',[
+    password: ['1234',[
       Validators.required
     ]],
     checkbox: [true, []]

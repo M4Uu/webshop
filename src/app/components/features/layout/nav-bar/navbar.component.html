@@ -1,5 +1,7 @@
-<nav class="fixed top-0 left-0 right-0 z-50 bg-gray-800">
-  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+<nav
+  class="fixed top-0 left-0 right-0 z-50 bg-gray-800 border border-transparent border-b-gray-600"
+>
+  <div class="mx-auto">
     <div class="relative flex h-16 items-center justify-between">
       <!-- Mobile menu button -->
       <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -9,34 +11,42 @@
         >
           <span class="absolute -inset-0.5"></span>
           <span class="sr-only">Open main menu</span>
-          <mat-icon *ngIf="!isMobileMenuOpen" class="block size-6">menu</mat-icon>
-          <mat-icon *ngIf="isMobileMenuOpen" class="hidden size-6">close</mat-icon>
+          <mat-icon *ngIf="!isMobileMenuOpen" class="block size-6"
+            >menu</mat-icon
+          >
+          <mat-icon *ngIf="isMobileMenuOpen" class="hidden size-6"
+            >close</mat-icon
+          >
         </button>
       </div>
 
-      <div class="flex flex-1 items-center justify-start px-16 sm:items-stretch sm:justify-start">
+      <div
+        class="flex flex-1 items-center justify-start pl-10 sm:items-stretch sm:justify-start"
+      >
         <div class="flex shrink-0 items-center">
           <span class="text-white text-xl">Julias Gioielli</span>
         </div>
 
         <!-- Desktop Navigation -->
-        <div class="hidden sm:ml-6 sm:block">
+        <div *ngIf="!menuUsers" class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
             <a
               *ngFor="let item of navigation"
               [routerLink]="item.href"
               routerLinkActive="bg-gray-900 text-white"
-              [routerLinkActiveOptions]="{exact: true}"
+              [routerLinkActiveOptions]="{ exact: true }"
               class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
             >
-              {{item.name}}
+              {{ item.name }}
             </a>
           </div>
         </div>
       </div>
 
       <!-- User menu -->
-      <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+      <div
+        class="absolute mr-5 inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+      >
         <button
           type="button"
           class="relative flex rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none"
@@ -53,8 +63,18 @@
           >
             <span class="absolute -inset-1.5"></span>
             <span class="sr-only">Open user menu</span>
-            <i class="pi pi-user text-gray-300 self-center text-lg"></i>
-            <span class='text-gray-300 py-[2px] pl-[8px] text-base'>Ingresar</span>
+            <div class="flex" *ngIf="!menuUsers">
+              <i class="pi pi-user text-gray-300 self-center text-lg"></i>
+              <span class="text-gray-300 py-[2px] pl-[8px] text-base"
+                >Ingresar</span
+              >
+            </div>
+            <div class="flex" *ngIf="menuUsers">
+              <img [src]="this.menuUsers?.img" class="h-8" alt="FlowBite Logo" />
+              <span  class='text-gray-300 py-[2px] pl-[8px] text-base'>
+                {{this.menuUsers?.first_name}} {{this.menuUsers?.last_name}}
+              </span>
+            </div>
           </button>
 
           <!-- User dropdown menu -->
@@ -65,15 +85,24 @@
             class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
           >
             <div *ngIf="!menuUsers" class="py-1">
-              <button (click)="openRegisterModal()" class="block px-4 py-2 text-sm text-gray-700 w-full text-left hover:bg-gray-100">
+              <button
+                (click)="openRegisterModal()"
+                class="block px-4 py-2 text-sm text-gray-700 w-full text-left hover:bg-gray-100"
+              >
                 Registrarse
               </button>
-              <button (click)="openLoginModal()" class="block px-4 py-2 text-sm text-gray-700 w-full text-left hover:bg-gray-100">
+              <button
+                (click)="openLoginModal()"
+                class="block px-4 py-2 text-sm text-gray-700 w-full text-left hover:bg-gray-100"
+              >
                 Iniciar sesión
               </button>
             </div>
             <div *ngIf="menuUsers" class="py-1">
-              <button (click)="closeSesion()" class="block px-4 py-2 text-sm text-gray-700 w-full text-left hover:bg-gray-100">
+              <button
+                (click)="closeSesion()"
+                class="block px-4 py-2 text-sm text-gray-700 w-full text-left hover:bg-gray-100"
+              >
                 Salir
               </button>
             </div>
@@ -91,10 +120,10 @@
         [routerLink]="item.href"
         (click)="isMobileMenuOpen = false"
         routerLinkActive="bg-gray-900 text-white"
-        [routerLinkActiveOptions]="{exact: true}"
+        [routerLinkActiveOptions]="{ exact: true }"
         class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
       >
-        {{item.name}}
+        {{ item.name }}
       </a>
     </div>
   </div>

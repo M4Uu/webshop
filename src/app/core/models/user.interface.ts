@@ -18,4 +18,5 @@ export interface SessionInfo {
   first_name?: string | null,
   last_name?: string | null,
   created_ad?: string | null,
+  img?: string | null,
 }

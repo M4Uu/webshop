@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { MainLayoutComponent } from './components/features/layout/Guest/main-layout/main-layout.component';
 import { authGuard } from './core/guards/auth/auth.guard';
-
+import { MainLayoutComponent as LayoutAuth } from './components/features/layout/Auth/main-layout/main-layout.component';
 export const routes: Routes = [
   // Guest
   {
@@ -17,8 +17,8 @@ export const routes: Routes = [
   // Auth
   {
     path: '',
-    component: MainLayoutComponent,
-    canActivate: [authGuard],
+    component: LayoutAuth,
+    // canActivate: [authGuard],
     children: [
       { path: 'home',loadChildren: () => import('./modules/Auth/homelogin/homelogin.module').then(m => m.HomeloginModule) },
     ],
