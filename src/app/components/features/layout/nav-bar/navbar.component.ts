@@ -1,18 +1,12 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, Inject, inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDialogModule } from '@angular/material/dialog';
 import { Router, RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { LoginComponent } from '@features/AuthUser/login/login.component';
-import { RegisterComponent } from '@features/AuthUser/register/register.component';
 import { ButtonModule } from 'primeng/button';
-import { Store } from '@ngrx/store';
-import { UserActions } from '@app/store/actions/user.action';
-import { Observable } from 'rxjs';
-import { UserInfo } from '@app/core/models/user.interface';
-import { selectUser } from '@app/store/selects/user.select';
 import { AuthService } from '@app/core/services/auth/auth.service';
+import { DialogModule } from 'primeng/dialog';
+import { RegisterComponent } from '../../AuthUser/register/register.component';
 
 @Component({
   selector: 'app-navbar',
@@ -22,54 +16,36 @@ import { AuthService } from '@app/core/services/auth/auth.service';
   imports: [
     CommonModule,
     MatIconModule,
-    MatDialogModule,
     RouterModule,
     ButtonModule,
+    DialogModule,
+    LoginComponent,
+    RegisterComponent
   ]
 })
 export class NavbarComponent implements OnInit {
-  @Input() currentPath: string = '';
-  dialog = inject(MatDialog);
-  store = inject(Store);
-  router = inject(Router);
-  authService = inject(AuthService)
+  @Input() user: any;
 
-  isMobileMenuOpen = false;
-  isUserMenuOpen = false;
+  private router = inject(Router);
+  private authService = inject(AuthService)
 
-  private user$: Observable<UserInfo | undefined> = this.store.select(selectUser);
   public menuUsers: any;
+  public isMobileMenuOpen = false;
+  public isUserMenuOpen = false;
 
-  navigation = [
+  visibleLogin: boolean = false;
+  visibleRegister: boolean = false;
+
+  public navigation = [
     { name: 'Inicio', href: '/' },
     { name: '¿Quienes somos?', href: 'about' },
     { name: 'Ofrecemos', href: 'weoffer' },
     { name: 'Contacto', href: 'contact' },
   ];
 
-  ngOnInit(): void {
-    this.user$.subscribe(u => this.menuUsers = u)
-    // const dialogRef = this.dialog.open(LoginComponent);
-  }
-
-  openLoginModal() {
-    const dialogRef = this.dialog.open(LoginComponent);
-    // dialogRef.afterClosed().subscribe(result => {});
-    this.isUserMenuOpen = false;
-  }
-
-  openRegisterModal() {
-    const dialogRef = this.dialog.open(RegisterComponent);
-    // dialogRef.afterClosed().subscribe(result => {});
-    this.isUserMenuOpen = false;
-  }
-
-  isCurrent(href: string): boolean {
-    return href === this.currentPath;
-  }
+  ngOnInit(): void { }
 
   closeSesion() {
-    this.store.dispatch(UserActions.unlogin())
     this.authService.clearSession();
     this.router.navigate(['/'])
   }

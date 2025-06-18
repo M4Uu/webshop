@@ -1,110 +1,89 @@
-<form
-  class="flex flex-col gap-3 px-16 py-14 w-[30rem]"
-  [formGroup]="registerForm"
-  (ngSubmit)="onSubmit()"
->
-  <p-toast />
-  <div class="flex justify-between items-center mb-4">
-    <h1 class="!text-2xl !font-semibold">REGISTRO</h1>
-    <button mat-icon-button (click)="closeDialog()" type="button">
-      <mat-icon>close</mat-icon>
-    </button>
-  </div>
-
-  <div class="flex flex-col gap-5">
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="relative flex flex-col px-8 py-8 gap-6 rounded-2xl"
+  style="
+          border-radius: 12px;
+          background-image: radial-gradient(
+            circle at left top,
+            #95989c,
+            #6b6e74,
+            #505155
+          );
+        ">
+  <div class="inline-flex flex-col gap-2">
     <div class="input-container">
+      <label for="username" class="text-primary-50 font-semibold">Nombre</label>
       <span *ngIf="registerForm.get('first_name')?.errors?.['required'] && registerForm.get('first_name')?.touched">
         El nombre es requerido.
       </span>
       <span *ngIf="registerForm.get('first_name')?.errors?.['invalidName']">
         Solo se permiten letras y espacios.
       </span>
-      <input
-        class="input"
-        type="text"
-        formControlName="first_name"
-        id="name"
-        placeholder="Nombre"
-      />
+      <input pInputText class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80"
+        class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" type="text" formControlName="first_name" id="name"
+        placeholder="Nombre" />
     </div>
     <div class="input-container">
+      <label for="username" class="text-primary-50 font-semibold">Apellido</label>
+
       <span *ngIf="registerForm.get('last_name')?.errors?.['required'] && registerForm.get('last_name')?.touched">
         El apellido es requerido.
       </span>
       <span *ngIf="registerForm.get('last_name')?.errors?.['invalidName']">
         Solo se permiten letras y espacios.
       </span>
-      <input
-        class="input"
-        type="text"
-        formControlName="last_name"
-        id="last-name"
-        placeholder="Apellido"
-      />
+      <input pInputText class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" type="text"
+        formControlName="last_name" id="last-name" placeholder="Apellido" />
     </div>
     <div class="input-container">
+      <label for="username" class="text-primary-50 font-semibold">Nombre de Usuario</label>
+
       <span *ngIf="registerForm.get('user-name')?.errors?.['required'] && registerForm.get('user-name')?.touched">
         El nombre de usuario es requerido.
       </span>
-      <input
-        class="input"
-        type="text"
-        formControlName="user_name"
-        id="user-name"
-        placeholder="Nombre de Usuario"
-      />
+      <input pInputText class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" type="text"
+        formControlName="user_name" id="user-name" placeholder="Nombre de Usuario" />
     </div>
     <div class="input-container">
-      <span *ngIf="registerForm.get('email_address')?.errors?.['required'] && registerForm.get('email_address')?.touched">
+      <label for="username" class="text-primary-50 font-semibold">Correo</label>
+
+      <span
+        *ngIf="registerForm.get('email_address')?.errors?.['required'] && registerForm.get('email_address')?.touched">
         El correo es obligatorio.
       </span>
 
       <span *ngIf="registerForm.get('email_address')?.errors?.['invalidEmail']">
         {{"Formato de correo inválido (ej: usuario@dominio.com)."}}
       </span>
-      <input
-        class="input"
-        type="email"
-        formControlName="email_address"
-        id="email"
-        placeholder="Correo electrónico"
-      />
+      <input pInputText class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" type="email"
+        formControlName="email_address" id="email" placeholder="Correo electrónico" />
     </div>
     <div class="input-container">
+      <label for="username" class="text-primary-50 font-semibold">Contraseña</label>
+
       <span *ngIf="registerForm.get('pswd')?.errors?.['required'] && registerForm.get('pswd')?.touched">
         La contraseña es requerida.
       </span>
       <span *ngIf="registerForm.get('pswd')?.errors?.['weakPassword']">
-        La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y caracteres especiales.
+        La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y caracteres
+        especiales.
       </span>
-      <input
-        class="input"
-        type="password"
-        formControlName="pswd"
-        id="password"
-        placeholder="Contraseña"
-      />
+      <input pInputText class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" type="password" formControlName="pswd"
+        id="password" placeholder="Contraseña" />
     </div>
     <div class="input-container">
-      <span *ngIf="registerForm.get('confirm_password')?.errors?.['required'] && registerForm.get('confirm_password')?.touched">
+      <label for="username" class="text-primary-50 font-semibold">Confirmar Contraseña</label>
+
+      <span
+        *ngIf="registerForm.get('confirm_password')?.errors?.['required'] && registerForm.get('confirm_password')?.touched">
         Confirma tu contraseña.
       </span>
       <span *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('confirm_password')?.touched">
         Las contraseñas no coinciden.
       </span>
-      <input
-        class="input"
-        type="password"
-        formControlName="confirm_password"
-        id="confirm-password"
-        placeholder="Confirmar contraseña"
-      />
+      <input pInputText class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" type="password"
+        formControlName="confirm_password" id="confirm-password" placeholder="Confirmar contraseña" />
     </div>
   </div>
-  <div
-    *ngIf="registerForm.get('confirm-password')?.hasError('mistmatch')"
-    class=""
-  >
+  <div *ngIf="registerForm.get('confirm-password')?.hasError('mistmatch')" class="">
     Las contraseñas no coinciden
   </div>
 
@@ -112,13 +91,11 @@
     <input type="checkbox" formControlName="checkbox" />
     <span>Acepto los Términos y Condiciones</span>
   </div>
-  <button
-    [class.button]="registerForm.valid"
-    [class.button-invalid]="registerForm.invalid"
-    [disabled]="registerForm.invalid"
-    class="font-semibold rounded-md tracking-wider py-3 border border-transparent"
-    type="submit"
-  >
-    REGISTER
-  </button>
+  <div class="flex items-center gap-4">
+    <p-button label="Cancel" [text]="false" (onClick)="closeDialog.emit()"
+      styleClass="!p-4 w-full !text-primary-50 !border !border-white/30 hover:!bg-white/10" class="w-full" />
+    <p-button label="Sign-In" [text]="true"
+      styleClass="!p-4 w-full !text-primary-50 !border !border-white/30 hover:!bg-white/10" class="w-full"
+      type="submit" />
+  </div>
 </form>

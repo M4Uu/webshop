@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { PrimeNGConfig } from 'primeng/api';
 import { AosService } from './global/aos-service/aosservice.service';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ import { AosService } from './global/aos-service/aosservice.service';
   imports: [
     CommonModule,
     RouterOutlet,
+    ToastModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

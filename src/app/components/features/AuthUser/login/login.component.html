@@ -1,17 +1,14 @@
-<form
-  [formGroup]="loginForm"
-  (ngSubmit)="onSubmit()"
-  class="flex flex-col gap-4 p-[3rem]"
->
-  <p-toast />
-  <div class="flex justify-between items-center mb-4">
-    <h1 class="!text-2xl !font-semibold">INICIAR SESIÓN</h1>
-    <button mat-icon-button (click)="closeDialog()" type="button">
-      <mat-icon>close</mat-icon>
-    </button>
-  </div>
-
-  <div class="flex flex-col gap-5">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="relative flex flex-col px-8 py-8 gap-6 rounded-2xl" style="
+          border-radius: 12px;
+          background-image: radial-gradient(
+            circle at left top,
+            #95989c,
+            #6b6e74,
+            #505155
+          );
+        ">
+  <div class="inline-flex flex-col gap-2">
+    <label for="username" class="text-primary-50 font-semibold">Correo</label>
     <div class="input-container">
       <span *ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched">
         El correo es obligatorio.
@@ -20,39 +17,20 @@
       <span *ngIf="loginForm.get('email')?.errors?.['invalidEmail']">
         Formato de correo inválido.
       </span>
-      <input
-        class="input"
-        type="email"
-        formControlName="email"
-        id="email"
-        placeholder="Correo electróncio"
-      />
+      <input pInputText class="input" type="email" formControlName="email" id="email" placeholder="Correo electróncio"
+        class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" />
     </div>
-    <div class="input-container">
-      <span *ngIf="loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched">
-        La contraseña es requerida.
-      </span>
-      <input
-        class="input"
-        type="password"
-        formControlName="password"
-        placeholder="Contraseña"
-      />
+    <div class="inline-flex flex-col gap-2">
+      <label for="password" class="text-primary-50 font-semibold">Contraseña</label>
+      <input pInputText id="password" formControlName="password" type="password"
+        class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" />
+    </div>
+    <div class="flex items-center gap-4">
+      <p-button label="Cancel" [text]="false" (onClick)="closeDialog.emit()"
+        styleClass="!p-4 w-full !text-primary-50 !border !border-white/30 hover:!bg-white/10" class="w-full" />
+      <p-button label="Sign-In" [text]="true"
+        styleClass="!p-4 w-full !text-primary-50 !border !border-white/30 hover:!bg-white/10" class="w-full"
+        type="submit" />
     </div>
   </div>
-
-  <div class="flex gap-2 items-center">
-    <input type="checkbox" formControlName="checkbox" />
-    <span>Recuérdame</span>
-  </div>
-
-  <button
-    [class.button]="loginForm.valid"
-    [class.button-invalid]="loginForm.invalid"
-    [disabled]="loginForm.invalid"
-    class="font-semibold rounded-md tracking-wider py-3 border border-transparent"
-    type="submit"
-  >
-    INGRESAR
-  </button>
 </form>

@@ -1,41 +1,48 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
-import { catchError, filter, map, of, switchMap, take, tap, timeout } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { UserActions } from '@store/actions/user.action';
-import { selectUser } from '@store/selects/user.select';
+import { CanActivateFn, Router, UrlTree } from '@angular/router'; // Asegúrate de importar UrlTree y Router
 import { AuthService } from '@app/core/services/auth/auth.service';
+import { Observable, of } from 'rxjs'; // Importa Observable y of
+import { map, catchError } from 'rxjs/operators'; // Importa map y catchError
+import { MessageService } from 'primeng/api'; // Si también quieres mostrar un toast
 
 export const authGuard: CanActivateFn = (route, state) => {
-  const store = inject(Store);
-  const router = inject(Router);
   const authService = inject(AuthService);
+  const router = inject(Router);
+  const messageService = inject(MessageService);
 
-  return store.select(selectUser).pipe(
-    take(1),
-    switchMap(user => {
-      // Caso 1: Usuario ya en estado
-      if (user) return of(true);
-
-      // Caso 2: Verificar sessionStorage primero
-      authService.loadSession();
-
-      // Caso 3: Último recurso - Petición al backend
-      store.dispatch(UserActions.protected());
-
-      return store.select(selectUser).pipe(
-        filter(u => u !== undefined),
-        take(1),
-        timeout(3000),
-        map(u => !!u),
-        catchError(() => of(false))
-      );
-    }),
-    tap(authorized => {
-      if (!authorized) {
-        authService.clearSession();
-        router.navigate(['/']);
-      }
-    })
-  );
+  if (authService.loadSessionStorage()) {
+    return true;
+  } else {
+    return authService.loadSessionProtected().pipe(
+      map(isAuthenticated => {
+        if (isAuthenticated) {
+          messageService.add({
+            severity: 'contrast',
+            summary: 'Inicio de Sesión',
+            detail: 'Has iniciado sesión satisfactoriamente.',
+            life: 2000
+          });
+          return true;
+        } else {
+          messageService.add({
+            severity: 'contrast',
+            summary: 'Sesión Inválida',
+            detail: 'Tu sesión no es válida o ha caducado. Por favor, inicia sesión.',
+            life: 5000
+          });
+          return router.createUrlTree(['/login']);
+        }
+      }),
+      catchError(error => {
+        console.error('AuthGuard: Error during API validation:', error);
+        messageService.add({
+          severity: 'contrast',
+          summary: 'Error de Conexión',
+          detail: 'No se pudo verificar tu sesión. Intenta de nuevo más tarde.',
+          life: 7000
+        });
+        return of(router.createUrlTree([''])); // Redirige al login en caso de error
+      })
+    );
+  }
 };

@@ -12,8 +12,8 @@ export class UsersService {
   // private apiUrl = 'https://webshop-backend-i8ee.onrender.com/api' + '/users';
   constructor(private http: HttpClient) { }
 
-  loginUser(user: LoginInf): Observable<HttpResponse<R>> {
-    return this.http.post<HttpResponse<R>>(this.apiUrl + "/login", user, { withCredentials: true })
+  loginUser(user: LoginInf): Observable<R> {
+    return this.http.post<R>(this.apiUrl + "/login", user, { withCredentials: true })
   }
 
   registerUser(input: UserInfo): Observable<any> {

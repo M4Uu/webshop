@@ -1,19 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Injectable } from '@angular/core';
+import { Component, EventEmitter, Inject, inject, Injectable, Output, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { UserActions } from '@store/actions/user.action';
 import { Router } from '@angular/router';
-import { MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { filter, firstValueFrom, Observable, Subject, take, takeUntil, tap, timeout } from 'rxjs';
-import { selectUser, selectStatusResponse } from '@app/store/selects/user.select';
-import { UserInfo } from '@app/core/models/user.interface';
-import { R } from "@global/schema/schema.response";
 import { emailFormatValidator } from '../validators.form';
+import { ButtonModule } from 'primeng/button';
+import { UsersService } from '@app/core/services/api-users/users.service';
 
 @Component({
   selector: 'app-login-form',
@@ -22,9 +17,8 @@ import { emailFormatValidator } from '../validators.form';
     ReactiveFormsModule,
     CommonModule,
     MatIconModule,
-    ToastModule,
+    ButtonModule
   ],
-  providers: [MessageService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -34,35 +28,15 @@ import { emailFormatValidator } from '../validators.form';
 })
 
 export class LoginComponent {
+  @Output() closeDialog = new EventEmitter<void>()
+
+  private APIUser = inject(UsersService);
   formBuilder = inject(FormBuilder);
   store = inject(Store);
   router = inject(Router);
-  dialogRef = inject(MatDialogRef);
   messageService = inject(MessageService);
 
-  private status$: Observable<R | undefined> = this.store.select(selectStatusResponse);
-
-  private destroy$ = new Subject<void>();
-
-  ngOnInit(): void {
-    this.status$.subscribe(status => {
-      if (status) {
-        console.log(`[Status]\ncode: ${status?.status?.statusCode}\nmessage: ${status?.status?.message}`);
-        switch (status.status?.statusCode) {
-          case 404:
-            this.messageService.add({ severity: 'contrast', summary: 'Alert', detail: 'Clave o Correo inválidos.', life: 3000 });
-            break;
-          case 500:
-            this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Error en el servidor, por favor, solicite al servicio técnico atención para su caso.', life: 3000 });
-            break;
-          case 0:
-            this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 });
-            break;
-        }
-      }
-      this.store.dispatch(UserActions.clearStatus());
-    });
-  }
+  ngOnInit(): void { }
 
   get email() {
     return this.loginForm.get('email');
@@ -77,34 +51,37 @@ export class LoginComponent {
       Validators.required,
       emailFormatValidator()
     ]],
-    password: ['1234',[
+    password: ['1234', [
       Validators.required
     ]],
     checkbox: [true, []]
   });
 
-  async onSubmit() {
-    this.store.dispatch(UserActions.login({ payload: this.loginForm.value }));
-    try {
-      const status = await firstValueFrom(
-        this.status$.pipe(
-          filter(s => !!s?.status?.statusCode),
-          take(1),
-          timeout(5000)
-        )
-      );
-
-      if (status?.status?.statusCode === 200) {
-        this.dialogRef.close(true);
-        this.router.navigate(['/home']);
-        this.destroy$.complete();
-      }
-    } catch (e) {
-      console.error('Login error:', e);
-    }
+  onSubmit() {
+    this.APIUser.loginUser(this.loginForm.value).subscribe({
+      next: (response) => {
+        if (response.status) {
+          const status = response.status;
+          switch (status?.statusCode) {
+            case 200:
+              this.router.navigate(['home']);
+              break;
+            case 404:
+              this.messageService.add({ severity: 'contrast', summary: 'Alert', detail: 'Clave o Correo inválidos.', life: 3000 });
+              break;
+            case 500:
+              this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Error en el servidor, por favor, solicite al servicio técnico atención para su caso.', life: 3000 });
+              break;
+            case 0:
+              this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 });
+              break;
+          }
+        }
+      },
+      error: (err) => console.log(err)
+    })
+    // this.store.dispatch(UserActions.login({ payload: this.loginForm.value }));
   }
 
-  closeDialog() {
-    this.dialogRef.close(false);
-  }
+
 }

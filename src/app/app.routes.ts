@@ -16,11 +16,11 @@ export const routes: Routes = [
   },
   // Auth
   {
-    path: '',
+    path: 'home',
     component: LayoutAuth,
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
     children: [
-      { path: 'home',loadChildren: () => import('./modules/Auth/homelogin/homelogin.module').then(m => m.HomeloginModule) },
+      { path: '',loadChildren: () => import('./modules/Auth/homelogin/homelogin.module').then(m => m.HomeloginModule) },
     ],
   },
   // Admin

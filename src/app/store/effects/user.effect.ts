@@ -30,10 +30,10 @@ export class UserEffects {
     return of(UserActions.messageResponse({ status: status }))
   }
 
-  ApiResponse = (response: HttpResponse<R>, message: string) => {
+  ApiResponse = (response: R, message: string) => {
     let status: R;
-    response.body ?
-      status = { status: response.body.status }
+    response.status ?
+      status = { status: response.status }
       : status = { status: { statusCode: 200, message: `${message} sucess` } };
     if (message === 'Login')
       this.store.dispatch(UserActions.protected());
@@ -45,8 +45,6 @@ export class UserEffects {
     ofType(UserActions.protected),
     mergeMap(() => this.ApiUser.protectedUser().pipe(
       tap(response => {
-        response.payload &&
-          this.authService.saveSession(response.payload, response.status);
       }),
       map(response => {
         if (!response.payload) {
@@ -65,7 +63,7 @@ export class UserEffects {
     ofType(UserActions.register),
     mergeMap((action: any) => this.ApiUser.registerUser(action.payload)
       .pipe(
-        map((response: HttpResponse<R>) => this.ApiResponse(response, 'Register')),
+        map((response: R) => this.ApiResponse(response, 'Register')),
         catchError((error: HttpErrorResponse) => this.ApiError(error))
       )),
   ))
@@ -76,7 +74,7 @@ export class UserEffects {
     mergeMap(action => this.ApiUser.loginUser(action.payload)
       .pipe(
         // map(response => UserActions.messageResponse({ message: response.status })),
-        map((response: HttpResponse<R>) => this.ApiResponse(response, 'Login')),
+        map((response: R) => this.ApiResponse(response, 'Login')),
         catchError((error: HttpErrorResponse) => this.ApiError(error))
       )),
   ))
@@ -85,7 +83,7 @@ export class UserEffects {
     ofType(UserActions.unlogin),
     mergeMap(() => this.ApiUser.logoutUser()
       .pipe(
-        map((response: HttpResponse<R>) => this.ApiResponse(response, 'Log out')),
+        map((response: R) => this.ApiResponse(response, 'Log out')),
         catchError((error: HttpErrorResponse) => this.ApiError(error))
       )),
   ))
