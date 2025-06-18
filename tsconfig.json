@@ -29,7 +29,7 @@
       "@hooks/*": ["src/app/components/hooks/*"],
       "@store/*": ["src/app/store/*"],
       "@core/*": ["src/app/core/*"],
-      "@env/*": ["src/app/env/*"],
+      "@env/*": ["src/environments/*"],
       "@global/*": ["src/app/global/*"],
       "@images/*": ["src/assets/images/*"]
     }

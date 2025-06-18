@@ -7,21 +7,21 @@ import { catchError, map, Observable, of } from 'rxjs';
 export class AuthService {
   private readonly SESSION_KEY = 'session_data';
   private APIUser = inject(UsersService);
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
 
   saveSession(payload: any): void {
     const sessionData = payload
-    if(isPlatformBrowser(this.platformId)){
+    if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem(this.SESSION_KEY, JSON.stringify(sessionData));
     }
   }
 
   loadSessionStorage(): any {
-    if(isPlatformBrowser(this.platformId)){
+    if (isPlatformBrowser(this.platformId)) {
       const user = localStorage.getItem(this.SESSION_KEY);
-      if(user){
+      if (user) {
         return JSON.parse(user);
-      }else{
+      } else {
         return false;
       }
     }
@@ -30,7 +30,6 @@ export class AuthService {
   loadSessionProtected(): Observable<boolean> { // Indicamos que devuelve un Observable<boolean>
     return this.APIUser.protectedUser().pipe(
       map(response => {
-        console.log('RESPUESTA')
         if (response.payload) {
           this.saveSession(response.payload);
           return true;
@@ -47,7 +46,7 @@ export class AuthService {
   }
 
   clearSession(): void {
-    if(isPlatformBrowser(this.platformId)){
+    if (isPlatformBrowser(this.platformId)) {
       localStorage.removeItem(this.SESSION_KEY);
     }
   }

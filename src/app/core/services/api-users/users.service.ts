@@ -3,12 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoginInf, SessionInfo, UserInfo } from '../../models/user.interface';
 import { R } from '@app/global/schema/schema.response';
+import { environment } from '@env/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
-  private apiUrl = 'http://localhost:1234/api' + '/users';
+  private apiUrl = environment.apiUrl + '/users';
+  // private apiUrl = 'http://localhost:1234/api' + '/users';
   // private apiUrl = 'https://webshop-backend-i8ee.onrender.com/api' + '/users';
   constructor(private http: HttpClient) { }
 

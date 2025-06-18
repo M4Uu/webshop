@@ -1,5 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'undefined',
-  apiKey: 'undefined'
+  apiUrl: 'https://webshop-backend-i8ee.onrender.com/api',
 };
