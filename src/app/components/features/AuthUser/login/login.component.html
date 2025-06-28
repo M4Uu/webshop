@@ -2,28 +2,28 @@
           border-radius: 12px;
           background-image: radial-gradient(
             circle at left top,
-            #95989c,
             #6b6e74,
-            #505155
+            #414347,
+            #3e3e42
           );
         ">
   <div class="inline-flex flex-col gap-2">
     <label for="username" class="text-primary-50 font-semibold">Correo</label>
     <div class="input-container">
-      <span *ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched">
+      <span *ngIf="loginForm.get('correo')?.errors?.['required'] && loginForm.get('correo')?.touched">
         El correo es obligatorio.
       </span>
 
-      <span *ngIf="loginForm.get('email')?.errors?.['invalidEmail']">
+      <span *ngIf="loginForm.get('correo')?.errors?.['invalidEmail']">
         Formato de correo inválido.
       </span>
-      <input pInputText class="input" type="email" formControlName="email" id="email" placeholder="Correo electróncio"
-        class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" />
+      <input pInputText class="input" type="correo" formControlName="correo" id="correo"
+        placeholder="Correo electróncio" class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" />
     </div>
     <div class="inline-flex flex-col gap-2">
       <label for="password" class="text-primary-50 font-semibold">Contraseña</label>
       <input pInputText id="password" formControlName="password" type="password"
-        class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" />
+        class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" placeholder="Contraseña" />
     </div>
     <div class="flex items-center gap-4">
       <p-button label="Cancel" [text]="false" (onClick)="closeDialog.emit()"

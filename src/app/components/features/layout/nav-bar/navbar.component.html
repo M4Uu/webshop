@@ -48,9 +48,9 @@
               <span class="text-gray-300 py-[2px] pl-[8px] text-base">Ingresar</span>
             </div>
             <div class="flex" *ngIf="user">
-              <img [src]="this.user?.img" class="h-8" alt="FlowBite Logo" />
-              <span class="text-gray-300 py-[2px] pl-[8px] text-base">
-                {{ this.user?.first_name }} {{ this.user?.last_name }}
+              <img [src]="this.user?.imagen_url" class="h-9 w-9 object-cover rounded-full" alt="Avatar User" />
+              <span class="text-gray-300 pt-[5px] pl-[8px] text-base">
+                {{ this.user?.nombre_usuario }}
               </span>
             </div>
           </button>
@@ -69,6 +69,14 @@
               </button>
             </div>
             <div *ngIf="user" class="py-1">
+              <button (click)="navigatePerfil()"
+                class="block px-4 py-2 text-sm text-gray-700 w-full text-left hover:bg-gray-100">
+                Ver mi perfil
+              </button>
+              <button (click)="navigateConfig()"
+                class="block px-4 py-2 text-sm text-gray-700 w-full text-left hover:bg-gray-100">
+                Configuración
+              </button>
               <button (click)="closeSesion()"
                 class="block px-4 py-2 text-sm text-gray-700 w-full text-left hover:bg-gray-100">
                 Salir

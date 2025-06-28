@@ -1,11 +1,11 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, Router, UrlTree } from '@angular/router'; // Asegúrate de importar UrlTree y Router
+import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '@app/core/services/auth/auth.service';
-import { Observable, of } from 'rxjs'; // Importa Observable y of
-import { map, catchError } from 'rxjs/operators'; // Importa map y catchError
-import { MessageService } from 'primeng/api'; // Si también quieres mostrar un toast
+import { of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+import { MessageService } from 'primeng/api';
 
-export const authGuard: CanActivateFn = (route, state) => {
+export const authGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
   const messageService = inject(MessageService);
@@ -20,7 +20,7 @@ export const authGuard: CanActivateFn = (route, state) => {
             severity: 'contrast',
             summary: 'Inicio de Sesión',
             detail: 'Has iniciado sesión satisfactoriamente.',
-            life: 2000
+            life: 1000
           });
           return true;
         } else {
@@ -30,7 +30,7 @@ export const authGuard: CanActivateFn = (route, state) => {
             detail: 'Tu sesión no es válida o ha caducado. Por favor, inicia sesión.',
             life: 5000
           });
-          return router.createUrlTree(['/login']);
+          return router.createUrlTree(['/']);
         }
       }),
       catchError(error => {
@@ -41,7 +41,7 @@ export const authGuard: CanActivateFn = (route, state) => {
           detail: 'No se pudo verificar tu sesión. Intenta de nuevo más tarde.',
           life: 7000
         });
-        return of(router.createUrlTree([''])); // Redirige al login en caso de error
+        return of(router.createUrlTree(['/'])); // Redirige al login en caso de error
       })
     );
   }

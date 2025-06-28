@@ -4,17 +4,23 @@
   "configurations": [
     {
       "name": "ng serve (Edge)", // Changed name for clarity
-      "type": "msedge",         // Changed from "chrome" to "msedge"
+      "type": "msedge", // Changed from "chrome" to "msedge"
       "request": "launch",
       "preLaunchTask": "npm: start",
-      "url": "http://localhost:4200/"
+      "url": "http://localhost:4200/",
+      "presentation": {
+        "hidden": true
+      }
     },
     {
       "name": "ng test (Edge)", // Changed name for clarity
-      "type": "msedge",         // Changed from "chrome" to "msedge"
+      "type": "msedge", // Changed from "chrome" to "msedge"
       "request": "launch",
       "preLaunchTask": "npm: test",
-      "url": "http://localhost:9876/debug.html"
+      "url": "http://localhost:9876/debug.html",
+      "presentation": {
+        "hidden": true
+      }
     }
   ]
 }

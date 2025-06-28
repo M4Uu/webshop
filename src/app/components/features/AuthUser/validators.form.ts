@@ -12,6 +12,17 @@ export function nameValidator(): ValidatorFn {
   };
 }
 
+export function numberValidator(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const value = control.value;
+    if (!value) return null;
+
+    const regex = /^\d+$/;
+    const isValid = regex.test(value);
+    return !isValid ? { 'invalidName': { value: control.value } } : null;
+  };
+}
+
 // Validador para contraseña fuerte
 export function strongPasswordValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
@@ -30,10 +41,14 @@ export function strongPasswordValidator(): ValidatorFn {
 
 // Validador para confirmar contraseña
 export function passwordMatchValidator(control: AbstractControl) {
-  const password = control.get('pswd')?.value;
+  const password = control.get('password')?.value;
   const confirmPassword = control.get('confirm_password')?.value;
 
-  return password === confirmPassword ? null : { 'mismatch': true };
+  if (password == confirmPassword) {
+    return null;
+  } else {
+    return { 'mismatch': true }
+  }
 }
 
 export function emailFormatValidator(): ValidatorFn {

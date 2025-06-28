@@ -6,9 +6,10 @@ import { Store } from '@ngrx/store';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MessageService } from 'primeng/api';
-import { emailFormatValidator, nameValidator, passwordMatchValidator, strongPasswordValidator } from '../validators.form';
+import { emailFormatValidator, nameValidator, numberValidator, passwordMatchValidator } from '../validators.form';
 import { ButtonModule } from 'primeng/button';
 import { UsersService } from '@app/core/services/api-users/users.service';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @Component({
   selector: 'app-register-form',
@@ -20,7 +21,8 @@ import { UsersService } from '@app/core/services/api-users/users.service';
     MatFormFieldModule,
     ReactiveFormsModule,
     FormsModule,
-    ButtonModule
+    ButtonModule,
+    InputNumberModule
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
@@ -35,36 +37,41 @@ export class RegisterComponent {
   store = inject(Store)
   messageService = inject(MessageService);
 
-  ngOnInit(): void { }
-
   registerForm = this.formBuilder.group({
-    'first_name': ['test', [
+    'cedula': ['', [
+      Validators.required,
+      numberValidator()
+    ]],
+    'nombres': ['', [
       Validators.required,
       nameValidator()
     ]],
-    'last_name': ['test', [
+    'nombre_usuario': ['', [
       Validators.required,
       nameValidator()
     ]],
-    'user_name': ['test', [Validators.required]],
-    'email_address': ['test@gmail.com', [
+    'localidad': ['', [
+      Validators.required,
+    ]],
+    'password': ['', [Validators.required]],
+    'correo': ['', [
       Validators.required,
       emailFormatValidator()
     ]],
-    'pswd': ['123lLoo.PP', [
-      Validators.required,
+    'imagen_url': ['', [
       // Validators.minLength(8),
     ]],
-    'confirm_password': ['123lLoo.PP', [Validators.required]],
-    'checkbox': [true, [Validators.required, Validators.requiredTrue]]
+    'confirm_password': ['', [Validators.required]],
+    // 'checkbox': [true, [Validators.required, Validators.requiredTrue]]
   }, { validator: passwordMatchValidator })
 
 
   onSubmit() {
+    this.registerForm.value.cedula = Number(this.registerForm.value.cedula);
     this.APIUsers.registerUser(this.registerForm.value).subscribe({
       next: response => {
         switch (response?.status?.statusCode) {
-          case 200:
+          case 201:
             this.messageService.add({ severity: 'contrast', summary: 'Registrado', detail: 'Usuario registrado correctamente.', life: 3000 });
             setTimeout(() => {
               this.closeDialog.emit();

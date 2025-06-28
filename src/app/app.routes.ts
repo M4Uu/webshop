@@ -16,11 +16,18 @@ export const routes: Routes = [
   },
   // Auth
   {
-    path: 'home',
+    path: 'usuarios',
     component: LayoutAuth,
     canActivate: [authGuard],
     children: [
-      { path: '',loadChildren: () => import('./modules/Auth/homelogin/homelogin.module').then(m => m.HomeloginModule) },
+      { path: '', loadChildren: () => import('./modules/Auth/homelogin/homelogin.module').then(m => m.HomeloginModule) },
+      { path: 'catalogo', loadChildren: () => import('./modules/Auth/catalogo/catalogo.module').then(m => m.CatalogoModule) },
+      { path: 'carrito', loadChildren: () => import('./modules/Auth/carrito/carrito.module').then(m => m.CarritoModule) },
+      { path: 'compras', loadChildren: () => import('./modules/Auth/compras/compras.module').then(m => m.ComprasModule) },
+      { path: 'guardados', loadChildren: () => import('./modules/Auth/guardados/guardados.module').then(m => m.GuardadosModule) },
+      { path: 'pedidos', loadChildren: () => import('./modules/Auth/pedidos/pedidos.module').then(m => m.PedidosModule) },
+      { path: 'perfil', loadChildren: () => import('./modules/Auth/perfil/perfil.module').then(m => m.PerfilModule) },
+      { path: 'configuracion', loadChildren: () => import('./modules/Auth/configuracion/configuracion.module').then(m => m.ConfiguracionModule) },
     ],
   },
   // Admin

@@ -1,7 +1,7 @@
-import { Component, Inject, inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterModule } from '@angular/router';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { LoginComponent } from '@features/AuthUser/login/login.component';
 import { ButtonModule } from 'primeng/button';
 import { AuthService } from '@app/core/services/auth/auth.service';
@@ -23,7 +23,7 @@ import { RegisterComponent } from '../../AuthUser/register/register.component';
     RegisterComponent
   ]
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
   @Input() user: any;
 
   private router = inject(Router);
@@ -33,8 +33,8 @@ export class NavbarComponent implements OnInit {
   public isMobileMenuOpen = false;
   public isUserMenuOpen = false;
 
-  visibleLogin: boolean = false;
-  visibleRegister: boolean = false;
+  visibleLogin = false;
+  visibleRegister = false;
 
   public navigation = [
     { name: 'Inicio', href: '/' },
@@ -43,10 +43,16 @@ export class NavbarComponent implements OnInit {
     { name: 'Contacto', href: 'contact' },
   ];
 
-  ngOnInit(): void { }
-
   closeSesion() {
     this.authService.clearSession();
     this.router.navigate(['/'])
+  }
+
+  navigatePerfil() {
+    this.router.navigateByUrl('usuarios/perfil')
+  }
+
+  navigateConfig() {
+    this.router.navigateByUrl('usuarios/configuracion')
   }
 }
