@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
@@ -5,6 +6,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-sidebar',
   standalone: true,
   imports: [
+    CommonModule,
     RouterLink
   ],
   templateUrl: './sidebar.component.html',
