@@ -77,12 +77,6 @@ export class RegisterComponent {
               this.closeDialog.emit();
             }, 3000);
             break;
-          case 406:
-            this.messageService.add({ severity: 'contrast', summary: 'Alerta', detail: 'Este usuario ya está registrado, por favor, cree un nuevo usuario o inicie sesión.', life: 3000 });
-            break;
-          case 500:
-            this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Error en el servidor, por favor, solicite al servicio técnico atención para su caso o vuelva a intentarlo en un momento.', life: 3000 });
-            break;
           case 0:
             this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 });
             break;
@@ -90,7 +84,14 @@ export class RegisterComponent {
       },
       error: (err) => {
         console.log(err);
-        this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 });
+        switch (err.status) {
+          case 406:
+            this.messageService.add({ severity: 'contrast', summary: 'Alerta', detail: 'Este usuario ya está registrado, por favor, cree un nuevo usuario o inicie sesión.', life: 3000 });
+            break;
+          case 500:
+            this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 });
+            break;
+        }
       },
     })
   }
