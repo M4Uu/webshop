@@ -53,7 +53,7 @@ export class RegisterComponent {
     'localidad': ['', [
       Validators.required,
     ]],
-    'password': ['', [Validators.required]],
+    'credencial': ['', [Validators.required]],
     'correo': ['', [
       Validators.required,
       emailFormatValidator()
@@ -61,13 +61,14 @@ export class RegisterComponent {
     'imagen_url': ['', [
       // Validators.minLength(8),
     ]],
-    'confirm_password': ['', [Validators.required]],
+    'confirm_credencial': ['', [Validators.required]],
     // 'checkbox': [true, [Validators.required, Validators.requiredTrue]]
   }, { validator: passwordMatchValidator })
 
 
   onSubmit() {
     this.registerForm.value.cedula = Number(this.registerForm.value.cedula);
+    delete this.registerForm.value.confirm_credencial;
     this.APIUsers.registerUser(this.registerForm.value).subscribe({
       next: response => {
         switch (response?.status?.statusCode) {

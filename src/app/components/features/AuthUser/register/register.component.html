@@ -58,33 +58,33 @@
     </div>
 
     <div class="input-container">
-      <label for="password" class="text-primary-50 font-semibold">Contraseña</label>
-      <span *ngIf="registerForm.get('password')?.errors?.['required'] && registerForm.get('password')?.touched">
+      <label for="credencial" class="text-primary-50 font-semibold">Contraseña</label>
+      <span *ngIf="registerForm.get('credencial')?.errors?.['required'] && registerForm.get('credencial')?.touched">
         La contraseña es requerida.
       </span>
-      <span *ngIf="registerForm.get('password')?.errors?.['weakPassword']">
+      <span *ngIf="registerForm.get('credencial')?.errors?.['weakPassword']">
         La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y caracteres
         especiales.
       </span>
-      <input pInputText class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" type="password"
-        formControlName="password" id="password" placeholder="Contraseña" />
+      <input pInputText class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" type="credencial"
+        formControlName="credencial" id="credencial" placeholder="Contraseña" />
     </div>
 
     <div class="input-container">
-      <label for="confirm_password" class="text-primary-50 font-semibold">Confirmar Contraseña</label>
+      <label for="confirm_credencial" class="text-primary-50 font-semibold">Confirmar Contraseña</label>
       <span
-        *ngIf="registerForm.get('confirm_password')?.errors?.['required'] && registerForm.get('confirm_password')?.touched">
+        *ngIf="registerForm.get('confirm_credencial')?.errors?.['required'] && registerForm.get('confirm_credencial')?.touched">
         Confirma tu contraseña.
       </span>
-      <span *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('confirm_password')?.touched">
+      <span *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('confirm_credencial')?.touched">
         Las contraseñas no coinciden.
       </span>
 
-      <input pInputText class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" type="password"
-        formControlName="confirm_password" id="confirm-password" placeholder="Confirmar contraseña" />
+      <input pInputText class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" type="credencial"
+        formControlName="confirm_credencial" id="confirm-credencial" placeholder="Confirmar contraseña" />
     </div>
   </div>
-  <div *ngIf="registerForm.get('confirm-password')?.hasError('mistmatch')" class="">
+  <div *ngIf="registerForm.get('confirm-credencial')?.hasError('mistmatch')" class="">
     Las contraseñas no coinciden
   </div>
 
