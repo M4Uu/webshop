@@ -4,6 +4,7 @@ import { SidebarComponent } from "../sidebar/sidebar.component";
 import { NavbarComponent } from '../../nav-bar/navbar.component';
 import { ToastModule } from 'primeng/toast';
 import { AuthService } from '@app/core/services/auth/auth.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-main-layout',
@@ -13,7 +14,8 @@ import { AuthService } from '@app/core/services/auth/auth.service';
     SidebarComponent,
     NavbarComponent,
     ToastModule
-],
+  ],
+  providers: [MessageService],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss'
 })

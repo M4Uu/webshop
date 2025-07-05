@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID} from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { PrimeNGConfig } from 'primeng/api';
@@ -16,14 +16,14 @@ import { ToastModule } from 'primeng/toast';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit{
-  title = 'test-pnpm';
+export class AppComponent implements OnInit {
+  title = 'webshop';
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private primengConfig: PrimeNGConfig,
     private aosService: AosService,
-  ) {}
+  ) { }
 
   ngOnInit() {
 

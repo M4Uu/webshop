@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -9,7 +9,7 @@ import { MessageService } from 'primeng/api';
 import { emailFormatValidator, nameValidator, numberValidator, passwordMatchValidator } from '../validators.form';
 import { ButtonModule } from 'primeng/button';
 import { UsersService } from '@app/core/services/api-users/users.service';
-import { InputNumberModule } from 'primeng/inputnumber';
+import { PasswordModule } from 'primeng/password';
 
 @Component({
   selector: 'app-register-form',
@@ -22,8 +22,9 @@ import { InputNumberModule } from 'primeng/inputnumber';
     ReactiveFormsModule,
     FormsModule,
     ButtonModule,
-    InputNumberModule
+    PasswordModule
   ],
+  encapsulation: ViewEncapsulation.None,
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
@@ -51,7 +52,7 @@ export class RegisterComponent {
       nameValidator()
     ]],
     'localidad': ['', [
-      Validators.required,
+      // Validators.required,
     ]],
     'credencial': ['', [Validators.required]],
     'correo': ['', [
@@ -67,33 +68,37 @@ export class RegisterComponent {
 
 
   onSubmit() {
-    this.registerForm.value.cedula = Number(this.registerForm.value.cedula);
-    delete this.registerForm.value.confirm_credencial;
-    this.APIUsers.registerUser(this.registerForm.value).subscribe({
-      next: response => {
-        switch (response?.status?.statusCode) {
-          case 201:
-            this.messageService.add({ severity: 'contrast', summary: 'Registrado', detail: 'Usuario registrado correctamente.', life: 3000 });
-            setTimeout(() => {
-              this.closeDialog.emit();
-            }, 3000);
-            break;
-          case 0:
-            this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 });
-            break;
-        }
-      },
-      error: (err) => {
-        console.log(err);
-        switch (err.status) {
-          case 406:
-            this.messageService.add({ severity: 'contrast', summary: 'Alerta', detail: 'Este usuario ya está registrado, por favor, cree un nuevo usuario o inicie sesión.', life: 3000 });
-            break;
-          case 500:
-            this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 });
-            break;
-        }
-      },
-    })
+    if (this.registerForm.invalid) {
+      this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Formulario sin contenido.', life: 3000 });
+    } else {
+      this.registerForm.value.cedula = Number(this.registerForm.value.cedula);
+      delete this.registerForm.value.confirm_credencial;
+      this.APIUsers.registerUser(this.registerForm.value).subscribe({
+        next: response => {
+          switch (response?.status?.statusCode) {
+            case 201:
+              this.messageService.add({ severity: 'contrast', summary: 'Registrado', detail: 'Usuario registrado correctamente.', life: 3000 });
+              setTimeout(() => {
+                this.closeDialog.emit();
+              }, 3000);
+              break;
+            case 0:
+              this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 });
+              break;
+          }
+        },
+        error: (err) => {
+          console.log(err);
+          switch (err.status) {
+            case 406:
+              this.messageService.add({ severity: 'contrast', summary: 'Alerta', detail: 'Este usuario ya está registrado, por favor, cree un nuevo usuario o inicie sesión.', life: 3000 });
+              break;
+            case 500:
+              this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 });
+              break;
+          }
+        },
+      })
+    }
   }
 }

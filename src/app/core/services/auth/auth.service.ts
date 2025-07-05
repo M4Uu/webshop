@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Inject, inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { UsersService } from '../api-users/users.service';
 import { catchError, map, Observable, of } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { catchError, map, Observable, of } from 'rxjs';
 export class AuthService {
   private readonly SESSION_KEY = 'session_data';
   private APIUser = inject(UsersService);
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
+  private platformId = inject(PLATFORM_ID) as object;
 
   saveSession(payload: any): void {
     const sessionData = payload

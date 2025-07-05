@@ -5,12 +5,12 @@ import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideState, provideStore } from '@ngrx/store';
-import { userFeature} from '@store/app.state';
+import { userFeature } from '@store/app.state';
 import { provideEffects } from '@ngrx/effects';
 import { UserEffects } from '@store/effects/user.effect';
 import { userReducer } from '@store/reducers/user.reducer';
 import { metaReducers } from '@store/app.state';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MessageService } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
@@ -19,10 +19,10 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(),
     provideHttpClient(withFetch()),
-    provideStore({user: userReducer}, {metaReducers}),
+    provideStore({ user: userReducer }, { metaReducers }),
     provideState(userFeature),
     provideEffects(UserEffects),
-    provideAnimations(),
+    provideAnimationsAsync(),
     MessageService
-]
+  ]
 };

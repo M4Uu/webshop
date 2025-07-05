@@ -1,0 +1,12 @@
+<div class="card">
+  @if (isHydrated) {
+  <p-galleria [value]="images" [responsiveOptions]="responsiveOptions" [autoPlay]="true" [showThumbnails]="false"
+    [showItemNavigatorsOnHover]="true" `>
+    <ng-template pTemplate="item" let-item>
+      <img [src]="item.itemImageSrc" [alt]="item.alt" style="width:100%" />
+    </ng-template>
+  </p-galleria>
+  } @else {
+  <p>Loading...</p>
+  }
+</div>

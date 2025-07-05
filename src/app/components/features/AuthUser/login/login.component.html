@@ -21,14 +21,14 @@
         placeholder="Correo electróncio" class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" />
     </div>
     <div class="inline-flex flex-col gap-2">
-      <label for="password" class="text-primary-50 font-semibold">Contraseña</label>
-      <input pInputText id="password" formControlName="password" type="password"
+      <label for="credencial" class="text-primary-50 font-semibold">Contraseña</label>
+      <input pInputText id="credencial" formControlName="credencial" type="password"
         class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" placeholder="Contraseña" />
     </div>
     <div class="flex items-center gap-4">
-      <p-button label="Cancel" [text]="false" (onClick)="closeDialog.emit()"
+      <p-button label="Cancelar" [text]="false" (onClick)="closeDialog.emit()"
         styleClass="!p-4 w-full !text-primary-50 !border !border-white/30 hover:!bg-white/10" class="w-full" />
-      <p-button label="Sign-In" [text]="true"
+      <p-button label="Iniciar Sesión" [text]="true"
         styleClass="!p-4 w-full !text-primary-50 !border !border-white/30 hover:!bg-white/10" class="w-full"
         type="submit" />
     </div>

@@ -41,7 +41,7 @@ export class LoginComponent {
   }
 
   get password() {
-    return this.loginForm.get('password');
+    return this.loginForm.get('credencial');
   }
 
   loginForm = this.formBuilder.group({
@@ -49,7 +49,7 @@ export class LoginComponent {
       Validators.required,
       emailFormatValidator()
     ]],
-    password: ['', [
+    credencial: ['', [
       Validators.required
     ]],
   });

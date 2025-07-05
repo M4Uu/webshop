@@ -51,7 +51,7 @@
         El correo es requerido.
       </span>
       <span *ngIf="registerForm.get('correo')?.errors?.['invalidEmail']">
-        {{"Formato de correo inválido (ej: usuario@dominio.com)."}}
+        {{"Formato de correo inválido."}}
       </span>
       <input pInputText class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" type="email" formControlName="correo"
         id="correo" placeholder="Correo electrónico" />
@@ -66,8 +66,8 @@
         La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y caracteres
         especiales.
       </span>
-      <input pInputText class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" type="credencial"
-        formControlName="credencial" id="credencial" placeholder="Contraseña" />
+      <input pInputText toggleMask="true" type="password" class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80"
+        formControlName="credencial" id="password" placeholder="Contraseña" />
     </div>
 
     <div class="input-container">
@@ -80,7 +80,7 @@
         Las contraseñas no coinciden.
       </span>
 
-      <input pInputText class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" type="credencial"
+      <input pInputText toggleMask="true" type="password" class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80"
         formControlName="confirm_credencial" id="confirm-credencial" placeholder="Confirmar contraseña" />
     </div>
   </div>
@@ -93,9 +93,9 @@
     <span>Acepto los Términos y Condiciones</span>
   </div> -->
   <div class="flex items-center gap-4">
-    <p-button label="Cancel" [text]="false" (onClick)="closeDialog.emit()"
+    <p-button label="Cancelar" [text]="false" (onClick)="closeDialog.emit()"
       styleClass="!p-4 w-full !text-primary-50 !border !border-white/30 hover:!bg-white/10" class="w-full" />
-    <p-button label="Sign-In" [text]="true"
+    <p-button label="Registrar" [text]="true"
       styleClass="!p-4 w-full !text-primary-50 !border !border-white/30 hover:!bg-white/10" class="w-full"
       type="submit" />
   </div>
