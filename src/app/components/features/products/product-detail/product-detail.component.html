@@ -1,0 +1,62 @@
+<div class="card px-20">
+  <div class="grid grid-flow-col grid-rows-2">
+    <div class="row-span-2 flex flex-col justify-center gap-7">
+      <div class="flex justify-between">
+        <h1 class="text-2xl font-semibold">Nombre del producto</h1>
+        <span class="font-bold">30.00$</span>
+      </div>
+      <p class="text-lg">[Descripción del producto] Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis,
+        facere? Nesciunt optio laudantium excepturi, quae voluptatum, animi ipsa dolorum minus debitis nam architecto
+        ut.
+        Porro exercitationem tempore omnis atque possimus?</p>
+    </div>
+    <div class="row-span-2 w-[25rem] h-[2q5rem] items-center flex flex-col gap-5">
+      <img class="w-[20rem] object-cover shadow-lg border rounded-lg"
+        [src]="'https://png.pngtree.com/png-vector/20240801/ourmid/pngtree-design-ring-png-image_13326726.png'"
+        alt="detalle producto imagen">
+      <div>
+        <p-rating [style]="{'--p-rating-icon-size': '15px'}" [ngModel]="value" [readonly]="true" />
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <h1 class="text-2xl font-semibold">Medidas</h1>
+    <p-table [value]="medidas" class="w-full" [scrollable]="true" scrollHeight="200px">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Nombre</th>
+          <th>Tamaño</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData>
+        <tr>
+          <td>{{ rowData.name }}</td>
+          <td>{{ rowData.value }} cm</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div class="mt-10">
+    <h1 class="text-2xl font-semibold">Materiales Utilizados</h1>
+    <p-table [value]="materiales" class="w-full" [scrollable]="true" scrollHeight="200px">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Nombre</th>
+          <th>Descripción</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData>
+        <tr>
+          <td>{{ rowData.name }}</td>
+          <td>{{ rowData.descripcion }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <div class="flex justify-end mt-8">
+    <p-button pButton label="Añadir al carrito" class="w-40" />
+  </div>
+
+</div>

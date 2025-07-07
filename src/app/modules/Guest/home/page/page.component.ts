@@ -7,12 +7,13 @@ import { AosService } from '@app/global/aos-service/aosservice.service';
   selector: 'app-home',
   templateUrl: './page.component.html',
   styleUrl: './page.component.scss',
+  standalone: false
 })
-export class PageComponent{
-    router = inject(Router);
-    logged = inject(LoggedService);
-    aosService = inject(AosService);
-    ngOnInit() {
-      // this.logged.ViewUserLogged();
-    }
+export class PageComponent {
+  router = inject(Router);
+  logged = inject(LoggedService);
+  aosService = inject(AosService);
+  ngOnInit() {
+    // this.logged.ViewUserLogged();
+  }
 }

@@ -1,11 +1,18 @@
 <div class="card">
   @if (isHydrated) {
-  <p-galleria [value]="images" [responsiveOptions]="responsiveOptions" [autoPlay]="true" [showThumbnails]="false"
-    [showItemNavigatorsOnHover]="true" `>
-    <ng-template pTemplate="item" let-item>
-      <img [src]="item.itemImageSrc" [alt]="item.alt" style="width:100%" />
-    </ng-template>
-  </p-galleria>
+  <div>
+    <p-galleria styleClass="custom-galeria" [value]="images" [showIndicators]="true" showIndicatorsOnItem="true"
+      [responsiveOptions]="responsiveOptions" [autoPlay]="true" [circular]="true" [showThumbnails]="false"
+      [transitionInterval]="5000">
+      <ng-template pTemplate="item" let-item>
+        <img [src]="item?.itemImageSrc" [alt]="item?.alt" class="container-layout object-cover" />
+      </ng-template>
+      <ng-template #item let-item>
+        <div class="text-xl mb-2 font-bold">{{ 'Title' }}</div>
+        <p class="text-white">{{ item.alt }}</p>
+      </ng-template>
+    </p-galleria>
+  </div>
   } @else {
   <p>Loading...</p>
   }

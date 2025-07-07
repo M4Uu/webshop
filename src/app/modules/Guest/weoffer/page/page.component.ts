@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
   },
   templateUrl: './page.component.html',
   styleUrl: './page.component.scss',
+  standalone: false
 })
 export class PageComponent {
   dialog = inject(MatDialog);

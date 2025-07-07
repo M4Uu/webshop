@@ -6,7 +6,8 @@ import { Component } from '@angular/core';
     'data-component': 'contact'
   },
   templateUrl: './page.component.html',
-  styleUrl: './page.component.scss'
+  styleUrl: './page.component.scss',
+  standalone: false
 })
 export class PageComponent {
 

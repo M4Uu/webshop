@@ -30,6 +30,14 @@ module.exports = tseslint.config(
           style: "kebab-case",
         },
       ],
+      "@angular-eslint/prefer-standalone": [
+        "error",
+        {
+          "components": "ignore",    // Permite componentes no-standalone
+          "directives": "explicit",  // Exige directivas standalone
+          "pipes": "explicit"        // Exige pipes standalone
+        }
+      ]
     },
   },
   {

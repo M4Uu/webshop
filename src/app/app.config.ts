@@ -12,6 +12,8 @@ import { userReducer } from '@store/reducers/user.reducer';
 import { metaReducers } from '@store/app.state';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MessageService } from 'primeng/api';
+import { providePrimeNG } from 'primeng/config';
+import Aura from '@primeng/themes/aura';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,6 +25,14 @@ export const appConfig: ApplicationConfig = {
     provideState(userFeature),
     provideEffects(UserEffects),
     provideAnimationsAsync(),
+    providePrimeNG({
+      theme: {
+        preset: Aura,
+        options: {
+          darkModeSelector: false || 'none'
+        }
+      }
+    }),
     MessageService
   ]
 };

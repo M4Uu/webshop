@@ -2,8 +2,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "primeng/resources/themes/lara-light-blue/theme.css";
-@import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
 
 body {
@@ -36,3 +34,13 @@ h1{
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container-layout {
+  height: calc(100vh - 4.1rem);
+  width: calc(100vw - 15rem);
+}
+
+body{
+  @apply bg-white;
+  color: #000;
+}

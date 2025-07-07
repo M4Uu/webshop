@@ -1,7 +1,3 @@
-*{
-  margin: .5rem;
-}
-
 div,label{
   display: flex;
   flex-direction: column;
@@ -15,4 +11,9 @@ button{
   border-radius: .5rem;
   width: 5rem;
   height: 2rem;
+}
+
+::ng-deep .custom-galleria .p-galleria-indicators {
+  @apply bg-transparent p-1;
+  /* Tailwind classes */
 }

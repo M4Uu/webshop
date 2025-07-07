@@ -1,1 +1,40 @@
-<p>page works!</p>
+<div class="grid grid-cols-8 h-full">
+  <div class="col-span-6">
+    <p-table [paginator]="items.length >= 5 ? true : false" [rows]="5" [value]="items" size="large" class="w-full">
+      <ng-template pTemplate="header">
+        <tr class="text-center">
+          <th>Imagen</th>
+          <th>Nombre</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+          <th>Añadido el...</th>
+        </tr>
+      </ng-template>
+      <ng-template let-rowData pTemplate="body" class="text-center">
+        <tr>
+          <td><img class="w-[5rem]" [src]="rowData.image" alt="carrito-img"></td>
+          <td>{{ rowData.name }}</td>
+          <td>{{ rowData.quantity }}</td>
+          <td>{{ rowData.price | currency }}</td>
+          <td>{{ rowData.buy_date | date:'dd/MM/yyyy' }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div class="col-span-2 p-4 bg-[#f7e7ce] ">
+    <h2 class="text-xl font-semibold mb-4">Resumen del Carrito</h2>
+    <div class="bg-black w-full h-2"></div>
+    <div class="flex flex-col items-center mt-8 gap-3">
+      <p>Total a Dolar: <span class="font-bold text-lg">{{ calcTotal() | currency }}</span></p>
+      <p>Total a Bolívar: <span class="font-bold text-base">Bs.{{ calcTotal()*dolar }}</span></p>
+      <p>Dolar hoy: <span> {{ dolar | currency }} </span></p>
+      <p>Total de artículos: {{ items.length }}</p>
+      <div class=" mt-4">
+        <p-button pButton label="Realizar Pago" class="w-40" />
+      </div>
+    </div>
+    <div class="flex items-center justify-center h-[23rem] w-full">
+      <i class="pi pi-shopping-bag" style="font-size: 12rem; color: rgba(218, 198, 166, 0.6);"></i>
+    </div>
+  </div>
+</div>
