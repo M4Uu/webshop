@@ -4,6 +4,15 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import '@angular/cdk/bidi';
 
+import { CommonEngine } from '@angular/ssr/node'
+import { render } from '@netlify/angular-runtime/common-engine'
+
+const commonEngine = new CommonEngine()
+
+export async function netlifyCommonEngineHandler(request: Request, context: any): Promise<Response> {
+  return await render(commonEngine)
+}
+
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
   const server = express();
