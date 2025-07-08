@@ -37,7 +37,6 @@ export class NavbarComponent {
   private APIUsers = inject(UsersService);
   private messageService = inject(MessageService);
   private authService = inject(AuthService);
-  private document = inject(DOCUMENT);
 
   public menuUsers: any;
   public isMobileMenuOpen = false;
@@ -53,17 +52,9 @@ export class NavbarComponent {
     { name: 'Contacto', href: 'contact' },
   ];
 
-  private deleteCookie(name: string) {
-    this.document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-  }
 
   closeSesion() {
     this.authService.clearSession();
-<<<<<<< HEAD
-=======
-    this.deleteCookie('access_token');
-    this.deleteCookie('refresh_token');
->>>>>>> 1bbe5dd10cc5981a0846acb2c6dd285b25772cfb
     this.APIUsers.logoutUser().subscribe({
       next: (response) => {
         if (response.statusCode = 200) {
