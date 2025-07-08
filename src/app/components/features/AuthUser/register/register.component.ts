@@ -51,19 +51,12 @@ export class RegisterComponent {
       Validators.required,
       nameValidator()
     ]],
-    'localidad': ['', [
-      // Validators.required,
-    ]],
     'credencial': ['', [Validators.required]],
     'correo': ['', [
       Validators.required,
       emailFormatValidator()
     ]],
-    'imagen_url': ['', [
-      // Validators.minLength(8),
-    ]],
     'confirm_credencial': ['', [Validators.required]],
-    // 'checkbox': [true, [Validators.required, Validators.requiredTrue]]
   }, { validator: passwordMatchValidator })
 
 
