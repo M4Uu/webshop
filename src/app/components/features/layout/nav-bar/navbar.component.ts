@@ -1,7 +1,7 @@
 import { Component, inject, Injectable, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterModule } from '@angular/router';
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { LoginComponent } from '@features/AuthUser/login/login.component';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
@@ -39,7 +39,6 @@ export class NavbarComponent {
   private messageService = inject(MessageService);
   private cookieService = inject(CookieService);
   private authService = inject(AuthService);
-  private document = inject(DOCUMENT);
 
   public menuUsers: any;
   public isMobileMenuOpen = false;
@@ -55,14 +54,9 @@ export class NavbarComponent {
     { name: 'Contacto', href: 'contact' },
   ];
 
-  private deleteCookie(name: string) {
-    this.document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-  }
-
   closeSesion() {
     this.authService.clearSession();
-    this.deleteCookie('access_token');
-    this.deleteCookie('refresh_token');
+    this.cookieService.deleteAll();
     this.APIUsers.logoutUser().subscribe({
       next: (response) => {
         if (response.statusCode = 200) {
