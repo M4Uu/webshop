@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { R } from '@app/global/schema/schema.response';
 import { environment } from '@env/environment';
 import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,6 @@ import { CookieService } from 'ngx-cookie-service';
 export class UsersService {
   private http = inject(HttpClient);
   private apiUrl = environment.api.apiUrlUsers;
-  private cookieService = inject(CookieService);
 
   loginUser(user: any): Observable<R> {
     return this.http.post<R>(this.apiUrl.login, user, { withCredentials: true })
@@ -32,7 +32,8 @@ export class UsersService {
   }
 
   logoutUser(): Observable<any> {
-    this.cookieService.deleteAll();
+    inject(AuthService).clearSession();
+    inject(CookieService).deleteAll();
     return this.http.get<any>(this.apiUrl.logout, { withCredentials: true })
   }
 

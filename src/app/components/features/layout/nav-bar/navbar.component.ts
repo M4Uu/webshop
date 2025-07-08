@@ -1,12 +1,13 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Injectable, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from '@features/AuthUser/login/login.component';
 import { ButtonModule } from 'primeng/button';
-import { AuthService } from '@app/core/services/auth/auth.service';
 import { DialogModule } from 'primeng/dialog';
 import { RegisterComponent } from '../../AuthUser/register/register.component';
+import { UsersService } from '@app/core/services/api-users/users.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-navbar',
@@ -23,11 +24,17 @@ import { RegisterComponent } from '../../AuthUser/register/register.component';
     RegisterComponent
   ]
 })
+
+@Injectable({
+  providedIn: 'root'
+})
+
 export class NavbarComponent {
   @Input() user: any;
 
   private router = inject(Router);
-  private authService = inject(AuthService)
+  private APIUsers = inject(UsersService);
+  private messageService = inject(MessageService);
 
   public menuUsers: any;
   public isMobileMenuOpen = false;
@@ -44,8 +51,15 @@ export class NavbarComponent {
   ];
 
   closeSesion() {
-    this.authService.clearSession();
-    this.router.navigate(['/'])
+    this.APIUsers.logoutUser().subscribe({
+      next: (response) => {
+        if (response.statusCode = 200) {
+          this.messageService.add({ severity: 'contrast', summary: 'Formulario vacío', detail: 'Sesión cerrada exitosamente.', life: 3000 });
+        }
+      },
+      error: (err) => console.error('Error al cerrar sesión:', err),
+      complete: () => this.router.navigate(['/'])
+    });
   }
 
   navigatePerfil() {
