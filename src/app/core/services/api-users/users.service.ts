@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { UserInfo } from '@core/models/user.interface';
 import { R } from '@app/global/schema/schema.response';
 import { environment } from '@env/environment';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,7 @@ export class UsersService {
   }
 
   logoutUser(): Observable<any> {
+    inject(CookieService).deleteAll();
     return this.http.get<UserInfo>(this.apiUrl.logout, { withCredentials: true })
   }
 
