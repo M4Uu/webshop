@@ -27,7 +27,7 @@ export class AuthService {
     }
   }
 
-  loadSessionProtected(): Observable<boolean> { // Indicamos que devuelve un Observable<boolean>
+  loadSessionProtected(): Observable<boolean> {
     return this.APIUser.protectedUser().pipe(
       map(response => {
         if (response.payload) {
