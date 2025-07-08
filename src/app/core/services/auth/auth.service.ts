@@ -1,7 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { UsersService } from '../api-users/users.service';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, take } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -18,12 +18,7 @@ export class AuthService {
 
   loadSessionStorage(): any {
     if (isPlatformBrowser(this.platformId)) {
-      const user = localStorage.getItem(this.SESSION_KEY);
-      if (user) {
-        return JSON.parse(user);
-      } else {
-        return false;
-      }
+      return !!localStorage.getItem(this.SESSION_KEY);
     }
   }
 
@@ -33,15 +28,11 @@ export class AuthService {
         if (response.payload) {
           this.saveSession(response.payload);
           return true;
-        } else {
-          console.log(`${response.status.statusCode} - ${response.status.message}`);
-          return false;
         }
+        return false;
       }),
-      catchError(err => {
-        console.error(err);
-        return of(false);
-      })
+      catchError(() => of(false)),
+      take(1)
     );
   }
 

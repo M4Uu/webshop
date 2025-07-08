@@ -8,7 +8,6 @@ import { DialogModule } from 'primeng/dialog';
 import { RegisterComponent } from '../../AuthUser/register/register.component';
 import { UsersService } from '@app/core/services/api-users/users.service';
 import { MessageService } from 'primeng/api';
-import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from '@app/core/services/auth/auth.service';
 
 @Component({
@@ -37,7 +36,6 @@ export class NavbarComponent {
   private router = inject(Router);
   private APIUsers = inject(UsersService);
   private messageService = inject(MessageService);
-  private cookieService = inject(CookieService);
   private authService = inject(AuthService);
 
   public menuUsers: any;
@@ -56,12 +54,10 @@ export class NavbarComponent {
 
   closeSesion() {
     this.authService.clearSession();
-    this.cookieService.deleteAll();
     this.APIUsers.logoutUser().subscribe({
       next: (response) => {
         if (response.statusCode = 200) {
           this.messageService.add({ severity: 'contrast', summary: 'Cierre de Sesión', detail: 'Sesión cerrada exitosamente.', life: 3000 });
-
         }
       },
       error: (err) => this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Error al cerrar sesión.', life: 3000 }),

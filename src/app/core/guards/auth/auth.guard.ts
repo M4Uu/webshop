@@ -12,37 +12,48 @@ export const authGuard: CanActivateFn = () => {
 
   if (authService.loadSessionStorage()) {
     return true;
-  } else {
-    return authService.loadSessionProtected().pipe(
-      map(isAuthenticated => {
-        if (isAuthenticated) {
-          messageService.add({
-            severity: 'contrast',
-            summary: 'Inicio de Sesión',
-            detail: 'Has iniciado sesión satisfactoriamente.',
-            life: 1000
-          });
-          return true;
-        } else {
-          messageService.add({
-            severity: 'contrast',
-            summary: 'Sesión Inválida',
-            detail: 'Tu sesión no es válida o ha caducado. Por favor, inicia sesión.',
-            life: 5000
-          });
-          return router.createUrlTree(['/']);
-        }
-      }),
-      catchError(error => {
-        console.error('AuthGuard: Error during API validation:', error);
-        messageService.add({
-          severity: 'contrast',
-          summary: 'Error de Conexión',
-          detail: 'No se pudo verificar tu sesión. Intenta de nuevo más tarde.',
-          life: 7000
-        });
-        return of(router.createUrlTree(['/'])); // Redirige al login en caso de error
-      })
-    );
   }
+  return authService.loadSessionProtected().pipe(
+    map(isAuthenticated => {
+      if (isAuthenticated) {
+        hanldeValidSession(messageService);
+        return true;
+      } else {
+        handleInvalidSession(messageService);
+        return router.createUrlTree(['/']);
+      }
+    }),
+    catchError(error => {
+      console.error('AuthGuard: Error during API validation:', error);
+      handleConnectionError(messageService);
+      return of(router.createUrlTree(['/']));
+    })
+  );
 };
+
+const hanldeValidSession = (messageService: MessageService) => {
+  messageService.add({
+    severity: 'contrast',
+    summary: 'Inicio de Sesión',
+    detail: 'Has iniciado sesión satisfactoriamente.',
+    life: 1000
+  });
+}
+
+const handleInvalidSession = (messageService: MessageService) => {
+  messageService.add({
+    severity: 'contrast',
+    summary: 'Sesión Inválida',
+    detail: 'Tu sesión no es válida o ha caducado. Por favor, inicia sesión.',
+    life: 5000
+  });
+}
+
+const handleConnectionError = (messageService: MessageService) => {
+  messageService.add({
+    severity: 'contrast',
+    summary: 'Error de Conexión',
+    detail: 'No se pudo verificar tu sesión. Intenta de nuevo más tarde.',
+    life: 7000
+  });
+}
