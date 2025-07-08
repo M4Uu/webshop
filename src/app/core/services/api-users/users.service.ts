@@ -12,6 +12,8 @@ import { AuthService } from '../auth/auth.service';
 export class UsersService {
   private http = inject(HttpClient);
   private apiUrl = environment.api.apiUrlUsers;
+  private cookieService = inject(CookieService);
+  private authService = inject(AuthService);
 
   loginUser(user: any): Observable<R> {
     return this.http.post<R>(this.apiUrl.login, user, { withCredentials: true })
@@ -32,8 +34,8 @@ export class UsersService {
   }
 
   logoutUser(): Observable<any> {
-    inject(AuthService).clearSession();
-    inject(CookieService).deleteAll();
+    this.authService.clearSession();
+    this.cookieService.deleteAll();
     return this.http.get<any>(this.apiUrl.logout, { withCredentials: true })
   }
 

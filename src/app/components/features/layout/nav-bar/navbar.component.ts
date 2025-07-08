@@ -54,10 +54,10 @@ export class NavbarComponent {
     this.APIUsers.logoutUser().subscribe({
       next: (response) => {
         if (response.statusCode = 200) {
-          this.messageService.add({ severity: 'contrast', summary: 'Formulario vacío', detail: 'Sesión cerrada exitosamente.', life: 3000 });
+          this.messageService.add({ severity: 'contrast', summary: 'Cierre de Sesión', detail: 'Sesión cerrada exitosamente.', life: 3000 });
         }
       },
-      error: (err) => console.error('Error al cerrar sesión:', err),
+      error: (err) => this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Error al cerrar sesión.', life: 3000 }),
       complete: () => this.router.navigate(['/'])
     });
   }
