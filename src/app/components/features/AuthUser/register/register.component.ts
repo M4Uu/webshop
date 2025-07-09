@@ -68,6 +68,7 @@ export class RegisterComponent {
 
 
   onSubmit() {
+    this.registerForm.markAllAsTouched();
     if (this.registerForm.invalid) {
       this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Formulario sin contenido.', life: 3000 });
     } else {
