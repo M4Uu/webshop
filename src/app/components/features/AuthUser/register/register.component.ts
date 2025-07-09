@@ -51,7 +51,7 @@ export class RegisterComponent {
       Validators.required,
       // nameValidator()
     ]],
-    'localidad': ['none', [
+    'localidad': ['', [
       // Validators.required,
     ]],
     'credencial': ['', [Validators.required]],
