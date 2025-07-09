@@ -70,7 +70,6 @@ export class RegisterComponent {
   onSubmit() {
     this.registerForm.markAllAsTouched();
     if (this.registerForm.valid) {
-      this.registerForm.value.cedula = Number(this.registerForm.value.cedula);
       delete this.registerForm.value.confirm_credencial;
       this.APIUsers.registerUser(this.registerForm.value).subscribe({
         next: response => {
