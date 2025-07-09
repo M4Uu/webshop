@@ -41,30 +41,25 @@ export class RegisterComponent {
   registerForm = this.formBuilder.group({
     'cedula': ['', [
       Validators.required,
-      // numberValidator()
+      numberValidator()
     ]],
     'nombres': ['', [
       Validators.required,
-      // nameValidator()
+      nameValidator()
     ]],
     'nombre_usuario': ['', [
       Validators.required,
-      // nameValidator()
+      nameValidator()
     ]],
-    'localidad': ['', [
-      // Validators.required,
-    ]],
+    'localidad': ['', []],
     'credencial': ['', [Validators.required]],
     'correo': ['', [
       Validators.required,
-      // emailFormatValidator()
+      emailFormatValidator()
     ]],
-    'imagen_url': ['', [
-      // Validators.minLength(8),
-    ]],
+    'imagen_url': ['', []],
     'confirm_credencial': ['', [Validators.required]],
-    // 'checkbox': [true, [Validators.required, Validators.requiredTrue]]
-  })
+  }, { validator: passwordMatchValidator })
 
 
   onSubmit() {
