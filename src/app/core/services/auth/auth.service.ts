@@ -18,7 +18,12 @@ export class AuthService {
 
   loadSessionStorage(): any {
     if (isPlatformBrowser(this.platformId)) {
-      return !!localStorage.getItem(this.SESSION_KEY);
+      const user = localStorage.getItem(this.SESSION_KEY);
+      if (user) {
+        return JSON.parse(user);
+      } else {
+        return null;
+      }
     }
   }
 
