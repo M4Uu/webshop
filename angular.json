@@ -10,7 +10,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "test-pnpm": {
+    "webshop": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -24,7 +24,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/test-pnpm",
+            "outputPath": "dist/webshop",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -92,10 +92,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "test-pnpm:build:production"
+              "buildTarget": "webshop:build:production"
             },
             "development": {
-              "buildTarget": "test-pnpm:build:development"
+              "buildTarget": "webshop:build:development"
             }
           },
           "defaultConfiguration": "development"
