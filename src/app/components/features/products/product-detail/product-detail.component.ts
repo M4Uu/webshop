@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { TestProductsService } from '@app/core/services/test-products.service';
 import { ButtonModule } from 'primeng/button';
 import { RatingModule } from 'primeng/rating';
 import { TableModule } from 'primeng/table';
@@ -15,7 +17,10 @@ import { TableModule } from 'primeng/table';
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
 })
-export class ProductDetailComponent {
+export class ProductDetailComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  private productService = inject(TestProductsService)
+  public items: any = [];
   public value = 3;
   public medidas = [
     { name: 'Longitud 1', value: 10 },
@@ -40,4 +45,9 @@ export class ProductDetailComponent {
     { name: 'Material 7', descripcion: 'Descripción del material 7' },
     { name: 'Material 8', descripcion: 'Descripción del material 8' },
   ];
+
+  ngOnInit() {
+    const index = Number(this.route.snapshot.paramMap.get('id'));
+    this.items = this.productService.get()[index];
+  }
 }

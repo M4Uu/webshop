@@ -4,7 +4,7 @@ import { PageComponent } from './page/page.component';
 import { RouterModule, Routes } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
-
+import { DrawerModule } from 'primeng/drawer';
 
 const routes: Routes = [
   {
@@ -23,6 +23,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     TableModule,
     ButtonModule,
+    DrawerModule
   ]
 })
 export class CarritoModule { }

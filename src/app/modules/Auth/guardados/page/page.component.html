@@ -1,1 +1,72 @@
-<p>page works!</p>
+<div class="p-5">
+  <div class="flex items-center justify-center py-5">
+    <h3 class="text-4xl font-bold">Elementos Guardados</h3>
+  </div>
+
+  <div class="relative grid grid-cols-2 gap-3">
+    <div class="grid grid-cols-12 gap-3">
+      @for (item of items; track $index) {
+      <div [tabindex]="$index" (click)="showDrawer($index)" (keyup.esc)="visible = false"
+        class="shadow-lg col-span-12 h-[19rem] rounded-md overflow-hidden transition-transform transform hover:scale-105 cursor-pointer">
+        <div class="flex flex-col h-full w-full">
+          <div class="bg-[#e9e9e9] rounded-t flex flex-col justify-center items-center h-52 w-full">
+            <p-rating [style]="{'--p-rating-icon-size': '13px'}" class="pl-5 self-start" [(ngModel)]="item.calificacion"
+              [readonly]="true" />
+            <img [src]="item.imagen_url" alt="{{ item.nombre }}" class="w-full h-40 object-contain ">
+          </div>
+          <div class="grid grid-cols-12 text-gray-600 m-4">
+            <div class="col-span-10">
+              <h3 class="text-medium font-semibold">{{ item.nombre }}</h3>
+              <p class="text-sm">{{ getTextUntilFirstDot(item.descripcion) }}.</p>
+            </div>
+            <div class="col-span-2 text-center">
+              <span class="text-xs font-bold text-right">{{ item.categoria }}</span>
+              <span class="text-xs font-bold mt-2">{{ item.precio | currency }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+    <div class="bg-[#e9e9e9] rounded-xl shadow-xl fixed w-[40rem] h-[78vh] left-[57.5%]"
+      [ngClass]="{ 'top-[5rem] h-[88vh]': !isAtTop }">
+      <div class="flex items-center justify-between p-4">
+        <div class="mb-6">
+          <h4 class="text-2xl font-semibold mb-2">Filtros</h4>
+          <p class="text-gray-600 mb-4">Utiliza los siguientes filtros para refinar tu búsqueda de elementos guardados.
+          </p>
+          <div class="grid grid-cols-3 gap-3">
+            <div>
+              <p-floatlabel variant="on">
+                <p-multiselect [options]="options.categorias" [(ngModel)]=" filters.categorias" optionLabel="nombre"
+                  inputId="categorias" class="w-full" />
+                <label for="categorias">Categorías</label>
+              </p-floatlabel>
+            </div>
+            <div>
+              <p-floatlabel variant="on">
+                <p-multiselect [options]="options.etiquetas" [(ngModel)]="filters.etiquetas" optionLabel="nombre"
+                  inputId="etiquetas" class="w-full" />
+                <label for="etiquetas">Etiquetas</label>
+              </p-floatlabel>
+            </div>
+            <div>
+              <p-floatlabel variant="on">
+                <input pInputText [(ngModel)]="filters.nombre" id="nombre" type="text" class="w-full" />
+                <label for="nombre">Buscar por nombre</label>
+              </p-floatlabel>
+            </div>
+          </div>
+          <div class="bg-white h-full">
+            <!-- Revisar que contenido colocar aqui -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-drawer (onHide)="hideDrawer()" [(visible)]="visible" [modal]="true" position="right" [style]="{width: '70vw'}"
+  [baseZIndex]="10000" [closeOnEscape]="true">
+  <router-outlet />
+</p-drawer>

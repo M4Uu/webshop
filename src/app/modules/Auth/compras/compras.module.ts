@@ -1,22 +1,38 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PageComponent } from './page/page.component';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, RouterOutlet, Routes } from '@angular/router';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { DrawerModule } from 'primeng/drawer';
 
-const routes: Routes = [
+
+export const routes: Routes = [
   {
     path: '',
     title: 'Historial de Compras',
-    component: PageComponent
-  }
+    component: PageComponent,
+    children: [
+      {
+        path: 'producto/:id',
+        loadComponent: () => import('@features/products/product-detail/product-detail.component').then(m => m.ProductDetailComponent),
+      },
+    ]
+  },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    PageComponent
+  ],
   imports: [
     CommonModule,
-    PageComponent,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    TableModule,
+    ButtonModule,
+    DrawerModule,
+    RouterOutlet
   ]
 })
 export class ComprasModule { }

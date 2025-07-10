@@ -1,5 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
+import { TestProductsService } from '@app/core/services/test-products.service';
 
 
 @Component({
@@ -9,52 +11,54 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './page.component.scss'
 })
 export class PageComponent implements OnInit {
-  private http = inject(HttpClient)
+  private http = inject(HttpClient);
+  private messageService = inject(MessageService);
 
-  public items: any[] = [];
+  public visible: boolean = false;
+  public items: any[] = inject(TestProductsService).get();
   public dolar: any;
-  private jewelryImages = [
-    'https://png.pngtree.com/png-vector/20240801/ourmid/pngtree-design-ring-png-image_13326726.png',
-    'https://png.pngtree.com/png-vector/20240801/ourmid/pngtree-design-ring-png-image_13326726.png',
-    'https://png.pngtree.com/png-vector/20240801/ourmid/pngtree-design-ring-png-image_13326726.png',
-    'https://png.pngtree.com/png-vector/20240801/ourmid/pngtree-design-ring-png-image_13326726.png',
-    'https://png.pngtree.com/png-vector/20240801/ourmid/pngtree-design-ring-png-image_13326726.png',
-    'https://png.pngtree.com/png-vector/20240801/ourmid/pngtree-design-ring-png-image_13326726.png',
-    'https://png.pngtree.com/png-vector/20240801/ourmid/pngtree-design-ring-png-image_13326726.png',
-    'https://png.pngtree.com/png-vector/20240801/ourmid/pngtree-design-ring-png-image_13326726.png',
-  ];
-
-  private jewelryNames = [
-    'Diamond Ring', 'Gold Necklace', 'Sapphire Earrings',
-    'Pearl Bracelet', 'Ruby Pendant', 'Emerald Brooch',
-    'Platinum Watch', 'Topaz Hairpin'
-  ];
-
-  calcTotal() {
-    return this.items.reduce((sum, item) => sum + item.price, 0);
-  }
-
-  getDollarRate() {
-    return this.http.get('https://api.exchangerate-api.com/v4/latest/USD');
-  }
 
   ngOnInit(): void {
     this.getDollarRate().subscribe({
-      next: (value: any) => {
-        this.dolar = value.rates?.VES;
-      },
-      error: (reason) => console.log(reason)
+      next: (value: any) => this.dolar = value.rates?.VES,
+      error: (reason) => {
+        console.log(reason)
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al consultar el precio del dolar.', life: 3000 });
+      }
     })
-    for (let index = 0; index < 8; index++) {
-      this.items.push({
-        id: index,
-        name: this.jewelryNames[index] || `Jewelry Item ${index + 1}`,
-        image: this.jewelryImages[index],
-        price: (index + 1) * 10,
-        quantity: 1,
-        buy_date: Date()
-      });
+  }
+
+  calcTotal = () => this.items.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+  calcTotalDolar = () => this.items.reduce((sum, item) => sum + (item.precio * item.cantidad), 0) * this.dolar;
+  calcArticles = () => this.items.reduce((sum, item) => sum + item.cantidad, 0);
+  getDollarRate = () => this.http.get('https://api.exchangerate-api.com/v4/latest/USD');
+
+  addItem(item: any) {
+    if (item.cantidad < item.existencias) {
+      item.cantidad++;
+    } else {
+      this.messageService.add({ severity: 'warn', summary: 'Alerta', detail: 'Máximo alcanzado', life: 3000 });
     }
   }
+
+  removeItem(item: any) {
+    if (item.cantidad > 1) {
+      item.cantidad--;
+    } else {
+      this.messageService.add({ severity: 'warn', summary: 'Alerta', detail: 'Mínimo alcanzado', life: 3000 });
+    }
+  }
+
+  removeItemFromCart(item: any) {
+    const index = this.items.indexOf(item);
+    if (index > -1) {
+      this.items.splice(index, 1);
+      this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Artículo eliminado del carrito', life: 3000 });
+    } else {
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Artículo no encontrado en el carrito', life: 3000 });
+    }
+  }
+
+
 }
 
