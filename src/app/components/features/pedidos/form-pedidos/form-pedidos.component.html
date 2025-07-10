@@ -1,0 +1,39 @@
+<div class="px-5">
+  <div class="flex items-center justify-between mb-4">
+    <h4 class="text-2xl font-bold">{{ pedido ? 'Editar Pedido' : 'Nuevo Pedido' }}</h4>
+    <button *ngIf="pedido" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"
+      (click)="onEdit()" aria-label="Editar"></button>
+  </div>
+
+  <form [formGroup]="pedidoForm" (ngSubmit)="onSubmit()" *ngIf="!pedido; else viewMode">
+    <div class="p-fluid flex flex-col gap-4">
+      <div class="field flex flex-col gap-2">
+        <label for="nombre">Nombre del Encargo</label>
+        <input pInputText id="nombre" formControlName="nombre" />
+        <small *ngIf="pedidoForm.get('nombre')?.invalid && pedidoForm.get('nombre')?.touched" class="p-error">
+          El nombre del pedido es requerido.
+        </small>
+      </div>
+      <div class="field flex flex-col gap-2">
+        <label for="nombre">Descripción del Encargo</label>
+        <textarea rows="5" class="border border-gray-300 hover:border-gray-400 rounded-lg" cols="30" pTextarea
+          formControlName="descripcion"></textarea>
+
+        <small *ngIf="pedidoForm.get('descripcion')?.invalid && pedidoForm.get('descripcion')?.touched" class="p-error">
+          La descripcion del pedido es requerida.
+        </small>
+      </div>
+
+      <p-button pButton type="submit" label="Enviar" [disabled]="pedidoForm.invalid"></p-button>
+    </div>
+  </form>
+
+  <ng-template #viewMode>
+    <div class="p-fluid">
+      <div class="field">
+        <label for="">Cliente:</label>
+        <div>{{ pedido?.cliente || '-' }}</div>
+      </div>
+    </div>
+  </ng-template>
+</div>

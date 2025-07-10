@@ -50,4 +50,21 @@ export class TestProductsService {
     }
     return items;
   }
+
+  getForm() {
+    const items: any[] = [];
+    for (let index = 0; index < 8; index++) {
+      items.push({
+        id: index,
+        nombre: this.jewelryNames[index] || `Jewelry Item ${index + 1}`,
+        imagen_url: 'https://png.pngtree.com/png-vector/20240801/ourmid/pngtree-design-ring-png-image_13326726.png',
+        descripcion: this.descriptions[index] || `Description for item ${index + 1}`,
+        cantidad: 1,
+        fecha_pedido: Date(),
+        fecha_entrega: Date(),
+        estado: this.estado[Math.floor(Math.random() * this.estado.length)],
+      });
+    }
+    return items;
+  }
 }

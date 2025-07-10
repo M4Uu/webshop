@@ -2,10 +2,10 @@
   <div class="flex items-center justify-center pt-5">
     <h3 class="text-4xl font-bold">Historial de Compras</h3>
   </div>
-  <p-table [paginator]="items.length >= 5 ? true : false" size="small" [rows]="5" [value]="items" class="w-full pl-2">
+  <p-table [paginator]="items.length >= 5 ? true : false" size="large" [rows]="8" [value]="items" class="w-full pl-2">
     <ng-template pTemplate="header">
       <tr class="text-center">
-        <th>Imagen</th>
+        <!-- <th>Imagen</th> -->
         <th>Nombre</th>
         <th>Unidades</th>
         <th>Precio</th>
@@ -16,7 +16,7 @@
     </ng-template>
     <ng-template let-rowData let-i="rowIndex" pTemplate="body" class="text-center">
       <tr class="hover:bg-gray-100 transition-all duration-300">
-        <td><img class="w-[5rem]" [src]="rowData.imagen_url" alt="carrito-img"></td>
+        <!-- <td><img class="w-[5rem]" [src]="rowData.imagen_url" alt="carrito-img"></td> -->
         <td>{{ rowData.nombre }}</td>
         <td>{{ rowData.cantidad }}</td>
         <td>{{ rowData.precio | currency }}</td>
