@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TestProductsService } from '@app/core/services/test-products.service';
 
 @Component({
   selector: 'app-page',
@@ -7,30 +9,28 @@ import { Component } from '@angular/core';
   styleUrl: './page.component.scss'
 })
 export class PageComponent {
+  private route = inject(ActivatedRoute)
+  private router = inject(Router);
+
   public visible: boolean = false;
   public pedido: any;
-  public pedidos: any[] = [
-    { id: 1, cliente: 'Cliente A', total: 100, fecha: '2023-10-01', estado: 'Sin recoger' },
-    { id: 2, cliente: 'Cliente B', total: 200, fecha: '2023-10-02', estado: 'Sin recoger' },
-    { id: 3, cliente: 'Cliente C', total: 300, fecha: '2023-10-03', estado: 'Sin recoger' },
-  ];
+  public pedidos: any[] = inject(TestProductsService).getForm();
   public createPedido() {
-    // Aquí puedes implementar la lógica para crear un nuevo pedido
-    console.log('Crear nuevo pedido');
-    this.pedido = null;
     this.visible = true;
+    this.router.navigate(['detalle', 'create'], { relativeTo: this.route });
   }
 
   deletePedido(pedido: any) {
-    // Aquí puedes implementar la lógica para eliminar un pedido
-    console.log('Eliminar pedido', pedido);
     this.pedidos = this.pedidos.filter(p => p.id !== pedido.id);
   }
 
-  showPedidoDetails(pedido: any) {
-    // Aquí puedes implementar la lógica para mostrar los detalles de un pedido
-    console.log('Detalles del pedido', pedido);
-    this.pedido = pedido;
+  showPedidoDetails(idPedido: any) {
+    this.router.navigate(['pedido', idPedido], { relativeTo: this.route });
     this.visible = true;
+  }
+
+  public hideDrawer() {
+    this.visible = false;
+    this.router.navigate(['.'], { relativeTo: this.route });
   }
 }

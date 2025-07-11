@@ -10,10 +10,14 @@ import { TestProductsService } from '@app/core/services/test-products.service';
   styleUrl: './page.component.scss',
 })
 export class PageComponent {
-  public items: any[] = inject(TestProductsService).get();
+  private productsService = inject(TestProductsService);
+  public items: any[] = this.productsService.get();
   public value: number = 3;
   public visible: boolean = false;
   public visibleFilter: boolean = false;
+  public selectCategoria: any;
+  public categoria = this.productsService.categorias();
+
   private router = inject(Router);
   private route = inject(ActivatedRoute);
 
@@ -27,17 +31,6 @@ export class PageComponent {
     this.router.navigate(['.'], { relativeTo: this.route });
   }
 
-  public selectCategoria: any;
-  public categoria = [
-    { name: 'Anillos', code: 'AN' },
-    { name: 'Collares', code: 'CO' },
-    { name: 'Pendientes', code: 'PE' },
-    { name: 'Pulseras', code: 'PU' },
-    { name: 'Relojes', code: 'RE' },
-    { name: 'Broches', code: 'BR' },
-    { name: 'Diademas', code: 'DI' },
-    { name: 'Anillos de compromiso', code: 'AC' }
-  ]
 
   getTextUntilFirstDot = (text: string): string => {
     return text.split('.')[0];

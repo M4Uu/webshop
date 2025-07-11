@@ -36,7 +36,7 @@ export const routes: Routes = [
     FormsModule,
     InputTextModule,
     MultiSelectModule,
-    FloatLabelModule
+    FloatLabelModule,
   ]
 })
 export class GuardadosModule { }

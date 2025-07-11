@@ -1,4 +1,4 @@
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TestProductsService } from '@app/core/services/test-products.service';
 
@@ -8,21 +8,22 @@ import { TestProductsService } from '@app/core/services/test-products.service';
   templateUrl: './page.component.html',
   styleUrl: './page.component.scss'
 })
-export class PageComponent {
-  public items = inject(TestProductsService).get();
+export class PageComponent implements OnInit {
+  private productsService = inject(TestProductsService);
+  public items = this.productsService.get();
   private route = inject(ActivatedRoute)
   private router = inject(Router);
   public visible: boolean = false;
 
-  public options = {
-    categorias: [],
-    etiquetas: [],
-  }
+  public categorias = this.productsService.categorias();
+  public selectedCategoria: any;
 
   public filters = {
     categorias: null,
-    etiquetas: null,
     nombre: null,
+  }
+
+  ngOnInit(): void {
   }
 
 
