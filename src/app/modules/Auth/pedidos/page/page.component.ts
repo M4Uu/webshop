@@ -25,7 +25,7 @@ export class PageComponent {
   }
 
   showPedidoDetails(idPedido: any) {
-    this.router.navigate(['pedido', idPedido], { relativeTo: this.route });
+    this.router.navigate(['detalle', idPedido], { relativeTo: this.route });
     this.visible = true;
   }
 
