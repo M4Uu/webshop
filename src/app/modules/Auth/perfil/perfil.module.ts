@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PageComponent } from './page/page.component';
 import { RouterModule, Routes } from '@angular/router';
+import { InputTextModule } from 'primeng/inputtext';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -12,11 +14,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    PageComponent
+  ],
   imports: [
     CommonModule,
-    PageComponent,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    InputTextModule,
+    FormsModule
   ]
 })
 export class PerfilModule { }
