@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { TestProductsService } from '@app/core/services/test-products.service';
+import { TestProductsService } from '@app/core/services/customs/test-products.service';
 
 
 @Component({

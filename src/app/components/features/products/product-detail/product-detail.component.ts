@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { TestProductsService } from '@app/core/services/test-products.service';
+import { TestProductsService } from '@app/core/services/customs/test-products.service';
 import { ButtonModule } from 'primeng/button';
 import { RatingModule } from 'primeng/rating';
 import { TableModule } from 'primeng/table';

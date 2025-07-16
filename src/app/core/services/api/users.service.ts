@@ -11,17 +11,9 @@ export class UsersService {
   private http = inject(HttpClient);
   private apiUrl = environment.api.apiUrlUsers;
 
-
+  // Viajan con cookies
   loginUser(user: any): Observable<R> {
     return this.http.post<R>(this.apiUrl.login, user, { withCredentials: true })
-  }
-
-  registerUser(input: any): Observable<any> {
-    return this.http.post(this.apiUrl.register, input, { withCredentials: true })
-  }
-
-  uploadUser(input: any): Observable<any> {
-    return this.http.patch<R>(this.apiUrl.upload, input, { withCredentials: true })
   }
 
   protectedUser(): Observable<{ status: any; payload: any }> {
@@ -33,5 +25,25 @@ export class UsersService {
   logoutUser(): Observable<any> {
     return this.http.get<any>(this.apiUrl.logout, { withCredentials: true })
   }
+
+  // Viajan sin cookies
+  getMovil(cedula: any): Observable<any> {
+    const user = { cedula: cedula };
+    return this.http.post<any>(this.apiUrl.getmovil, user, { withCredentials: false })
+  }
+
+  updateMovil(user: any): Observable<any> {
+    return this.http.patch<any>(this.apiUrl.updatemovil, user, { withCredentials: false })
+  }
+
+  registerUser(input: any): Observable<any> {
+    return this.http.post(this.apiUrl.register, input, { withCredentials: false })
+  }
+
+  updateUser(input: any): Observable<any> {
+    return this.http.patch<any>(this.apiUrl.update, input, { withCredentials: false })
+  }
+
+
 
 }

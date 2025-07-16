@@ -1,13 +1,13 @@
 import { inject, Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { UsersService } from "@core/services/api-users/users.service";
+import { UsersService } from "@app/core/services/api/users.service";
 import { UserActions } from "../actions/user.action";
 import { catchError, map, mergeMap, of, tap } from "rxjs";
 import { Store } from "@ngrx/store";
 import { Router } from "@angular/router";
 import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { R } from "@global/schema/schema.response";
-import { AuthService } from "@app/core/services/auth/auth.service";
+import { AuthService } from "@app/core/services/customs/auth.service";
 
 @Injectable()
 export class UserEffects {

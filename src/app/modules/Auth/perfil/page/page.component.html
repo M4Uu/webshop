@@ -1,38 +1,70 @@
 <div class="p-10">
   <div class="mb-2 flex flex-col gap-3">
     <h1 class="font-bold text-2xl">Perfil de Usuario</h1>
-    <h3 class="font-bold text-xl">Datos del Perfil <i class="pi pi-pencil text-indigo-400 cursor-pointer" [tabindex]="0"
-        (click)="changeEditar()" (keyup.esc)="editar"></i></h3>
+    <h3 class="font-bold text-xl">Datos del Perfil
+      <i *ngIf="!editar" class="pi pi-pencil text-indigo-400 cursor-pointer" [tabindex]="0" (click)="changeEditar()"
+        (keyup.esc)="editar"></i>
+      <i *ngIf="editar" class="pi pi-save text-green-400 cursor-pointer" [tabindex]="0" (click)="changeGuardar()"
+        (keyup.esc)="editar"></i>
+    </h3>
   </div>
-  <div class="grid grid-cols-2 gap-3">
+  <form [formGroup]="userForm" class="grid grid-cols-2 gap-3 mb-3">
     <div class=" fluid flex flex-col gap-3">
       <div class="field flex flex-col gap-1">
         <label class="text-lg" for="">Nombres</label>
-        <input [readOnly]="!editar" pInputText type="text" [(ngModel)]="user.nombres">
-      </div>
-      <div class="field flex flex-col gap-1">
-        <label class="text-lg" for="">Cédula de Identidad</label>
-        <input [readOnly]="!editar" pInputText type="text" [(ngModel)]="user.cedula">
+        <input [readOnly]="!editar" pInputText type="text" formControlName="nombres">
       </div>
       <div class="field flex flex-col gap-1">
         <label class="text-lg" for="">Nombre de Usuario</label>
-        <input [readOnly]="!editar" pInputText type="text" [(ngModel)]="user.nombre_usuario">
+        <input [readOnly]="!editar" pInputText type="text" formControlName="nombre_usuario">
       </div>
       <div class="field flex flex-col gap-1">
         <label class="text-lg" for="">Localidad</label>
-        <input [readOnly]="!editar" pInputText type="text" [(ngModel)]="user.localidad">
+        <input [readOnly]="!editar" pInputText type="text" formControlName="localidad">
       </div>
       <div class="field flex flex-col gap-1">
         <label class="text-lg" for="">Correo</label>
-        <input [readOnly]="!editar" pInputText type="text" [(ngModel)]="user.correo">
+        <input [readOnly]="!editar" pInputText type="text" formControlName="correo">
       </div>
     </div>
     <div class="w-full flex justify-center">
-      <img class="w-[28rem]" [src]="user.imagen_url" alt="usuario-avatar">
+      <div class="w-[26rem] bg-black ">
+        <img class="hover:opacity-85 cursor-pointer" [src]="user.imagen_url" alt="usuario-avatar">
+      </div>
     </div>
-  </div>
-  <div>
-    <h3 class="font-bold text-xl">Datos Bancarios <i class="pi pi-pencil text-indigo-400 cursor-pointer" [tabindex]="0"
-        (click)="changeEditarBank()" (keyup.esc)="editar"></i></h3>
+  </form>
+  <div class="flex flex-col gap-3">
+    <h3 class="font-bold text-xl">Datos Pago Móvil
+      <i *ngIf="!editarMovil" class="pi pi-pencil text-indigo-400 cursor-pointer" [tabindex]="0"
+        (click)="changeEditarMovil()" (keyup.esc)="editar"></i>
+      <i *ngIf="editarMovil" class="pi pi-save text-green-400 cursor-pointer" [tabindex]="0"
+        (click)="changeGuardarMovil()" (keyup.esc)="editar"></i>
+    </h3>
+    <form [formGroup]="movilForm" class="fluid flex flex-col gap-3">
+      <div class="field flex flex-col gap-1">
+        <label class="text-lg" for="">Número de Teléfono</label>
+        <input [readOnly]="!editarMovil" pInputText type="text" formControlName="telefono">
+        <small
+          *ngIf="movilForm.get('telefono')?.invalid && (movilForm.get('telefono')?.touched || movilForm.get('telefono')?.dirty)"
+          class="p-error">
+          <div *ngIf="movilForm.get('telefono')?.errors?.['required']">El teléfono es obligatorio</div>
+          <div *ngIf="movilForm.get('telefono')?.errors?.['telefonoLongitudMinima']">
+            El teléfono debe tener al menos 10 dígitos
+          </div>
+          <div *ngIf="movilForm.get('telefono')?.errors?.['telefonoInvalido']">
+            Formato inválido. Ejemplo válido: 04121234567
+          </div>
+        </small>
+      </div>
+      <div class="field flex flex-col gap-1">
+        <label class="text-lg" for="">Cédula de Identidad</label>
+        <p-inputnumber [min]="7000000" [max]="50000000" [readonly]="!editarMovil" mode="decimal" type="text"
+          formControlName="cedula" />
+      </div>
+      <div class="field flex flex-col gap-1">
+        <label class="text-lg" for="">Banco</label>
+        <p-select [readonly]="!editarMovil" [options]="banklist" filter="true" formControlName="banco_num" />
+      </div>
+    </form>
   </div>
 </div>

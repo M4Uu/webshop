@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { PageComponent } from './page/page.component';
 import { RouterModule, Routes } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { SelectModule } from 'primeng/select';
 
 const routes: Routes = [
   {
@@ -21,7 +23,10 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     InputTextModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    InputNumberModule,
+    SelectModule
   ]
 })
 export class PerfilModule { }

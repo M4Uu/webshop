@@ -6,9 +6,9 @@ import { LoginComponent } from '@features/AuthUser/login/login.component';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { RegisterComponent } from '../../AuthUser/register/register.component';
-import { UsersService } from '@app/core/services/api-users/users.service';
+import { UsersService } from '@app/core/services/api/users.service';
 import { MessageService } from 'primeng/api';
-import { AuthService } from '@app/core/services/auth/auth.service';
+import { AuthService } from '@app/core/services/customs/auth.service';
 
 @Component({
   selector: 'app-navbar',

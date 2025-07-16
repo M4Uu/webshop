@@ -7,9 +7,14 @@ export const environment = {
     apiUrlUsers: {
       login: APIURL + '/users/login',
       register: APIURL + '/users/register',
-      upload: APIURL + '/users/upload',
+      update: APIURL + '/users/update',
       protected: APIURL + '/users/protected',
       logout: APIURL + '/users/logout',
+      getmovil: APIURL + '/users/getmovil',
+      updatemovil: APIURL + '/users/updatemovil',
+    },
+    apiUrlMovil: {
+      banklist: APIURL + '/movil/listbanks',
     }
   }
 };

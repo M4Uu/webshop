@@ -10,6 +10,7 @@ export const environment = {
       upload: APIURL + '/users/upload',
       protected: APIURL + '/users/protected',
       logout: APIURL + '/users/logout',
+      getmovil: APIURL + '/users/getmovil',
     }
   }
 };

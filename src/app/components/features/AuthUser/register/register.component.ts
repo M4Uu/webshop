@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MessageService } from 'primeng/api';
 import { emailFormatValidator, nameValidator, numberValidator, passwordMatchValidator } from '../validators.form';
 import { ButtonModule } from 'primeng/button';
-import { UsersService } from '@app/core/services/api-users/users.service';
+import { UsersService } from '@app/core/services/api/users.service';
 import { PasswordModule } from 'primeng/password';
 
 @Component({

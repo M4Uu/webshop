@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { LoggedService } from '@core/services/loggedUser/logged.service';
+import { LoggedService } from '@app/core/services/customs/logged.service';
 import { Router } from '@angular/router';
 import { AosService } from '@app/global/aos-service/aosservice.service';
 

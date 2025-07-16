@@ -10,7 +10,7 @@ import { TextareaModule } from 'primeng/textarea';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { SelectModule } from 'primeng/select';
 import { ActivatedRoute } from '@angular/router';
-import { TestProductsService } from '@app/core/services/test-products.service';
+import { TestProductsService } from '@app/core/services/customs/test-products.service';
 
 @Component({
   selector: 'app-form-pedidos',

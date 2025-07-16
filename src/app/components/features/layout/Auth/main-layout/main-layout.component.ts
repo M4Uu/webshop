@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { SidebarComponent } from "../sidebar/sidebar.component";
 import { NavbarComponent } from '../../nav-bar/navbar.component';
 import { ToastModule } from 'primeng/toast';
-import { AuthService } from '@app/core/services/auth/auth.service';
+import { AuthService } from '@app/core/services/customs/auth.service';
 import { MessageService } from 'primeng/api';
 
 @Component({

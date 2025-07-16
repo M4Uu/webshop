@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
-import { TestProductsService } from '@app/core/services/test-products.service';
+import { TestProductsService } from '@app/core/services/customs/test-products.service';
 
 
 @Component({

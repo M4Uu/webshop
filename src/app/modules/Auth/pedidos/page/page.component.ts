@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TestProductsService } from '@app/core/services/test-products.service';
+import { TestProductsService } from '@app/core/services/customs/test-products.service';
 
 @Component({
   selector: 'app-page',

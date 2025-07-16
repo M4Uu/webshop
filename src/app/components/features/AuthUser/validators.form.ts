@@ -63,3 +63,36 @@ export function emailFormatValidator(): ValidatorFn {
     return !isValid ? { 'invalidEmail': true } : null;
   };
 }
+
+export function telefonoValidator(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const value = control.value;
+
+    // Si el valor está vacío, retornamos null (el validador required se encargará)
+    if (!value || value.trim() === '') {
+      return null;
+    }
+
+    // Limpiamos el número (eliminamos espacios, guiones, paréntesis, etc.)
+    const cleanValue = value.replace(/[^\d]/g, '');
+
+    // Expresión regular para números venezolanos válidos:
+    // - Móviles: 04xx xxx xxxx (0412, 0414, 0416, 0424, 0426)
+    // - Fijos: 02xx xxx xxxx
+    // - Código de país: +58 o 0058 seguido de 10 dígitos
+    const telefonoPattern = /^(04[1246]\d{8}|02\d{9}|(\+58|0058)\d{11})$/;
+
+    // Validamos el formato
+    if (!telefonoPattern.test(cleanValue)) {
+      return { telefonoInvalido: true };
+    }
+
+    // Validamos la longitud mínima (10 dígitos para números locales)
+    if (cleanValue.length < 10) {
+      return { telefonoLongitudMinima: true };
+    }
+
+    // Si pasa todas las validaciones, retornamos null (sin errores)
+    return null;
+  };
+}
