@@ -16,32 +16,32 @@ export class PageComponent {
   dialog = inject(MatDialog);
   products = [
     {
-      title: 'Libros y libretas',
+      title: 'Joyería y olfebrería',
       description: 'Mauris quam neque, ullamcorper sit amet lorem in, aliquet sagittis ante...',
       delay: 100
     },
     {
-      title: 'Libros y libretas',
+      title: 'Bisutería de calidad',
       description: 'Mauris quam neque, ullamcorper sit amet lorem in, aliquet sagittis ante...',
       delay: 300
     },
     {
-      title: 'Libros y libretas',
+      title: 'Pantalones a la moda',
       description: 'Mauris quam neque, ullamcorper sit amet lorem in, aliquet sagittis ante...',
       delay: 500
     },
     {
-      title: 'Libros y libretas',
+      title: 'Accesorios con el mayor estilo',
       description: 'Mauris quam neque, ullamcorper sit amet lorem in, aliquet sagittis ante...',
       delay: 700
     },
     {
-      title: 'Libros y libretas',
+      title: 'Maquillaje para ti',
       description: 'Mauris quam neque, ullamcorper sit amet lorem in, aliquet sagittis ante...',
       delay: 900
     },
     {
-      title: 'Libros y libretas',
+      title: '¡Y mucho más!',
       description: 'Mauris quam neque, ullamcorper sit amet lorem in, aliquet sagittis ante...',
       delay: 1100
     },

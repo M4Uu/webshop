@@ -2,18 +2,17 @@
   <section class="h-auto flex justify-center items-center flex-col">
     <div class="flex flex-wrap h-full w-[80vw] py-[5rem] justify-center gap-[5rem]">
       <div data-aos="flip-left" [attr.data-aos-delay]="100*products.indexOf(product)" *ngFor="let product of products"
-           class="flex flex-col justify-center items-center w-[18rem] gap-3">
-        <mat-icon class="">menu_book</mat-icon>
+        class="flex flex-col justify-center items-center w-[18rem] gap-3">
+        <mat-icon class="">redeem</mat-icon>
         <h1 class="!font-bold !text-lg">{{product.title}}</h1>
         <p class="text-center text-sm">{{product.description}}</p>
       </div>
     </div>
 
-    <div data-aos="fade-up" data-aos-duration="3000" class="w-full flex font-bold items-center h-[10rem] justify-between bg-green-500 px-[1rem] gap-[1rem] lg:px-[5rem]">
+    <div data-aos="fade-up" data-aos-duration="3000"
+      class="w-full flex font-bold items-center h-[10rem] justify-between bg-green-500 px-[1rem] gap-[1rem] lg:px-[5rem]">
       <span class="text-xl w-[15rem] lg:w-auto lg:text-2xl">Puedes encontrar estos productos y más al ingresar</span>
-      <p-button
-        label="Ingresa"
-        styleClass="bg-black text-green-500 text-xl w-[10rem] h-[4rem]"
+      <p-button label="Ingresa" styleClass="bg-black text-green-500 text-xl w-[10rem] h-[4rem]"
         (onClick)="openLoginModal()">
       </p-button>
     </div>
