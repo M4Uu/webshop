@@ -6,6 +6,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { SelectModule } from 'primeng/select';
+import { Tooltip } from 'primeng/tooltip';
+import { FileUpload } from 'primeng/fileupload';
 
 const routes: Routes = [
   {
@@ -26,7 +28,9 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     InputNumberModule,
-    SelectModule
+    SelectModule,
+    Tooltip,
+    FileUpload
   ]
 })
 export class PerfilModule { }

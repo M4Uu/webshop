@@ -3,9 +3,9 @@
     <h1 class="font-bold text-2xl">Perfil de Usuario</h1>
     <h3 class="font-bold text-xl">Datos del Perfil
       <i *ngIf="!editar" class="pi pi-pencil text-indigo-400 cursor-pointer" [tabindex]="0" (click)="changeEditar()"
-        (keyup.esc)="editar"></i>
+        (keyup.esc)="editar" pTooltip="Editar" tooltipPosition="top"></i>
       <i *ngIf="editar" class="pi pi-save text-green-400 cursor-pointer" [tabindex]="0" (click)="changeGuardar()"
-        (keyup.esc)="editar"></i>
+        (keyup.esc)="editar" pTooltip="Guardar" tooltipPosition="top"></i>
     </h3>
   </div>
   <form [formGroup]="userForm" class="grid grid-cols-2 gap-3 mb-3">
@@ -28,17 +28,24 @@
       </div>
     </div>
     <div class="w-full flex justify-center">
-      <div class="w-[26rem] bg-black ">
-        <img class="hover:opacity-85 cursor-pointer" [src]="user.imagen_url" alt="usuario-avatar">
-      </div>
+      <p-fileupload #fileUpload name="image" [url]="getUploadImgUrl + '/' + user.cedula" [multiple]="false"
+        accept="image/jpeg,image/png,image/jpg" maxFileSize="1000000" (onSelect)="onSelectedFiles($event)"
+        (onUpload)="handleUploadResponse($event)">
+        <ng-template #header let-files let-chooseCallback="chooseCallback" let-clearCallback="clearCallback">
+          <div class="w-[26rem] bg-black">
+            <img (click)="selectEvent(chooseCallback, clearCallback)" (keyup.esc)="editar" [tabindex]="0"
+              class="hover:opacity-85 cursor-pointer" [src]="userForm?.value?.imagen_url" alt="usuario-avatar">
+          </div>
+        </ng-template>
+      </p-fileupload>
     </div>
   </form>
   <div class="flex flex-col gap-3">
     <h3 class="font-bold text-xl">Datos Pago Móvil
       <i *ngIf="!editarMovil" class="pi pi-pencil text-indigo-400 cursor-pointer" [tabindex]="0"
-        (click)="changeEditarMovil()" (keyup.esc)="editar"></i>
+        (click)="changeEditarMovil()" (keyup.esc)="editar" pTooltip="Editar" tooltipPosition="top"></i>
       <i *ngIf="editarMovil" class="pi pi-save text-green-400 cursor-pointer" [tabindex]="0"
-        (click)="changeGuardarMovil()" (keyup.esc)="editar"></i>
+        (click)="changeGuardarMovil()" (keyup.esc)="editar" pTooltip="Guardar" tooltipPosition="top"></i>
     </h3>
     <form [formGroup]="movilForm" class="fluid flex flex-col gap-3">
       <div class="field flex flex-col gap-1">

@@ -13,8 +13,9 @@ export const environment = {
       getmovil: APIURL + '/users/getmovil',
       updatemovil: APIURL + '/users/updatemovil',
     },
-    apiUrlMovil: {
-      banklist: APIURL + '/movil/listbanks',
+    apiUrlToolkit: {
+      banklist: APIURL + '/toolkit/listbanks',
+      uploadimg: APIURL + '/toolkit/uploadimg',
     }
   }
 };

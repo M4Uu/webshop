@@ -30,8 +30,8 @@ export class AuthService {
   loadSessionProtected(): Observable<boolean> {
     return this.APIUser.protectedUser().pipe(
       map(response => {
-        if (response.payload) {
-          this.saveSession(response.payload);
+        if (response.data) {
+          this.saveSession(response.data);
           return true;
         }
         return false;

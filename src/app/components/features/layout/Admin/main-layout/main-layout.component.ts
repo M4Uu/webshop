@@ -1,21 +1,18 @@
 import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { SidebarComponent } from "../../sidebar/sidebar.component";
-import { NavbarComponent } from '../../nav-bar/navbar.component';
 import { ToastModule } from 'primeng/toast';
+import { NavbarComponent } from '../../nav-bar/navbar.component';
+import { SidebarComponent } from '../../sidebar/sidebar.component';
+import { RouterOutlet } from '@angular/router';
 import { AuthService } from '@app/core/services/customs/auth.service';
-import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-main-layout',
-  standalone: true,
   imports: [
-    RouterOutlet,
-    SidebarComponent,
+    ToastModule,
     NavbarComponent,
-    ToastModule
+    SidebarComponent,
+    RouterOutlet
   ],
-  providers: [MessageService],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss'
 })

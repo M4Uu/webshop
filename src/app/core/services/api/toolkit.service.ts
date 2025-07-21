@@ -6,11 +6,13 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class MovilService {
+export class ToolkitService {
   private http = inject(HttpClient);
-  private apiUrl = environment.api.apiUrlMovil;
+  private apiUrl = environment.api.apiUrlToolkit;
+  public uploadImgUrl = environment.api.apiUrlToolkit.uploadimg;
 
   getBankList(): Observable<any> {
-    return this.http.get<any>(this.apiUrl.banklist)
+    return this.http.get<any>(this.apiUrl.banklist);
   }
+
 }

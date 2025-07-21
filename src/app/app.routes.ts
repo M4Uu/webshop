@@ -1,12 +1,10 @@
 import { Routes } from '@angular/router';
-import { MainLayoutComponent } from './components/features/layout/Guest/main-layout/main-layout.component';
 import { authGuard } from './core/guards/auth/auth.guard';
-import { MainLayoutComponent as LayoutAuth } from './components/features/layout/Auth/main-layout/main-layout.component';
 export const routes: Routes = [
   // Guest
   {
     path: '',
-    component: MainLayoutComponent,
+    loadComponent: () => import('./components/features/layout/Guest/main-layout/main-layout.component').then(c => c.MainLayoutComponent),
     children: [
       { path: '', loadChildren: () => import('./modules/Guest/home/home.module').then(m => m.HomeModule) },
       { path: 'contact', loadChildren: () => import('./modules/Guest/contact/contact.module').then(m => m.ContactModule) },
@@ -17,7 +15,7 @@ export const routes: Routes = [
   // Auth
   {
     path: 'usuarios',
-    component: LayoutAuth,
+    loadComponent: () => import('./components/features/layout/Auth/main-layout/main-layout.component').then(c => c.MainLayoutComponent),
     canActivate: [authGuard],
     children: [
       { path: '', loadChildren: () => import('./modules/Auth/homelogin/homelogin.module').then(m => m.HomeloginModule) },
@@ -32,8 +30,15 @@ export const routes: Routes = [
   },
   // Admin
   {
-    path: '',
-    children: []
+    path: 'administrador',
+    loadComponent: () => import('./components/features/layout/Admin/main-layout/main-layout.component').then(c => c.MainLayoutComponent),
+    children: [
+      { path: '', loadChildren: () => import('./modules/Admin/homeadmin/homeadmin.module').then(m => m.HomeadminModule) },
+      { path: 'usuarios', loadChildren: () => import('./modules/Admin/usuarios/usuarios.module').then(m => m.UsuariosModule) },
+      { path: 'productos', loadChildren: () => import('./modules/Admin/productos/productos.module').then(m => m.ProductosModule) },
+      { path: 'pedidos', loadChildren: () => import('./modules/Admin/pedidos/pedidos.module').then(m => m.PedidosModule) },
+      { path: 'ventas', loadChildren: () => import('./modules/Admin/ventas/ventas.module').then(m => m.VentasModule) },
+    ]
   },
   // Global
   {

@@ -16,8 +16,8 @@ export class UsersService {
     return this.http.post<R>(this.apiUrl.login, user, { withCredentials: true })
   }
 
-  protectedUser(): Observable<{ status: any; payload: any }> {
-    return this.http.get<{ status: any; payload: any }>(
+  protectedUser(): Observable<any> {
+    return this.http.get<any>(
       this.apiUrl.protected, { withCredentials: true }
     );
   }

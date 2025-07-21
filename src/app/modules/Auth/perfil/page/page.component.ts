@@ -1,11 +1,11 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { emailFormatValidator, telefonoValidator } from '@app/components/features/AuthUser/validators.form';
-import { MovilService } from '@app/core/services/api/movil.service';
+import { ToolkitService } from '@app/core/services/api/toolkit.service';
 import { UsersService } from '@app/core/services/api/users.service';
 import { AuthService } from '@app/core/services/customs/auth.service';
 import { MessageService } from 'primeng/api';
-import { of } from 'rxjs';
+import { FileUpload } from 'primeng/fileupload';
 
 @Component({
   selector: 'app-page',
@@ -16,11 +16,12 @@ import { of } from 'rxjs';
 export class PageComponent implements OnInit {
   private authService = inject(AuthService);
   private APIUsers = inject(UsersService);
-  private APIMovil = inject(MovilService);
+  private APIToolkit = inject(ToolkitService);
   private messageService = inject(MessageService);
 
   private fb: FormBuilder = inject(FormBuilder);
 
+  public getUploadImgUrl = this.APIToolkit.uploadImgUrl;
   public userForm: any;
   public movilForm = this.fb.group({
     telefono: ['', [
@@ -37,17 +38,19 @@ export class PageComponent implements OnInit {
   public editar: boolean = false;
   public editarMovil: boolean = false;
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.userForm = this.fb.group({
       cedula: [this.user.cedula, [Validators.required]],
       nombres: [this.user.nombres, [Validators.required]],
       nombre_usuario: [this.user.nombre_usuario, [Validators.required]],
       localidad: [this.user.localidad, [Validators.required]],
       correo: [this.user.correo, [Validators.required, emailFormatValidator()]],
-    })
+      imagen_url: [this.user.imagen_url, [Validators.required]]
+    });
+
     this.APIUsers.getMovil(this.user.cedula).subscribe({
       next: (responseMovil) => {
-        this.APIMovil.getBankList().subscribe({
+        this.APIToolkit.getBankList().subscribe({
           next: (responseBank) => {
             this.banklist = responseBank.data
             this.movilForm = this.fb.group({
@@ -63,11 +66,11 @@ export class PageComponent implements OnInit {
     })
 
   }
-  changeEditar = () => this.editar = !this.editar;
+  public changeEditar = () => this.editar = !this.editar;
 
-  changeEditarMovil = () => this.editarMovil = !this.editarMovil;
+  public changeEditarMovil = () => this.editarMovil = !this.editarMovil;
 
-  changeGuardar() {
+  public changeGuardar() {
     this.APIUsers.updateUser(this.userForm.value).subscribe({
       next: () => this.messageService.add({
         severity: 'success',
@@ -79,7 +82,7 @@ export class PageComponent implements OnInit {
     })
   }
 
-  changeGuardarMovil() {
+  public changeGuardarMovil() {
     this.APIUsers.updateMovil(this.movilForm.value).subscribe({
       next: () => this.messageService.add({
         severity: 'success',
@@ -99,5 +102,40 @@ export class PageComponent implements OnInit {
       summary: 'Error con el servidor',
       detail: 'Error al intentar contactar con el servidor, intente más tarde.'
     })
+  }
+
+  @ViewChild('fileUpload') fileUpload!: FileUpload;
+  public onSelectedFiles(event: any) {
+    setTimeout(() => {
+      if (event.currentFiles && event.currentFiles.length > 0) {
+        this.fileUpload.upload();
+      }
+    }, 100);
+  }
+
+  handleUploadResponse(event: any) {
+    if (event.originalEvent?.body) {
+      try {
+        const response = event.originalEvent.body.data;
+        if (response.url) {
+          this.userForm.value.imagen_url = response.url;
+          this.user.imagen_url = response.url;
+
+          this.messageService.add({ severity: 'success', summary: 'Imagen actualizada', detail: 'La foto de perfil se actualizó correctamente' });
+        } else {
+          console.error('Respuesta inesperada:', response);
+          this.messageService.add({ severity: 'error', summary: 'Error de subida', detail: 'Error al intentar subir la imágen, comunicarse con la administración.' });
+        }
+      } catch (error) {
+        console.error('Error procesando respuesta:', error);
+        this.messageService.add({ severity: 'error', summary: 'Error con el servidor', detail: 'Error al intentar contactar con el servidor, intente más tarde.' });
+      }
+    }
+    this.fileUpload.clear();
+  }
+
+  public selectEvent(choose: any, clear: any) {
+    clear();
+    choose();
   }
 }
