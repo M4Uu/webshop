@@ -73,10 +73,14 @@
                 class="block px-4 py-2 text-sm text-gray-700 w-full text-left hover:bg-gray-100">
                 Ver mi perfil
               </button>
-              <!-- <button (click)="navigateConfig()"
+              <button *ngIf="isAdmin()" (click)="navigateAdministrador()"
                 class="block px-4 py-2 text-sm text-gray-700 w-full text-left hover:bg-gray-100">
-                Configuración
-              </button> -->
+                Administrador
+              </button>
+              <button *ngIf="backToUsers()" (click)="navigateUsuarios()"
+                class="block px-4 py-2 text-sm text-gray-700 w-full text-left hover:bg-gray-100">
+                Usuario
+              </button>
               <button (click)="closeSesion()"
                 class="block px-4 py-2 text-sm text-gray-700 w-full text-left hover:bg-gray-100">
                 Salir

@@ -28,8 +28,8 @@ export class UsersService {
 
   // Viajan sin cookies
   getMovil(cedula: any): Observable<any> {
-    const user = { cedula: cedula };
-    return this.http.post<any>(this.apiUrl.getmovil, user, { withCredentials: false })
+    const data = { cedula: cedula };
+    return this.http.post<any>(this.apiUrl.getmovil, data, { withCredentials: false })
   }
 
   updateMovil(user: any): Observable<any> {
@@ -44,6 +44,9 @@ export class UsersService {
     return this.http.patch<any>(this.apiUrl.update, input, { withCredentials: false })
   }
 
-
+  getRolesUsuario(cedula: any) {
+    const data = { cedula: cedula };
+    return this.http.post<any>(this.apiUrl.getRolesUsuario, data, { withCredentials: false });
+  }
 
 }

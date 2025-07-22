@@ -1,10 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SidebarComponent } from "../../sidebar/sidebar.component";
+import { SidebarComponent } from "../sidebar/sidebar.component";
 import { NavbarComponent } from '../../nav-bar/navbar.component';
 import { ToastModule } from 'primeng/toast';
 import { AuthService } from '@app/core/services/customs/auth.service';
-import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-main-layout',
@@ -15,10 +14,9 @@ import { MessageService } from 'primeng/api';
     NavbarComponent,
     ToastModule
   ],
-  providers: [MessageService],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss'
 })
-export class MainLayoutComponent {
+export class MainLayoutAuthComponent {
   public user = inject(AuthService).loadSessionStorage();
 }

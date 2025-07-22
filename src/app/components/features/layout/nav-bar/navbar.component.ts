@@ -1,7 +1,7 @@
-import { Component, inject, Injectable, Input } from '@angular/core';
+import { Component, inject, Injectable, Input, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { Router, RouterModule } from '@angular/router';
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { LoginComponent } from '@features/AuthUser/login/login.component';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
@@ -30,10 +30,11 @@ import { AuthService } from '@app/core/services/customs/auth.service';
   providedIn: 'root'
 })
 
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   @Input() user: any;
 
   private router = inject(Router);
+  private activateRoute = inject(ActivatedRoute)
   private APIUsers = inject(UsersService);
   private messageService = inject(MessageService);
   private authService = inject(AuthService);
@@ -41,6 +42,8 @@ export class NavbarComponent {
   public menuUsers: any;
   public isMobileMenuOpen = false;
   public isUserMenuOpen = false;
+
+  public roles: any[] = [];
 
   visibleLogin = false;
   visibleRegister = false;
@@ -52,6 +55,17 @@ export class NavbarComponent {
     { name: 'Contacto', href: 'contact' },
   ];
 
+  ngOnInit(): void {
+    this.APIUsers.getRolesUsuario(this.user.cedula).subscribe({
+      next: (response) => this.roles = response.data,
+      error: (reason) => {
+        console.log('Error al intentar obtener roles de usuario: ', reason);
+        setTimeout(() => {
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al intentar obtener roles de usuario.', life: 3000 })
+        });
+      }
+    })
+  }
 
   closeSesion() {
     this.authService.clearSession();
@@ -66,11 +80,28 @@ export class NavbarComponent {
     });
   }
 
-  navigatePerfil() {
-    this.router.navigateByUrl('usuarios/perfil')
+  navigatePerfil = () => this.router.navigateByUrl('usuarios/perfil');
+  navigateConfig = () => this.router.navigateByUrl('usuarios/configuracion');
+  navigateUsuarios = () => this.router.navigateByUrl('usuarios');
+  navigateAdministrador = () => this.router.navigateByUrl('administrador');
+
+  isAdmin() {
+    let result: any;
+    this.activateRoute.url.subscribe({
+      next: (value) => {
+        if (value[0].path === 'administrador') {
+          result = false;
+        } else if (this.roles) {
+          result = this.roles.some(rol => rol.rol_id === 2);
+        }
+      }
+    });
+    return result;
   }
 
-  navigateConfig() {
-    this.router.navigateByUrl('usuarios/configuracion')
+  backToUsers() {
+    let result: any;
+    this.activateRoute.url.subscribe((value) => result = value[0].path === 'administrador');
+    return result;
   }
 }

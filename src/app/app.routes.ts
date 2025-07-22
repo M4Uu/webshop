@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './core/guards/auth/auth.guard';
+import { authGuard } from './core/guards/auth.guard';
+import { adminGuard } from './core/guards/admin.guard';
 export const routes: Routes = [
   // Guest
   {
@@ -15,7 +16,7 @@ export const routes: Routes = [
   // Auth
   {
     path: 'usuarios',
-    loadComponent: () => import('./components/features/layout/Auth/main-layout/main-layout.component').then(c => c.MainLayoutComponent),
+    loadComponent: () => import('./components/features/layout/Auth/main-layout/main-layout.component').then(c => c.MainLayoutAuthComponent),
     canActivate: [authGuard],
     children: [
       { path: '', loadChildren: () => import('./modules/Auth/homelogin/homelogin.module').then(m => m.HomeloginModule) },
@@ -31,7 +32,8 @@ export const routes: Routes = [
   // Admin
   {
     path: 'administrador',
-    loadComponent: () => import('./components/features/layout/Admin/main-layout/main-layout.component').then(c => c.MainLayoutComponent),
+    loadComponent: () => import('./components/features/layout/Admin/main-layout/main-layout.component').then(c => c.MainLayoutAdminComponent),
+    canActivate: [adminGuard],
     children: [
       { path: '', loadChildren: () => import('./modules/Admin/homeadmin/homeadmin.module').then(m => m.HomeadminModule) },
       { path: 'usuarios', loadChildren: () => import('./modules/Admin/usuarios/usuarios.module').then(m => m.UsuariosModule) },
