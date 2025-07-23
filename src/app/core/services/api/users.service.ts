@@ -49,4 +49,7 @@ export class UsersService {
     return this.http.post<any>(this.apiUrl.getRolesUsuario, data, { withCredentials: false });
   }
 
+  getUsuarios(): Observable<any> {
+    return this.http.get<any>(this.apiUrl.getUsuarios, { withCredentials: false });
+  }
 }

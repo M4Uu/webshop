@@ -6,7 +6,7 @@ import { ToastModule } from 'primeng/toast';
 import { AuthService } from '@app/core/services/customs/auth.service';
 
 @Component({
-  selector: 'app-main-layout',
+  selector: 'app-main-layout-auth',
   standalone: true,
   imports: [
     RouterOutlet,

@@ -6,7 +6,7 @@ import { RouterOutlet } from '@angular/router';
 import { AuthService } from '@app/core/services/customs/auth.service';
 
 @Component({
-  selector: 'app-main-layout',
+  selector: 'app-main-layout-admin',
   imports: [
     ToastModule,
     NavbarComponent,

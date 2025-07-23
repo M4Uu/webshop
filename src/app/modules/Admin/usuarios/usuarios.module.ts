@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PageComponent } from './page/page.component';
 import { RouterModule, Routes } from '@angular/router';
+import { TableModule } from 'primeng/table';
+import { Chip } from 'primeng/chip';
+import { Skeleton } from 'primeng/skeleton';
 
 const routes: Routes = [
   {
@@ -17,7 +20,10 @@ const routes: Routes = [
   ],
   imports: [
     RouterModule.forChild(routes),
-    CommonModule
+    CommonModule,
+    TableModule,
+    Chip,
+    Skeleton
   ]
 })
 export class UsuariosModule { }
