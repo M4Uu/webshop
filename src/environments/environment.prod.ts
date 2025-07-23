@@ -13,6 +13,7 @@ export const environment = {
       getmovil: APIURL + '/users/getmovil',
       updatemovil: APIURL + '/users/updatemovil',
       getRolesUsuario: APIURL + '/users/getroles',
+      getUsuarios: APIURL + '/users/getusers',
     },
     apiUrlToolkit: {
       banklist: APIURL + '/toolkit/listbanks',
