@@ -2,18 +2,18 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router, UrlTree } from '@angular/router';
 import { UsersService } from '../services/api/users.service';
 import { AuthService } from '../services/customs/auth.service';
-import { catchError, map, of, Observable } from 'rxjs';
+import { catchError, map, of, Observable, switchMap } from 'rxjs';
 import { MessageService } from 'primeng/api';
 
-export const adminGuard: CanActivateFn = (route, state): Observable<boolean | UrlTree> => {
-  const APIUsuarios = inject(UsersService);
+export const adminGuard: CanActivateFn = (route, state) => {
+  const usersService = inject(UsersService);
   const authService = inject(AuthService);
   const router = inject(Router);
   const messageService = inject(MessageService);
 
   const user = authService.loadSessionStorage();
 
-  // Verificar si hay usuario autenticado
+  // Caso 1: No hay usuario autenticado
   if (!user) {
     messageService.add({
       severity: 'warn',
@@ -24,12 +24,58 @@ export const adminGuard: CanActivateFn = (route, state): Observable<boolean | Ur
     return of(router.createUrlTree(['/']));
   }
 
-  return APIUsuarios.getRolesUsuario(user.cedula).pipe(
-    map((response) => {
+  // Caso 2: Usuario inactivo
+  if (!user.estado) {
+    return handleInactiveUser(usersService, authService, router, messageService);
+  }
+
+  // Caso 3: Verificar roles de usuario activo
+  return verifyAdminRole(user.cedula, usersService, router, messageService);
+};
+
+// Función para manejar usuarios inactivos
+const handleInactiveUser = (
+  usersService: UsersService,
+  authService: AuthService,
+  router: Router,
+  messageService: MessageService
+) => {
+  return usersService.logoutUser().pipe(
+    switchMap(() => {
+      messageService.add({
+        severity: 'error',
+        summary: 'Sesión Inválida',
+        detail: 'Su usuario está desactivado, por favor, comuníquese con la administración',
+        life: 5000
+      });
+      authService.clearSession();
+      return of(router.createUrlTree(['/']));
+    }),
+    catchError(() => {
+      messageService.add({
+        severity: 'error',
+        summary: 'Error de Conexión',
+        detail: 'Error al comunicarse con el servidor. Intente más tarde.',
+        life: 5000
+      });
+      return of(router.createUrlTree(['/']));
+    })
+  );
+};
+
+// Función para verificar rol de administrador
+const verifyAdminRole = (
+  cedula: string,
+  usersService: UsersService,
+  router: Router,
+  messageService: MessageService
+) => {
+  return usersService.getRolesUsuario(cedula).pipe(
+    map(response => {
       const isAdmin = response.data.some((rol: any) => rol.rol_id === 2);
 
       if (isAdmin) {
-        return true; // Permitir acceso
+        return true; // Acceso permitido
       } else {
         messageService.add({
           severity: 'error',
@@ -37,18 +83,17 @@ export const adminGuard: CanActivateFn = (route, state): Observable<boolean | Ur
           detail: 'No tienes permisos de administrador',
           life: 5000
         });
-        return router.createUrlTree(['/usuarios']); // Redirigir
+        return router.createUrlTree(['/usuarios']);
       }
     }),
-    catchError((error) => {
-      console.error('AdminGuard: Error de conexión', error);
+    catchError(error => {
       messageService.add({
         severity: 'contrast',
         summary: 'Error de Conexión',
-        detail: 'No se pudieron verificar tus credenciales. Intenta de nuevo más tarde.',
+        detail: 'No se pudieron verificar tus credenciales',
         life: 7000
       });
-      return of(router.createUrlTree(['/usuarios'])); // Redirigir a página de error
+      return of(router.createUrlTree(['/usuarios']));
     })
   );
 };

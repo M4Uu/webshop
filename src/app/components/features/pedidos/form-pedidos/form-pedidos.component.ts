@@ -69,7 +69,6 @@ export class FormPedidosComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log('Componente destruido');
     this.pedidoForm.reset();
     this.editar = false;
   }

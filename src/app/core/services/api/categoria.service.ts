@@ -6,13 +6,12 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ToolkitService {
+export class CategoriaService {
   private http = inject(HttpClient);
-  private apiUrl = environment.api.toolkit;
-  public uploadImgUrl = environment.api.toolkit.uploadimg;
+  private apiUrl = environment.api.categoria;
 
-  getBankList(): Observable<any> {
-    return this.http.get<any>(this.apiUrl.banklist);
+  getCategoria(): Observable<any> {
+    return this.http.get<any>(this.apiUrl.getCategorias);
   }
 
 }

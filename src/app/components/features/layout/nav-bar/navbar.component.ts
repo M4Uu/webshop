@@ -56,7 +56,7 @@ export class NavbarComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.APIUsers.getRolesUsuario(this.user.cedula).subscribe({
+    this.APIUsers.getRolesUsuario(this.user?.cedula).subscribe({
       next: (response) => this.roles = response.data,
       error: (reason) => {
         console.log('Error al intentar obtener roles de usuario: ', reason);

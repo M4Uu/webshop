@@ -1,0 +1,73 @@
+<div class="px-5">
+  <div class="flex items-center justify-between mb-4">
+    <h4 class="text-2xl font-bold">{{ editar ? 'Escribir Producto' : 'Detalle Producto' }}</h4>
+    <button *ngIf="!isCreate" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"
+      (click)="onEdit()" aria-label="Editar"></button>
+  </div>
+
+  <form [formGroup]="productoForm" (ngSubmit)="onSubmit()">
+    <div class="p-fluid flex flex-col gap-4">
+      <div class="flex flex-col gap-2">
+        <label for="nombre">Nombre del Producto</label>
+        <input [readonly]="!editar" pInputText id="nombre" formControlName="nombre" />
+        <small *ngIf="productoForm.get('nombre')?.invalid && productoForm.get('nombre')?.touched" class="p-error">
+          El nombre del pedido es requerido.
+        </small>
+      </div>
+
+      <div class="field flex flex-col gap-2">
+        <label for="nombre">Descripción del Producto</label>
+        <textarea [readonly]="!editar" rows="4" class="border border-gray-300 hover:border-gray-400 rounded-lg"
+          cols="30" pTextarea formControlName="descripcion"></textarea>
+        <small *ngIf="productoForm.get('descripcion')?.invalid && productoForm.get('descripcion')?.touched"
+          class="p-error">
+          La descripcion del pedido es requerida.
+        </small>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div class="flex gap-5 flex-col">
+          <div class="flex flex-col gap-2">
+            <label for="nombre">Existencias</label>
+            <p-inputnumber [readonly]="!editar" formControlName="existencias" showButtons="true" inputId="minmax"
+              mode="decimal" [min]="0" [max]="100" />
+            <small *ngIf="productoForm.get('existencias')?.invalid && productoForm.get('existencias')?.touched"
+              class="p-error">
+              Las existencias del producto son requeridas.
+            </small>
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="nombre">Precio</label>
+            <p-inputnumber [readonly]="!editar" formControlName="precio" showButtons="true" inputId="minmax"
+              mode="decimal" [min]="0" [max]="100" />
+            <small *ngIf="productoForm.get('precio')?.invalid && productoForm.get('precio')?.touched" class="p-error">
+              El precio del producto es requerido.
+            </small>
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="nombre">Categoría</label>
+            <p-select [readonly]="!editar" formControlName="categoria" [options]="categorias" optionLabel="name"
+              placeholder="Seleccione una categoría" class="w-full" />
+            <small *ngIf="productoForm.get('categorias')?.invalid && productoForm.get('categorias')?.touched"
+              class="p-error">
+              La categoría del producto es requerida.
+            </small>
+          </div>
+        </div>
+        <div class="w-full flex justify-center">
+          <p-fileupload #fileUpload name="image" [url]="getUploadImgUrl" [multiple]="false"
+            accept="image/jpeg,image/png,image/jpg" maxFileSize="1000000" (onSelect)="onSelectedFiles($event)"
+            (onUpload)="handleUploadResponse($event)">
+            <ng-template #header let-files let-chooseCallback="chooseCallback" let-clearCallback="clearCallback">
+              <div class="w-[15rem] bg-black">
+                <img (click)="selectEvent(chooseCallback, clearCallback)" (keyup.esc)="editar" [tabindex]="0"
+                  class="object-cover w-full" [class]="editar ? 'hover:opacity-85 cursor-pointer ': ''"
+                  [src]="productoForm.value.imagen_url" alt="producto-img">
+              </div>
+            </ng-template>
+          </p-fileupload>
+        </div>
+      </div>
+
+      <p-button *ngIf="editar" pButton type="submit" label="Enviar" [disabled]="productoForm.invalid"></p-button>
+    </div>
+  </form>

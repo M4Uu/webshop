@@ -9,7 +9,7 @@ import { environment } from '@env/environment';
 })
 export class UsersService {
   private http = inject(HttpClient);
-  private apiUrl = environment.api.apiUrlUsers;
+  private apiUrl = environment.api.users;
 
   // Viajan con cookies
   loginUser(user: any): Observable<R> {
@@ -27,6 +27,10 @@ export class UsersService {
   }
 
   // Viajan sin cookies
+  getUsuarios(): Observable<any> {
+    return this.http.get<any>(this.apiUrl.getUsuarios, { withCredentials: false });
+  }
+
   getMovil(cedula: any): Observable<any> {
     const data = { cedula: cedula };
     return this.http.post<any>(this.apiUrl.getmovil, data, { withCredentials: false })
@@ -49,7 +53,19 @@ export class UsersService {
     return this.http.post<any>(this.apiUrl.getRolesUsuario, data, { withCredentials: false });
   }
 
-  getUsuarios(): Observable<any> {
-    return this.http.get<any>(this.apiUrl.getUsuarios, { withCredentials: false });
+  toggleAdmin(cedula: any) {
+    const data = { cedula: cedula };
+    return this.http.post<any>(this.apiUrl.toggleAdmin, data, { withCredentials: false });
   }
+
+  toggleStatus(cedula: any) {
+    const data = { cedula: cedula };
+    return this.http.post<any>(this.apiUrl.toggleStatus, data, { withCredentials: false });
+  }
+
+  isActive(cedula: any) {
+    const data = { cedula: cedula };
+    return this.http.post<any>(this.apiUrl.isActive, data, { withCredentials: false });
+  }
+
 }

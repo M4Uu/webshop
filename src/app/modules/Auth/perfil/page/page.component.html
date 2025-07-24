@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="w-full flex justify-center">
-      <p-fileupload #fileUpload name="image" [url]="getUploadImgUrl + '/' + user.cedula" [multiple]="false"
+      <p-fileupload #fileUpload name="image" [url]="getUploadImgUrl" [multiple]="false"
         accept="image/jpeg,image/png,image/jpg" maxFileSize="1000000" (onSelect)="onSelectedFiles($event)"
         (onUpload)="handleUploadResponse($event)">
         <ng-template #header let-files let-chooseCallback="chooseCallback" let-clearCallback="clearCallback">

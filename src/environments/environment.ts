@@ -4,7 +4,7 @@ export const environment = {
   production: false,
   api: {
     apiUrl: APIURL,
-    apiUrlUsers: {
+    users: {
       login: APIURL + '/users/login',
       register: APIURL + '/users/register',
       update: APIURL + '/users/update',
@@ -14,10 +14,23 @@ export const environment = {
       updatemovil: APIURL + '/users/updatemovil',
       getRolesUsuario: APIURL + '/users/getroles',
       getUsuarios: APIURL + '/users/getusers',
+      toggleAdmin: APIURL + '/users/toggleadmin',
+      toggleStatus: APIURL + '/users/togglstatus',
+      isActive: APIURL + '/users/isactive',
     },
-    apiUrlToolkit: {
+    toolkit: {
       banklist: APIURL + '/toolkit/listbanks',
-      uploadimg: APIURL + '/toolkit/uploadimg',
+      uploadimg: APIURL + '/toolkit/upload_img',
+    },
+    ventas: {
+      getVentas: APIURL + '/ventas'
+    },
+    productos: {
+      getProductos: APIURL + '/productos',
+      getProductosById: APIURL + '/productos/get'
+    },
+    categoria: {
+      getCategorias: APIURL + '/categoria'
     }
   }
 };

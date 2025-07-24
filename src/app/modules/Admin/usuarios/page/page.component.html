@@ -4,7 +4,7 @@
       <h3 data-aos="fade-down" data-aos-duration="800" class="text-4xl font-bold">Gestión de Usuarios</h3>
     </div>
 
-    <p-table *ngIf="loading" data-aos="fade-zoom-in" [paginator]="usuarios.length >= 9 ? true : false" [rows]="9"
+    <p-table [loading]="loading" data-aos="fade-zoom-in" [paginator]="usuarios.length >= 9 ? true : false" [rows]="9"
       [value]="usuarios" class="w-full pl-2">
       <ng-template pTemplate="header">
         <tr class="text-center">
@@ -23,8 +23,8 @@
           <td class="flex gap-3 text-xs">
             <p-chip [label]="rowData.roles[0].nombre" icon="pi pi-user" />
             <p-chip *ngIf="rowData.roles[1]" [label]="rowData.roles[1].nombre" icon="pi pi-crown" [removable]="true"
-              (onRemove)="removeAdmin(i)" />
-            <p-chip class="cursor-pointer" (click)="addAdmin(i)" *ngIf="!rowData.roles[1]" label="DAR ADMINISTRADOR"
+              (onRemove)="toggleAdmin(i)" />
+            <p-chip class="cursor-pointer" (click)="toggleAdmin(i)" *ngIf="!rowData.roles[1]" label="DAR ADMINISTRADOR"
               icon="pi pi-plus" />
           </td>
           <td>
@@ -33,26 +33,13 @@
               [ngClass]="rowData.estado ? 'bg-green-500 text-white' : 'bg-red-500 text-white'"
               [title]="rowData.estado ? 'Usuario activo' : 'Usuario inactivo'" tabindex="0" role="button"
               aria-label="Estado">
-              <i *ngIf="rowData.estado" (click)="rowData.estado = false" class="pi pi-check" aria-hidden="true"></i>
-              <i *ngIf="!rowData.estado" (click)="rowData.estado = true" class="pi pi-times" aria-hidden="true"></i>
+              <i *ngIf="rowData.estado" (click)="toggleStatus(rowData)" class="pi pi-check" aria-hidden="true"></i>
+              <i *ngIf="!rowData.estado" (click)="toggleStatus(rowData)" class="pi pi-times" aria-hidden="true"></i>
             </div>
           </td>
         </tr>
       </ng-template>
     </p-table>
 
-    <div *ngIf="!loading">
-      @for (item of [1,2,3,4,5,6,7,8,9]; track $index) {
-      <p-skeleton height="2rem" styleClass="my-4" />
-      <div class="w-full bg-gray-200 h-[1px]"></div>
-      }
-      <div class="flex gap-3 items-center justify-center mt-3">
-        <p-skeleton shape="circle" size="2.5rem" />
-        <p-skeleton shape="circle" size="1.5rem" />
-        <p-skeleton shape="circle" size="1.5rem" />
-        <p-skeleton shape="circle" size="1.5rem" />
-        <p-skeleton shape="circle" size="2.5rem" />
-      </div>
-    </div>
   </div>
 </div>
