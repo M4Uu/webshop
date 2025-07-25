@@ -7,7 +7,7 @@ import { TableModule } from 'primeng/table';
 const routes: Routes = [
   {
     path: '',
-    title: 'Visualizar Ventas',
+    title: 'Historial de Ventas',
     component: PageComponent
   }
 ];

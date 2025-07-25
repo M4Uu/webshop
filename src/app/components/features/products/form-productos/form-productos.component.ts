@@ -75,7 +75,7 @@ export class FormProductosComponent implements OnInit, OnDestroy {
         descripcion: ['', [Validators.required]],
         existencias: [0, [Validators.required]],
         precio: [0, [Validators.required]],
-        categoria: [[], [Validators.required]],
+        categoria_id: [[], [Validators.required]],
         imagen_url: ['https://link.storjshare.io/raw/15M6fjomdWMwh4cdbZx5YmDQpQsc8EN73sYKcfLodh6yz6PXEbNJe1WKFvKrwMotebVhRWPiihQoPEuKkaEt1reW5WhPwipmRZnqcfnA5Fq2A5NiMhief8rTrMtFWLimZCkGJp8CqpyA3CkXQZ6tZYrK5sC4Lgksbiq9BMwKnfxXWdH4smKmVNMgYkLyuEiA6gp6eJQv3dqPJnr7SrWepmbKTYQvSQTizqxxTrgj2HDLu6pde6NtYYbAmLArVx5W2fNNVg31w7Kc9nsReNx1HLf5yBhF9v7x9/tesis-webshop-bucket/default-image-product.webp', [Validators.required]]
       });
     } else {
@@ -83,11 +83,12 @@ export class FormProductosComponent implements OnInit, OnDestroy {
         next: (response) => {
           const producto = response.data[0];
           this.productoForm = this.fb.group({
+            id: [producto.id, [Validators.required]],
             nombre: [producto.nombre, [Validators.required]],
             descripcion: [producto.descripcion, [Validators.required]],
             existencias: [producto.existencias, [Validators.required]],
             precio: [producto.precio, [Validators.required]],
-            categoria: [this.categorias.find((value: any) => value.id == producto.categoria), [Validators.required]],
+            categoria_id: [this.categorias.find((value: any) => value.id == producto.categoria), [Validators.required]],
             imagen_url: [producto.imagen_url, [Validators.required]]
           })
         },
@@ -98,11 +99,29 @@ export class FormProductosComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.editar = false;
+    if (this.isCreate) {
+      this.APIProductos.createProducto(this.productoForm.value).subscribe({
+        next: () => {
+          this.messageService.add({ severity: 'success', summary: 'Producto creado', detail: 'El producto se creó correctamente.' });
+          this.productoForm.reset();
+        },
+        error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al crear el producto, intente más tarde.', life: 3000 })
+      });
+    } else {
+      this.APIProductos.updateProducto(this.productoForm.value).subscribe({
+        next: () => this.messageService.add({ severity: 'success', summary: 'Producto actualizado', detail: 'El producto se actualizó correctamente.' }),
+        error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al crear el producto, intente más tarde.', life: 3000 })
+      });
+
+    }
 
   }
 
   onEdit() {
     this.editar = !this.editar;
+    this.editar ?
+      this.messageService.add({ severity: 'contrast', summary: 'Editar', detail: 'Modo edición.' })
+      : this.messageService.add({ severity: 'contrast', summary: 'Visualiar', detail: 'Modo visualización.' });
   }
 
 

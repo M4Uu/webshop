@@ -34,5 +34,5 @@ export class PageComponent implements OnInit {
   cantidadTotal = (venta: any) =>
     venta.productos.reduce((total: number, producto: any) => total + producto.cantidad, 0);
 
-  generateCode = (ventas: any) => ventas.id + ventas.fecha_compra.replace(/[-: ]/g, '');
+  generateCode = (ventas: any) => 'COD-' + ventas.id;
 }

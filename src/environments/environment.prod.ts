@@ -27,7 +27,9 @@ export const environment = {
     },
     productos: {
       getProductos: APIURL + '/productos',
-      getProductosById: APIURL + '/productos/get'
+      getProductosById: APIURL + '/productos/get',
+      createProducto: APIURL + '/productos/create',
+      updateProducto: APIURL + '/productos/update',
     },
     categoria: {
       getCategorias: APIURL + '/categoria'

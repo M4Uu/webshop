@@ -37,17 +37,17 @@
           </div>
           <div class="flex flex-col gap-2">
             <label for="nombre">Precio</label>
-            <p-inputnumber [readonly]="!editar" formControlName="precio" showButtons="true" inputId="minmax"
-              mode="decimal" [min]="0" [max]="100" />
+            <p-inputnumber mode="currency" currency="USD" locale="en-US" [readonly]="!editar" formControlName="precio"
+              showButtons="true" inputId="minmax" />
             <small *ngIf="productoForm.get('precio')?.invalid && productoForm.get('precio')?.touched" class="p-error">
               El precio del producto es requerido.
             </small>
           </div>
           <div class="flex flex-col gap-2">
             <label for="nombre">Categoría</label>
-            <p-select [readonly]="!editar" formControlName="categoria" [options]="categorias" optionLabel="name"
+            <p-select [readonly]="!editar" formControlName="categoria_id" [options]="categorias" optionLabel="name"
               placeholder="Seleccione una categoría" class="w-full" />
-            <small *ngIf="productoForm.get('categorias')?.invalid && productoForm.get('categorias')?.touched"
+            <small *ngIf="productoForm.get('categoria_id')?.invalid && productoForm.get('categoria_id')?.touched"
               class="p-error">
               La categoría del producto es requerida.
             </small>

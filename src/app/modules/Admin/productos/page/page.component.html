@@ -25,7 +25,7 @@
     <ng-template pTemplate="body" let-producto>
       <tr>
         <td>{{ producto.nombre }}</td>
-        <td>{{ producto.precio }}</td>
+        <td>{{ producto.precio | currency }}</td>
         <td>{{ producto.existencias }}</td>
         <td><p-rating class="cursor-default" [readonly]="true" [(ngModel)]="producto.calificacion" /></td>
         <td class="">
