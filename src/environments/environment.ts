@@ -23,16 +23,24 @@ export const environment = {
       uploadimg: APIURL + '/toolkit/upload_img',
     },
     ventas: {
-      getVentas: APIURL + '/ventas'
+      getVentas: APIURL + '/ventas',
+      getVentasByCedula: APIURL + '/ventas/get'
     },
     productos: {
       getProductos: APIURL + '/productos',
+      getCatalogo: APIURL + '/productos/catalogo',
       getProductosById: APIURL + '/productos/get',
       createProducto: APIURL + '/productos/create',
       updateProducto: APIURL + '/productos/update',
     },
     categoria: {
       getCategorias: APIURL + '/categoria'
+    },
+    carrito: {
+      getCarrito: APIURL + '/carrito'
+    },
+    guardados: {
+      getGuardados: APIURL + '/guardados'
     }
   }
 };

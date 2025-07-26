@@ -7,7 +7,6 @@
       [rows]="8" [value]="ventas" class="w-full pl-2">
       <ng-template pTemplate="header">
         <tr class="text-center">
-          <th>N°</th>
           <th>Comprador</th>
           <th>Fecha de Compra</th>
           <th>Detalle</th>
@@ -15,7 +14,6 @@
       </ng-template>
       <ng-template let-rowData let-i="rowIndex" pTemplate="body" class="text-center">
         <tr class="hover:bg-gray-100 transition-all duration-300">
-          <td>{{ rowData.id }}</td>
           <td>{{ rowData.nombres }}</td>
           <td>{{ rowData.fecha_compra | date:'dd/MM/yyyy' }}</td>
           <td>

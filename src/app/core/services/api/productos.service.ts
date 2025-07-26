@@ -14,6 +14,10 @@ export class ProductosService {
     return this.http.get<any>(this.apiUrl.getProductos);
   }
 
+  getCatalogo(): Observable<any> {
+    return this.http.get<any>(this.apiUrl.getCatalogo);
+  }
+
   getProductosById(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl.getProductosById}/${id}`);
   }

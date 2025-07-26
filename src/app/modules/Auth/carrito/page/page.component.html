@@ -24,18 +24,19 @@
           <td>
             {{ rowData.cantidad }}
             <span *ngIf="rowData.existencias !== 1">
-              <i (click)="addItem(rowData)" (keyup.enter)="addItem(rowData)" tabindex="0"
-                class="pi pi-plus p-icon-sm cursor-pointer" style="font-size: 12px;" role="button"
-                aria-label="Agregar uno"></i>/<i (click)="removeItem(rowData)" (keyup.enter)="removeItem(rowData)"
-                tabindex="0" class="pi pi-minus cursor-pointer" style="font-size: 12px;" role="button"
-                aria-label="Quitar uno"></i>
+              <i pTooltip="Añadir" tooltipPosition="top" (click)="addItem(rowData)" (keyup.enter)="addItem(rowData)"
+                tabindex="0" class="pi pi-plus p-icon-sm cursor-pointer" style="font-size: 12px;" role="button"
+                aria-label="Agregar uno"></i>/<i (click)="removeItem(rowData)" pTooltip="Quitar" tooltipPosition="top"
+                (keyup.enter)="removeItem(rowData)" tabindex="0" class="pi pi-minus cursor-pointer"
+                style="font-size: 12px;" role="button" aria-label="Quitar"></i>
             </span>
           </td>
           <td>{{ rowData.precio | currency }}</td>
-          <td>{{ rowData.fecha_carrito | date:'dd/MM/yyyy' }}</td>
+          <td>{{ rowData.fecha_creacion | date:'dd/MM/yyyy' }}</td>
           <td>
-            <i (click)="removeItemFromCart(rowData)" (keyup.enter)="removeItemFromCart(rowData)" tabindex="0"
-              role="button" aria-label="Eliminar del carrito" class="pi pi-trash text-red-600">
+            <i pTooltip="Eliminar" tooltipPosition="top" (click)="removeItemFromCart(rowData)"
+              (keyup.enter)="removeItemFromCart(rowData)" tabindex="0" role="button" aria-label="Eliminar del carrito"
+              class="pi pi-trash text-red-600">
             </i>
           </td>
         </tr>

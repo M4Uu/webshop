@@ -19,7 +19,7 @@ export class PageComponent implements OnInit {
     this.loading = true;
     this.APIVentas.getVentas().subscribe({
       next: (response) => this.ventas = response.data,
-      error: () => this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 }),
+      error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 }),
       complete: () => this.loading = false
     });
   }

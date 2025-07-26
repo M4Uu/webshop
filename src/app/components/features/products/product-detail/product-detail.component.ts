@@ -1,7 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ProductosService } from '@app/core/services/api/productos.service';
 import { TestProductsService } from '@app/core/services/customs/test-products.service';
+import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { RatingModule } from 'primeng/rating';
 import { TableModule } from 'primeng/table';
@@ -19,35 +21,20 @@ import { TableModule } from 'primeng/table';
 })
 export class ProductDetailComponent implements OnInit {
   private route = inject(ActivatedRoute);
-  private productService = inject(TestProductsService)
-  public items: any = [];
-  public value = 3;
-  public medidas = [
-    { name: 'Longitud 1', value: 10 },
-    { name: 'Grosor 1', value: 20 },
-    { name: 'Longitud 2', value: 10 },
-    { name: 'Grosor 2', value: 20 },
-    { name: 'Longitud 2', value: 10 },
-    { name: 'Grosor 2', value: 20 },
-    { name: 'Longitud 2', value: 10 },
-    { name: 'Grosor 2', value: 20 },
-    { name: 'Longitud 2', value: 10 },
-    { name: 'Grosor 2', value: 20 },
-  ];
+  private APIproductos = inject(ProductosService)
+  public messageService = inject(MessageService);
 
-  public materiales = [
-    { name: 'Material 1', descripcion: 'Descripción del material 1' },
-    { name: 'Material 2', descripcion: 'Descripción del material 2' },
-    { name: 'Material 3', descripcion: 'Descripción del material 3' },
-    { name: 'Material 4', descripcion: 'Descripción del material 4' },
-    { name: 'Material 5', descripcion: 'Descripción del material 5' },
-    { name: 'Material 6', descripcion: 'Descripción del material 6' },
-    { name: 'Material 7', descripcion: 'Descripción del material 7' },
-    { name: 'Material 8', descripcion: 'Descripción del material 8' },
-  ];
+  public item: any;
+  public value = 3;
+  public loading: boolean = false;
 
   ngOnInit() {
     const index = Number(this.route.snapshot.paramMap.get('id'));
-    this.items = this.productService.get()[index];
+    this.loading = true;
+    this.APIproductos.getProductosById(index).subscribe({
+      next: (response) => this.item = response.data[0],
+      error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 }),
+      complete: () => this.loading = false,
+    });
   }
 }

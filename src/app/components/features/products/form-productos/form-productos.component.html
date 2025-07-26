@@ -9,7 +9,7 @@
     <div class="p-fluid flex flex-col gap-4">
       <div class="flex flex-col gap-2">
         <label for="nombre">Nombre del Producto</label>
-        <input [readonly]="!editar" pInputText id="nombre" formControlName="nombre" />
+        <input [readonly]="!editar" pInputText id="nombre" formControlName="nombre" placeholder="Nombre" />
         <small *ngIf="productoForm.get('nombre')?.invalid && productoForm.get('nombre')?.touched" class="p-error">
           El nombre del pedido es requerido.
         </small>
@@ -18,7 +18,7 @@
       <div class="field flex flex-col gap-2">
         <label for="nombre">Descripción del Producto</label>
         <textarea [readonly]="!editar" rows="4" class="border border-gray-300 hover:border-gray-400 rounded-lg"
-          cols="30" pTextarea formControlName="descripcion"></textarea>
+          cols="30" pTextarea formControlName="descripcion" placeholder="Descripción"></textarea>
         <small *ngIf="productoForm.get('descripcion')?.invalid && productoForm.get('descripcion')?.touched"
           class="p-error">
           La descripcion del pedido es requerida.

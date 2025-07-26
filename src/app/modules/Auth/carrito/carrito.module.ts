@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { DrawerModule } from 'primeng/drawer';
+import { TooltipModule } from 'primeng/tooltip';
 
 const routes: Routes = [
   {
@@ -23,7 +24,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     TableModule,
     ButtonModule,
-    DrawerModule
+    DrawerModule,
+    TooltipModule
   ]
 })
 export class CarritoModule { }

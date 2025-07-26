@@ -1,6 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { VentasService } from '@app/core/services/api/ventas.service';
+import { AuthService } from '@app/core/services/customs/auth.service';
 import { TestProductsService } from '@app/core/services/customs/test-products.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-page',
@@ -9,18 +12,33 @@ import { TestProductsService } from '@app/core/services/customs/test-products.se
   styleUrl: './page.component.scss'
 })
 export class PageComponent {
-  public items: any = inject(TestProductsService).get();
-  private router = inject(Router);
-  private route = inject(ActivatedRoute);
-  public visible: boolean = false;
+  public APIVentas = inject(VentasService);
+  public authService = inject(AuthService);
+  public messageService = inject(MessageService);
+  public ventas: any;
+  public ventasIndex: number = -1;
+  public loading: boolean = false;
 
-  public showDrawer(idProducto: number) {
-    this.visible = true;
-    this.router.navigate(['producto', idProducto], { relativeTo: this.route });
+  public user = this.authService.loadSessionStorage();
+
+  ngOnInit(): void {
+    this.loading = true;
+    this.APIVentas.getVentasByCedula(Number(this.user.cedula)).subscribe({
+      next: (response) => this.ventas = response.data,
+      error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 }),
+      complete: () => this.loading = false
+    });
   }
 
-  public hideDrawer() {
-    this.visible = false;
-    this.router.navigate(['.'], { relativeTo: this.route });
+  setIndexVenta(indexVenta: number): void {
+    this.ventasIndex = indexVenta;
+    if (this.ventasIndex === -1) {
+      this.messageService.add({ severity: 'info', summary: 'Información', detail: 'Seleccione una venta para ver los detalles.', life: 3000 });
+    }
   }
+
+  cantidadTotal = (venta: any) =>
+    venta.productos.reduce((total: number, producto: any) => total + producto.cantidad, 0);
+
+  generateCode = (ventas: any) => 'COD-' + ventas.id;
 }

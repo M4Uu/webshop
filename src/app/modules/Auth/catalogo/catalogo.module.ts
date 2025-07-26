@@ -10,6 +10,7 @@ import { RouterOutlet } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabel } from 'primeng/floatlabel';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { TooltipModule } from 'primeng/tooltip';
 
 export const routes: Routes = [
   {
@@ -40,7 +41,8 @@ export const routes: Routes = [
     InputTextModule,
     FloatLabel,
     MultiSelectModule,
-    RouterOutlet
+    RouterOutlet,
+    TooltipModule
   ]
 })
 export class CatalogoModule { }

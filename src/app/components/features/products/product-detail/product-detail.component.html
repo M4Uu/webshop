@@ -1,41 +1,33 @@
-<div class="card px-20">
-  <div class="grid grid-flow-col grid-rows-2">
-    <div class="row-span-2 flex flex-col justify-center gap-7">
-      <div class="flex flex-col">
-        <h1 class="text-2xl font-semibold w-[10rem]">{{ items.nombre }}</h1>
-        <span class="font-bold">30.00$</span>
+<div class="card flex flex-col items-center">
+  <div [hidden]="loading">
+
+    <div class="flex flex-col item?-center justify-center my-5 gap-3">
+      <div class="row-span-2 flex justify-center gap-7">
+        <div class="flex flex-col">
+          <h1 class="text-2xl font-semibold w-[13rem]">{{ item?.nombre }}</h1>
+          <span class="font-bold">{{ item?.precio }}</span>
+        </div>
+        <span class="font-bold text-xl">{{ item?.categoria_nombre }}</span>
       </div>
-      <p class="text-lg">{{ items.descripcion }}</p>
+      <div class="w-[20rem] h-[2q5rem] item?-center justify-center flex flex-col gap-5">
+        <img class="object-cover shadow-lg border rounded-lg" [src]="item?.imagen_url" alt="{{ item?.nombre }}"
+          alt="detalle producto imagen">
+        <div class="flex justify-center w-full">
+          <p-rating [style]="{'--p-rating-icon-size': '15px'}" [ngModel]="item?.calificacion" [readonly]="true" />
+        </div>
+      </div>
     </div>
-    <div class="row-span-2 w-[25rem] h-[2q5rem] items-center flex flex-col gap-5">
-      <img class="w-[20rem] object-cover shadow-lg border rounded-lg"
-        [src]="'https://png.pngtree.com/png-vector/20240801/ourmid/pngtree-design-ring-png-image_13326726.png'"
-        alt="detalle producto imagen">
-      <div>
-        <p-rating [style]="{'--p-rating-icon-size': '15px'}" [ngModel]="items.calificacion" [readonly]="true" />
-      </div>
+    <div class="w-full flex justify-center text-justify">
+      <p class="text-lg w-[20rem]">{{ item?.descripcion }}</p>
+    </div>
+
+
+    <div class="flex justify-center mt-7">
+      <p-button pButton label="Añadir al carrito" class="w-50" />
     </div>
   </div>
 
-  <div>
-    <h1 class="text-2xl font-semibold">Medidas</h1>
-    <p-table [value]="medidas" class="w-full" [scrollable]="true" scrollHeight="200px">
-      <ng-template pTemplate="header">
-        <tr>
-          <th>Nombre</th>
-          <th>Tamaño</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-rowData>
-        <tr>
-          <td>{{ rowData.name }}</td>
-          <td>{{ rowData.value }} cm</td>
-        </tr>
-      </ng-template>
-    </p-table>
+  <div [hidden]="!loading">
+    <i class="pi pi-spin pi-spinner"></i>
   </div>
-  <div class="flex justify-end mt-3">
-    <p-button pButton label="Añadir al carrito" class="w-50" />
-  </div>
-
 </div>

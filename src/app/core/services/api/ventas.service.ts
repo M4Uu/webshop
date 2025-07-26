@@ -14,4 +14,9 @@ export class VentasService {
     return this.http.get<any>(this.apiUrl.getVentas);
   }
 
+  getVentasByCedula(cedula: number): Observable<any> {
+    const data = { cedula: cedula };
+    return this.http.post<any>(this.apiUrl.getVentasByCedula, data);
+  }
+
 }

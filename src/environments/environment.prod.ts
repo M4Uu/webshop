@@ -23,7 +23,8 @@ export const environment = {
       uploadimg: APIURL + '/toolkit/upload_img',
     },
     ventas: {
-      getVentas: APIURL + '/ventas'
+      getVentas: APIURL + '/ventas',
+      getVentasByCedula: APIURL + '/ventas/get'
     },
     productos: {
       getProductos: APIURL + '/productos',
