@@ -28,12 +28,19 @@ export const environment = {
     },
     productos: {
       getProductos: APIURL + '/productos',
+      getCatalogo: APIURL + '/productos/catalogo',
       getProductosById: APIURL + '/productos/get',
       createProducto: APIURL + '/productos/create',
       updateProducto: APIURL + '/productos/update',
     },
     categoria: {
       getCategorias: APIURL + '/categoria'
+    },
+    carrito: {
+      getCarrito: APIURL + '/carrito'
+    },
+    guardados: {
+      getGuardados: APIURL + '/guardados'
     }
   }
 };
