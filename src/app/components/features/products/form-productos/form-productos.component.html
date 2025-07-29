@@ -1,15 +1,17 @@
 <div class="px-5">
   <div class="flex items-center justify-between mb-4">
-    <h4 class="text-2xl font-bold">{{ editar ? 'Escribir Producto' : 'Detalle Producto' }}</h4>
     <button *ngIf="!isCreate" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"
       (click)="onEdit()" aria-label="Editar"></button>
+    <h4 class="text-2xl font-bold">{{ editar ? 'Escribir Producto' : 'Detalle Producto' }}</h4>
   </div>
 
   <form [formGroup]="productoForm" (ngSubmit)="onSubmit()">
     <div class="p-fluid flex flex-col gap-4">
       <div class="flex flex-col gap-2">
         <label for="nombre">Nombre del Producto</label>
-        <input [readonly]="!editar" pInputText id="nombre" formControlName="nombre" placeholder="Nombre" />
+        <input *ngIf="!loading" [readonly]="!editar" pInputText id="nombre" formControlName="nombre"
+          placeholder="Nombre" />
+        <p-skeleton *ngIf="loading" height="2.5rem" styleClass="w-full" />
         <small *ngIf="productoForm.get('nombre')?.invalid && productoForm.get('nombre')?.touched" class="p-error">
           El nombre del pedido es requerido.
         </small>
@@ -17,8 +19,10 @@
 
       <div class="field flex flex-col gap-2">
         <label for="nombre">Descripción del Producto</label>
-        <textarea [readonly]="!editar" rows="4" class="border border-gray-300 hover:border-gray-400 rounded-lg"
-          cols="30" pTextarea formControlName="descripcion" placeholder="Descripción"></textarea>
+        <textarea *ngIf="!loading" [readonly]="!editar" rows="4"
+          class="border border-gray-300 hover:border-gray-400 rounded-lg" cols="30" pTextarea
+          formControlName="descripcion" placeholder="Descripción"></textarea>
+        <p-skeleton *ngIf="loading" height="7.2rem" styleClass="w-full" />
         <small *ngIf="productoForm.get('descripcion')?.invalid && productoForm.get('descripcion')?.touched"
           class="p-error">
           La descripcion del pedido es requerida.
@@ -28,8 +32,9 @@
         <div class="flex gap-5 flex-col">
           <div class="flex flex-col gap-2">
             <label for="nombre">Existencias</label>
-            <p-inputnumber [readonly]="!editar" formControlName="existencias" showButtons="true" inputId="minmax"
-              mode="decimal" [min]="0" [max]="100" />
+            <p-inputnumber *ngIf="!loading" [readonly]="!editar" formControlName="existencias" showButtons="true"
+              inputId="minmax" mode="decimal" [min]="0" [max]="100" />
+            <p-skeleton *ngIf="loading" height="2.5rem" styleClass="w-full" />
             <small *ngIf="productoForm.get('existencias')?.invalid && productoForm.get('existencias')?.touched"
               class="p-error">
               Las existencias del producto son requeridas.
@@ -37,16 +42,18 @@
           </div>
           <div class="flex flex-col gap-2">
             <label for="nombre">Precio</label>
-            <p-inputnumber mode="currency" currency="USD" locale="en-US" [readonly]="!editar" formControlName="precio"
-              showButtons="true" inputId="minmax" />
+            <p-inputnumber *ngIf="!loading" mode="currency" currency="USD" locale="en-US" [readonly]="!editar"
+              formControlName="precio" showButtons="true" inputId="minmax" />
+            <p-skeleton *ngIf="loading" height="2.5rem" styleClass="w-full" />
             <small *ngIf="productoForm.get('precio')?.invalid && productoForm.get('precio')?.touched" class="p-error">
               El precio del producto es requerido.
             </small>
           </div>
           <div class="flex flex-col gap-2">
             <label for="nombre">Categoría</label>
-            <p-select [readonly]="!editar" formControlName="categoria_id" [options]="categorias" optionLabel="name"
-              placeholder="Seleccione una categoría" class="w-full" />
+            <p-select *ngIf="!loading" [readonly]="!editar" formControlName="categoria_id" [options]="categorias"
+              optionLabel="name" placeholder="Seleccione una categoría" class="w-full" />
+            <p-skeleton *ngIf="loading" height="2.5rem" styleClass="w-full" />
             <small *ngIf="productoForm.get('categoria_id')?.invalid && productoForm.get('categoria_id')?.touched"
               class="p-error">
               La categoría del producto es requerida.
@@ -54,7 +61,7 @@
           </div>
         </div>
         <div class="w-full flex justify-center">
-          <p-fileupload #fileUpload name="image" [url]="getUploadImgUrl" [multiple]="false"
+          <p-fileupload *ngIf="!loading" #fileUpload name="image" [url]="getUploadImgUrl" [multiple]="false"
             accept="image/jpeg,image/png,image/jpg" maxFileSize="1000000" (onSelect)="onSelectedFiles($event)"
             (onUpload)="handleUploadResponse($event)">
             <ng-template #header let-files let-chooseCallback="chooseCallback" let-clearCallback="clearCallback">
@@ -65,6 +72,8 @@
               </div>
             </ng-template>
           </p-fileupload>
+          <p-skeleton *ngIf="loading" height="19rem" width="18rem" />
+
         </div>
       </div>
 

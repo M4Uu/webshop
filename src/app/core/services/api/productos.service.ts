@@ -14,12 +14,13 @@ export class ProductosService {
     return this.http.get<any>(this.apiUrl.getProductos);
   }
 
-  getCatalogo(): Observable<any> {
-    return this.http.get<any>(this.apiUrl.getCatalogo);
+  getCatalogo(cedula: number): Observable<any> {
+    const data = { cedula: cedula };
+    return this.http.post<any>(this.apiUrl.getCatalogo, data);
   }
 
-  getProductosById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl.getProductosById}/${id}`);
+  getProductosById(data: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl.getProductosById, data);
   }
 
   createProducto(producto: any): Observable<any> {
@@ -28,5 +29,13 @@ export class ProductosService {
 
   updateProducto(producto: any): Observable<any> {
     return this.http.put<any>(this.apiUrl.updateProducto, producto);
+  }
+
+  calificacion(producto: any): Observable<any> {
+    return this.http.put<any>(this.apiUrl.calificacion, producto);
+  }
+
+  inhabilitar(producto: any): Observable<any> {
+    return this.http.put<any>(this.apiUrl.inhabilitar, producto);
   }
 }

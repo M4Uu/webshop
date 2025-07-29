@@ -19,4 +19,9 @@ export class VentasService {
     return this.http.post<any>(this.apiUrl.getVentasByCedula, data);
   }
 
+  insertar(data: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl.insertar, data);
+  }
+
+
 }

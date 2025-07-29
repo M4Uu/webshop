@@ -11,6 +11,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabel } from 'primeng/floatlabel';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { TooltipModule } from 'primeng/tooltip';
+import { SkeletonModule } from 'primeng/skeleton';
 
 export const routes: Routes = [
   {
@@ -42,7 +43,8 @@ export const routes: Routes = [
     FloatLabel,
     MultiSelectModule,
     RouterOutlet,
-    TooltipModule
+    TooltipModule,
+    SkeletonModule
   ]
 })
 export class CatalogoModule { }

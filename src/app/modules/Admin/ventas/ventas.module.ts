@@ -3,6 +3,13 @@ import { CommonModule } from '@angular/common';
 import { PageComponent } from './page/page.component';
 import { RouterModule, Routes } from '@angular/router';
 import { TableModule } from 'primeng/table';
+import { TooltipModule } from 'primeng/tooltip';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { ButtonModule } from 'primeng/button';
+import { FormsModule } from '@angular/forms';
+import { InputText } from 'primeng/inputtext';
+import { DatePickerModule } from 'primeng/datepicker';
 
 const routes: Routes = [
   {
@@ -19,7 +26,13 @@ const routes: Routes = [
   imports: [
     RouterModule.forChild(routes),
     CommonModule,
-    TableModule
+    TableModule,
+    TooltipModule,
+    FloatLabelModule,
+    ButtonModule,
+    FormsModule,
+    InputText,
+    DatePickerModule
   ]
 })
 export class VentasModule { }

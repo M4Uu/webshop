@@ -1,8 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { VentasService } from '@app/core/services/api/ventas.service';
 import { AuthService } from '@app/core/services/customs/auth.service';
-import { TestProductsService } from '@app/core/services/customs/test-products.service';
 import { MessageService } from 'primeng/api';
 
 @Component({

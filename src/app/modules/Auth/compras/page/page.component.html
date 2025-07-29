@@ -19,10 +19,9 @@
           <td>{{ rowData.total | currency }}</td>
           <td>{{ cantidadTotal(rowData) }}</td>
           <td>
-            <div
+            <div tabindex="0" (click)="setIndexVenta(i)" (keyup.enter)="setIndexVenta(i)"
               class="rounded-full border-2 border-cyan-900 w-8 h-8 flex items-center justify-center cursor-pointer hover:bg-gray-200 transition-all duration-300  ">
-              <i class="pi pi-info" tabindex="0" role="button" (click)="setIndexVenta(i)"
-                (keyup.enter)="setIndexVenta(i)" aria-label="Ver detalles de la compra"></i>
+              <i class="pi pi-info" role="button" aria-label="Ver detalles de la compra"></i>
             </div>
           </td>
         </tr>

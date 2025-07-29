@@ -32,7 +32,7 @@
         accept="image/jpeg,image/png,image/jpg" maxFileSize="1000000" (onSelect)="onSelectedFiles($event)"
         (onUpload)="handleUploadResponse($event)">
         <ng-template #header let-files let-chooseCallback="chooseCallback" let-clearCallback="clearCallback">
-          <div class="w-[26rem] bg-black">
+          <div class="w-[23rem] bg-black">
             <img (click)="selectEvent(chooseCallback, clearCallback)" (keyup.esc)="editar" [tabindex]="0"
               class="hover:opacity-85 cursor-pointer" [src]="userForm?.value?.imagen_url" alt="usuario-avatar">
           </div>

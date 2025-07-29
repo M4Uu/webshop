@@ -6,6 +6,7 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { DrawerModule } from 'primeng/drawer';
 import { TooltipModule } from 'primeng/tooltip';
+import { PasarelaPagoComponent } from '@app/components/features/products/pasarela-pago/pasarela-pago.component';
 
 const routes: Routes = [
   {
@@ -25,7 +26,7 @@ const routes: Routes = [
     TableModule,
     ButtonModule,
     DrawerModule,
-    TooltipModule
+    PasarelaPagoComponent
   ]
 })
 export class CarritoModule { }

@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PageComponent } from './page/page.component';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, RouterOutlet, Routes } from '@angular/router';
 import { DrawerModule } from 'primeng/drawer';
 import { RatingModule } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FloatLabelModule } from 'primeng/floatlabel';
+import { SkeletonModule } from 'primeng/skeleton';
 
 export const routes: Routes = [
   {
@@ -37,6 +38,8 @@ export const routes: Routes = [
     InputTextModule,
     MultiSelectModule,
     FloatLabelModule,
+    RouterOutlet,
+    SkeletonModule
   ]
 })
 export class GuardadosModule { }

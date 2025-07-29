@@ -16,6 +16,7 @@ import { ToolkitService } from '@app/core/services/api/toolkit.service';
 import { AuthService } from '@app/core/services/customs/auth.service';
 import { FileUpload } from 'primeng/fileupload';
 import { CategoriaService } from '@app/core/services/api/categoria.service';
+import { Skeleton } from 'primeng/skeleton';
 
 @Component({
   selector: 'app-form-productos',
@@ -30,7 +31,8 @@ import { CategoriaService } from '@app/core/services/api/categoria.service';
     TextareaModule,
     InputNumberModule,
     SelectModule,
-    FileUpload
+    FileUpload,
+    Skeleton
   ],
   templateUrl: './form-productos.component.html',
   styleUrl: './form-productos.component.scss'
@@ -60,8 +62,11 @@ export class FormProductosComponent implements OnInit, OnDestroy {
 
   public isCreate = this.index == 'create';
   public editar: boolean = false;
+  public loading: boolean = false;
+
 
   ngOnInit(): void {
+    this.loading = true;
     this.APICategoria.getCategoria().subscribe({
       next: (response) => {
         this.categorias = response.data;
@@ -75,10 +80,12 @@ export class FormProductosComponent implements OnInit, OnDestroy {
             categoria_id: [[], [Validators.required]],
             imagen_url: ['https://link.storjshare.io/raw/15M6fjomdWMwh4cdbZx5YmDQpQsc8EN73sYKcfLodh6yz6PXEbNJe1WKFvKrwMotebVhRWPiihQoPEuKkaEt1reW5WhPwipmRZnqcfnA5Fq2A5NiMhief8rTrMtFWLimZCkGJp8CqpyA3CkXQZ6tZYrK5sC4Lgksbiq9BMwKnfxXWdH4smKmVNMgYkLyuEiA6gp6eJQv3dqPJnr7SrWepmbKTYQvSQTizqxxTrgj2HDLu6pde6NtYYbAmLArVx5W2fNNVg31w7Kc9nsReNx1HLf5yBhF9v7x9/tesis-webshop-bucket/default-image-product.webp', [Validators.required]]
           });
+          this.loading = false;
         } else {
-          this.APIProductos.getProductosById(Number(this.index)).subscribe({
+          const data = { cedula: this.user.cedula, producto_id: Number(this.index) };
+          this.APIProductos.getProductosById(data).subscribe({
             next: (response) => {
-              const producto = response.data[0];
+              const producto = response.data;
               this.productoForm = this.fb.group({
                 id: [producto.id, [Validators.required]],
                 nombre: [producto.nombre, [Validators.required]],
@@ -90,10 +97,11 @@ export class FormProductosComponent implements OnInit, OnDestroy {
               })
             },
             error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 }),
+            complete: () => this.loading = false
           })
         }
       },
-      error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 })
+      error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 }),
     })
 
 

@@ -24,7 +24,8 @@ export const environment = {
     },
     ventas: {
       getVentas: APIURL + '/ventas',
-      getVentasByCedula: APIURL + '/ventas/get'
+      getVentasByCedula: APIURL + '/ventas/get',
+      insertar: APIURL + '/ventas/insertar'
     },
     productos: {
       getProductos: APIURL + '/productos',
@@ -32,15 +33,24 @@ export const environment = {
       getProductosById: APIURL + '/productos/get',
       createProducto: APIURL + '/productos/create',
       updateProducto: APIURL + '/productos/update',
+      calificacion: APIURL + '/productos/calificacion',
+      inhabilitar: APIURL + '/productos/inhabilitar',
     },
     categoria: {
       getCategorias: APIURL + '/categoria'
     },
     carrito: {
-      getCarrito: APIURL + '/carrito'
+      getCarrito: APIURL + '/carrito',
+      insertar: APIURL + '/carrito/insertar',
+      eliminar: APIURL + '/carrito/eliminar',
+      aumentarCantidad: APIURL + '/carrito/mascantidad',
+      disminuirCantidad: APIURL + '/carrito/menoscantidad',
+      vendido: APIURL + '/carrito/vendido',
     },
     guardados: {
-      getGuardados: APIURL + '/guardados'
+      getGuardados: APIURL + '/guardados',
+      insertar: APIURL + '/guardados/insertar',
+      eliminar: APIURL + '/guardados/eliminar'
     }
   }
 };

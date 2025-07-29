@@ -7,13 +7,26 @@
           <h1 class="text-2xl font-semibold w-[13rem]">{{ item?.nombre }}</h1>
           <span class="font-bold">{{ item?.precio }}</span>
         </div>
-        <span class="font-bold text-xl">{{ item?.categoria_nombre }}</span>
+        <div>
+          <span class="font-bold text-xl">{{ item?.categoria_nombre }}</span>
+          <div class="flex items-center justify-end gap-2">
+            <i *ngIf="!item?.en_guardados" (click)="toggleGuardado(item, $event)" [tabindex]="0"
+              (keyup.esc)="toggleGuardado(item, $event)" class="pi pi-bookmark"></i>
+            <i *ngIf="item?.en_guardados" (click)="toggleGuardado(item, $event)" [tabindex]="0"
+              (keyup.esc)="toggleGuardado(item, $event)" class="pi pi-bookmark-fill"></i>
+          </div>
+        </div>
       </div>
       <div class="w-[20rem] h-[2q5rem] item?-center justify-center flex flex-col gap-5">
         <img class="object-cover shadow-lg border rounded-lg" [src]="item?.imagen_url" alt="{{ item?.nombre }}"
           alt="detalle producto imagen">
-        <div class="flex justify-center w-full">
-          <p-rating [style]="{'--p-rating-icon-size': '15px'}" [ngModel]="item?.calificacion" [readonly]="true" />
+        <div class="flex flex-col items-center gap-3 justify-center w-full">
+          <p-rating (ngModelChange)="setCalificacion()" [style]="{'--p-rating-icon-size': '15px'}"
+            (ngModel)="calificacion()" [ngModel]="item?.calificacion" />
+          <small class="text-xs font-bold transition animate-pulse" [hidden]="timerMessage">¡Valora nuestro
+            producto!</small>
+          <small class="text-xs font-bold transition animate-pulse" [hidden]="tenkiuTimer">¡Gracias por tu
+            apoyo!</small>
         </div>
       </div>
     </div>
@@ -23,11 +36,13 @@
 
 
     <div class="flex justify-center mt-7">
-      <p-button pButton label="Añadir al carrito" class="w-50" />
+      <p-button (onClick)="insertarCarrito()" *ngIf="!item?.en_carrito" pButton label="Añadir al carrito"
+        class="w-50" />
+      <p *ngIf="item?.en_carrito">Producto en carrito</p>
     </div>
   </div>
 
   <div [hidden]="!loading">
-    <i class="pi pi-spin pi-spinner"></i>
+    <i class="text-2xl pi pi-spin pi-spinner"></i>
   </div>
 </div>
