@@ -1,16 +1,19 @@
 <div class="about-container">
   <section class="flex h-auto flex-col py-20 items-center justify-center gap-14 bg-slate-50">
     <div class="flex flex-col items-center justify-center text-center gap-3">
-      <span class="text-lg" data-aos="fade-down">Bienvenido a Julias Gioielli</span>
-      <h1 class="!text-5xl" data-aos="fade-down" data-aos-delay="150">Tú mejor aliado para la moda</h1>
-      <span class="lg:w-[25rem]" data-aos="fade-down" data-aos-delay="300">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span>
+      <span class="text-5xl" data-aos="fade-down">Bienvenido a Julias Gioielli</span>
+      <h1 class="!text-lg" data-aos="fade-down" data-aos-delay="150">Somos más que joyas, somos un estilo de
+        vida</h1>
+      <!-- <span class="lg:w-[25rem]" data-aos="fade-down" data-aos-delay="300">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span> -->
     </div>
 
     <div class="flex gap-5 flex-col lg:flex-row">
 
-      <p-card data-aos="flip-right" *ngFor="let card of textCards" class="w-[20rem] cursor-pointer" [header]="card.title">
+      <p-card data-aos="flip-right" *ngFor="let card of textCards" class="w-[20rem] cursor-pointer"
+        [header]="card.title">
         <ng-template pTemplate="header">
-          <img alt="Card" class="w-full rounded-t-md" src="https://primefaces.org/cdn/primereact/images/usercard.png" alt="about-image"/>
+          <img alt="Card" class="w-full rounded-t-md" src="https://primefaces.org/cdn/primereact/images/usercard.png"
+            alt="about-image" />
         </ng-template>
         <p class="m-0">{{card.content}}</p>
       </p-card>
@@ -23,7 +26,7 @@
       <div data-aos="fade-down" class="lg:w-[50%] flex flex-col gap-4">
         <h1 class="!text-5xl">Somos líderes en productos para tu vestir</h1>
         <div class="w-[5rem] h-[.2rem] bg-blue-500"></div>
-        <p class="text-lg/8">Sed ut perspiciatis unde omnis iste natus error sit voluptatem...</p>
+        <p class="text-lg/8">Puedes encontrar el outfit perfecto para todo tipo de ocación.</p>
       </div>
       <div data-aos="zoom-in" data-aos-delay="300" class="lg:w-[50%] flex justify-center items-center">
         <img src="assets/images/test.webp" alt="about-image" class="rounded-lg shadow-xl">
@@ -47,9 +50,11 @@
           <div class="w-[5rem] h-[.2rem] bg-blue-500"></div>
         </div>
         <div class="flex gap-5 flex-col lg:flex-row">
-          <p-card data-aos="flip-left" [attr.data-aos-delay]="200*teamMembers.indexOf(member)" (click)="showDialog(member)" *ngFor="let member of teamMembers" class="w-[18rem] cursor-pointer" [header]="member.title">
+          <p-card data-aos="flip-left" [attr.data-aos-delay]="200*teamMembers.indexOf(member)"
+            (click)="showDialog(member)" *ngFor="let member of teamMembers" class="w-[18rem] cursor-pointer"
+            [header]="member.title">
             <ng-template pTemplate="header">
-              <img class="w-full rounded-t-md" [src]="member.img" alt="about-image"/>
+              <img class="w-full rounded-t-md" [src]="member.img" alt="about-image" />
             </ng-template>
           </p-card>
         </div>
@@ -61,11 +66,10 @@
       <span class="ml-2 font-bold text-xl">{{member.title}}</span>
     </ng-template>
     <div class="w-[30rem] flex flex-col items-center">
-      <img class="w-[20rem] rounded-md mb-5" [src]="member.img" alt="about-image"/>
+      <img class="w-[20rem] rounded-md mb-5" [src]="member.img" alt="about-image" />
       <p class="w-[25rem]">
         {{member.content}}
       </p>
     </div>
   </p-dialog>
 </div>
-

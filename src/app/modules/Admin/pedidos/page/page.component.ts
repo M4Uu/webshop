@@ -1,7 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductosService } from '@app/core/services/api/productos.service';
+import { PedidosService } from '@app/core/services/api/pedidos.service';
+import { Actualizar } from '@app/core/services/customs/actualizar.service';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-page',
@@ -10,33 +12,34 @@ import { MessageService } from 'primeng/api';
   standalone: false
 })
 export class PageComponent {
-  private APIProductos = inject(ProductosService);
-
+  private APIpedidos = inject(PedidosService);
   private route = inject(ActivatedRoute)
   private router = inject(Router);
+  private actualizar = inject(Actualizar);
+
+  public subscription!: Subscription;
   public messageService = inject(MessageService);
 
   public visible: boolean = false;
-  public pedido: any;
-  public productos: any[] = [];
+  public pedidos: any[] = [];
   public loading: boolean = false;
 
   ngOnInit() {
     this.loading = true;
-    this.APIProductos.getProductos().subscribe({
-      next: (response) => this.productos = response.data,
+    this.APIpedidos.get().subscribe({
+      next: (response) => this.pedidos = response.data,
       error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 }),
       complete: () => this.loading = false
     })
+
+    this.subscription = this.actualizar.pedidoActualizado$.subscribe((newPedido) => {
+      this.pedidos = this.pedidos.filter(pedido => pedido.id !== newPedido.id);
+      this.pedidos.push(newPedido);
+    })
   }
 
-  public createPedido() {
-    this.visible = true;
-    this.router.navigate(['detalle', 'create'], { relativeTo: this.route });
-  }
-
-  showProductoDetails(idProducto: string) {
-    this.router.navigate(['detalle', idProducto], { relativeTo: this.route });
+  showPedidoDetails(idPedido: string) {
+    this.router.navigate(['detalle', idPedido], { relativeTo: this.route });
     this.visible = true;
   }
 

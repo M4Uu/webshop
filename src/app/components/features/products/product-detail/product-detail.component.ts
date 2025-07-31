@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CarritoService } from '@app/core/services/api/carrito.service';
 import { GuardadosService } from '@app/core/services/api/guardados.service';
 import { ProductosService } from '@app/core/services/api/productos.service';
-import { Actualizar } from '@app/core/services/customs/actualizarcarrito.service';
+import { Actualizar } from '@app/core/services/customs/actualizar.service';
 import { AuthService } from '@app/core/services/customs/auth.service';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -45,7 +45,7 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit() {
     const index = Number(this.route.snapshot.paramMap.get('id'));
-    const data = { cedula: this.user.cedula, id_producto: index };
+    const data = { cedula: this.user.cedula, producto_id: index };
     this.loading = true;
     this.APIproductos.getProductosById(data).subscribe({
       next: (response) => this.item = response.data,

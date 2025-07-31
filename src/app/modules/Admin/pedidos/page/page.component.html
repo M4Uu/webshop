@@ -7,25 +7,26 @@
 </div>
 
 <div class="p-3">
-  <p-table [loading]="loading" data-aos="fade-zoom-in" [value]="productos" [paginator]="productos.length > 7"
-    size="large" [rows]="8" [responsiveLayout]="'scroll'">
+  <p-table [loading]="loading" data-aos="fade-zoom-in" [value]="pedidos" [paginator]="pedidos.length > 7" size="large"
+    [rows]="8" [responsiveLayout]="'scroll'">
     <ng-template pTemplate="header">
       <tr>
         <th>Nombre</th>
-        <th>Precio</th>
-        <th>Existencias</th>
-        <th>Calificación</th>
+        <th>Estado</th>
+        <th>Fecha cita</th>
+        <th>Creado el</th>
         <th>Opciones</th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-producto>
+    <ng-template pTemplate="body" let-pedido>
       <tr>
-        <td>{{ producto.nombre }}</td>
-        <td>{{ producto.precio }}</td>
-        <td>{{ producto.existencias }}</td>
-        <td><p-rating class="cursor-default" [readonly]="true" [(ngModel)]="producto.calificacion" /></td>
+        <td>{{ pedido.nombre }}</td>
+        <td>{{ pedido.prioridad }}</td>
+        <td *ngIf="pedido.fecha_cita !== 'Sin asignar'">{{ pedido.fecha_cita | date: 'short' }}</td>
+        <td *ngIf="pedido.fecha_cita === 'Sin asignar'">{{ pedido.fecha_cita }}</td>
+        <td>{{ pedido.fecha_creacion | date: 'dd:mm:yy' }}</td>
         <td class="">
-          <i (click)="showProductoDetails(producto.id)" [tabindex]="0" (keyup.esc)="visible = false"
+          <i (click)="showPedidoDetails(pedido.id)" [tabindex]="0" (keyup.esc)="visible = false"
             ngClass="rounded-lg pi pi-eye" class="text-indigo-400 cursor-pointer"></i>
         </td>
       </tr>

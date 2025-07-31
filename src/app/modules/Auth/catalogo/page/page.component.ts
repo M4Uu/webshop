@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CategoriaService } from '@app/core/services/api/categoria.service';
 import { GuardadosService } from '@app/core/services/api/guardados.service';
 import { ProductosService } from '@app/core/services/api/productos.service';
-import { Actualizar } from '@app/core/services/customs/actualizarcarrito.service';
+import { Actualizar } from '@app/core/services/customs/actualizar.service';
 import { AuthService } from '@app/core/services/customs/auth.service';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';

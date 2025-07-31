@@ -15,19 +15,20 @@
     [responsiveLayout]="'scroll'">
     <ng-template pTemplate="header">
       <tr>
-        <th>Id</th>
         <th>Nombre</th>
         <th>Estado</th>
-        <th>Fecha</th>
+        <th>Fecha de Cita</th>
+        <th>Creado el</th>
         <th>Acciones</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-pedido>
       <tr>
-        <td>{{ pedido.id }}</td>
         <td>{{ pedido.nombre }}</td>
-        <td>{{ pedido.estado }}</td>
-        <td>{{ pedido.fecha_pedido | date: 'short' }}</td>
+        <td>{{ pedido.prioridad }}</td>
+        <td *ngIf="typeof pedido.fecha_cita !== 'string'">{{ pedido.fecha_cita | date: 'short' }}</td>
+        <td *ngIf="typeof pedido.fecha_cita === 'string'">{{ pedido.fecha_cita }}</td>
+        <td>{{ pedido.fecha_creacion | date: 'short' }}</td>
         <td class="">
           <i (click)="showPedidoDetails(pedido.id)" [tabindex]="0" (keyup.esc)="visible = false"
             ngClass="rounded-lg pi pi-eye" class="text-indigo-400 cursor-pointer"></i>

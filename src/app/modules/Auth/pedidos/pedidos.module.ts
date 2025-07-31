@@ -33,7 +33,7 @@ const routes: Routes = [
     TableModule,
     DrawerModule,
     InputTextModule,
-    RouterOutlet
+    RouterOutlet,
   ]
 })
 export class PedidosModule { }

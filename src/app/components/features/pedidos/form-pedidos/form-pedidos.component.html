@@ -1,44 +1,54 @@
 <div class="px-5">
   <div class="flex items-center justify-between mb-4">
     <h4 class="text-2xl font-bold">{{ editar ? 'Escribir Pedido' : 'Detalle Pedido' }}</h4>
-    <button *ngIf="!isCreate" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"
-      (click)="onEdit()" aria-label="Editar"></button>
+    <button [pTooltip]="editar ? 'Modo vista' : 'Modo edición'" *ngIf="!isCreate" pButton type="button"
+      [icon]="editar ? 'pi pi-eye' : 'pi pi-pencil'" class="p-button-rounded p-button-text" (click)="onEdit()"
+      aria-label="Editar"></button>
   </div>
 
   <form [formGroup]="pedidoForm" (ngSubmit)="onSubmit()">
     <div class="p-fluid flex flex-col gap-4">
       <div class="field flex flex-col gap-2">
         <label for="nombre">Nombre del Pedido</label>
-        <input [readonly]="!editar" pInputText id="nombre" formControlName="nombre" />
+        <input *ngIf="!loading" [readonly]="!editar" pInputText id="nombre" formControlName="nombre" />
         <small *ngIf="pedidoForm.get('nombre')?.invalid && pedidoForm.get('nombre')?.touched" class="p-error">
           El nombre del pedido es requerido.
         </small>
+        <p-skeleton *ngIf="loading" height="2.5rem" styleClass="w-full" />
+
       </div>
       <div class="field flex flex-col gap-2">
         <label for="nombre">Descripción del Encargo</label>
-        <textarea [readonly]="!editar" rows="5" class="border b  order-gray-300 hover:border-gray-400 rounded-lg"
-          cols="30" pTextarea formControlName="descripcion"></textarea>
+        <textarea *ngIf="!loading" [readonly]="!editar" rows="5"
+          class="border b  order-gray-300 hover:border-gray-400 rounded-lg" cols="30" pTextarea
+          formControlName="descripcion"></textarea>
         <small *ngIf="pedidoForm.get('descripcion')?.invalid && pedidoForm.get('descripcion')?.touched" class="p-error">
           La descripcion del pedido es requerida.
         </small>
+        <p-skeleton *ngIf="loading" height="9rem" styleClass="w-full" />
       </div>
       <div class="field flex flex-col gap-2">
         <label for="nombre">Cantidad</label>
-        <p-inputnumber [readonly]="!editar" formControlName="cantidad" showButtons="true" inputId="minmax"
-          mode="decimal" [min]="0" [max]="100" />
+        <p-inputnumber *ngIf="!loading" [readonly]="!editar" formControlName="cantidad" showButtons="true"
+          inputId="minmax" mode="decimal" [min]="0" [max]="100" />
         <small *ngIf="pedidoForm.get('cantidad')?.invalid && pedidoForm.get('cantidad')?.touched" class="p-error">
           El cantidad del pedido es requerido.
         </small>
+        <p-skeleton *ngIf="loading" height="2.5rem" styleClass="w-full" />
+
       </div>
       <div class="field flex flex-col gap-2">
         <label for="nombre">Categoría</label>
-        <p-select [readonly]="!editar" formControlName="categoria" [options]="categorias" optionLabel="name"
-          placeholder="Seleccione una categoría" class="w-full" />
+        <p-select *ngIf="!loading" [readonly]="!editar" formControlName="categoria" [options]="categorias"
+          optionLabel="name" placeholder="Seleccione una categoría" class="w-full" />
         <small *ngIf="pedidoForm.get('cantidad')?.invalid && pedidoForm.get('cantidad')?.touched" class="p-error">
           El cantidad del pedido es requerido.
         </small>
+        <p-skeleton *ngIf="loading" height="2.5rem" styleClass="w-full" />
+
       </div>
 
-      <p-button pButton type="submit" label="Enviar" [disabled]="pedidoForm.invalid"></p-button>
+      <p-button class="self-center" data-aos="fade-zoom-in" *ngIf="editar" type="submit" label="Enviar"
+        [disabled]="pedidoForm.invalid" />
     </div>
   </form>

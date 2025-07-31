@@ -10,6 +10,9 @@ export class Actualizar {
 
   private guardadoActualizadoSource = new Subject<any>();
   guardadoActualizado$ = this.guardadoActualizadoSource.asObservable();
+  
+  private pedidoActualizadoSource = new Subject<any>();
+  pedidoActualizado$ = this.pedidoActualizadoSource.asObservable();
 
   notificarActualizacion(idProducto: number) {
     this.carritoActualizadoSource.next(idProducto);
@@ -17,5 +20,9 @@ export class Actualizar {
 
   notificarActualizacionGuardado(producto: any) {
     this.guardadoActualizadoSource.next(producto);
+  }
+
+  notificarActualizacionPedido(producto: any) {
+    this.pedidoActualizadoSource.next(producto);
   }
 }

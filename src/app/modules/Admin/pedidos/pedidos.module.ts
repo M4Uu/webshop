@@ -18,7 +18,7 @@ const routes: Routes = [
     children: [
       {
         path: 'detalle/:id',
-        loadComponent: () => import('@app/components/features/products/form-productos/form-productos.component').then(m => m.FormProductosComponent),
+        loadComponent: () => import('@app/components/features/pedidos/form-pedidos-admin/form-pedidos-admin.component').then(m => m.FormPedidosComponent),
       },
     ],
   }

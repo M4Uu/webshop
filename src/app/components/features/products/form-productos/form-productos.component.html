@@ -1,8 +1,9 @@
 <div class="px-5">
   <div class="flex items-center justify-between mb-4">
-    <button *ngIf="!isCreate" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"
-      (click)="onEdit()" aria-label="Editar"></button>
     <h4 class="text-2xl font-bold">{{ editar ? 'Escribir Producto' : 'Detalle Producto' }}</h4>
+    <button [pTooltip]="editar ? 'Modo vista' : 'Modo edición'" [icon]="editar ? 'pi pi-eye' : 'pi pi-pencil'"
+      *ngIf="!isCreate" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"
+      (click)="onEdit()" aria-label="Editar"></button>
   </div>
 
   <form [formGroup]="productoForm" (ngSubmit)="onSubmit()">
@@ -77,6 +78,7 @@
         </div>
       </div>
 
-      <p-button *ngIf="editar" pButton type="submit" label="Enviar" [disabled]="productoForm.invalid"></p-button>
+      <p-button data-aos="fade-zoom-in" *ngIf="editar" pButton type="submit" label="Enviar"
+        [disabled]="productoForm.invalid"></p-button>
     </div>
   </form>

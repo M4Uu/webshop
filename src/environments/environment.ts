@@ -51,6 +51,16 @@ export const environment = {
       getGuardados: APIURL + '/guardados',
       insertar: APIURL + '/guardados/insertar',
       eliminar: APIURL + '/guardados/eliminar'
+    },
+    pedidos: {
+      getPedidos: APIURL + '/pedidos',
+      getByCedula: APIURL + '/pedidos/get',
+      getById: APIURL + '/pedidos/id',
+      getPrioridad: APIURL + '/pedidos/prioridad',
+      create: APIURL + '/pedidos/create',
+      update: APIURL + '/pedidos/update',
+      updateAdmin: APIURL + '/pedidos/updateadmin',
+      delete: APIURL + '/pedidos/delete',
     }
   }
 };

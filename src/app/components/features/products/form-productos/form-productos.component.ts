@@ -17,6 +17,7 @@ import { AuthService } from '@app/core/services/customs/auth.service';
 import { FileUpload } from 'primeng/fileupload';
 import { CategoriaService } from '@app/core/services/api/categoria.service';
 import { Skeleton } from 'primeng/skeleton';
+import { Tooltip } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-form-productos',
@@ -32,7 +33,8 @@ import { Skeleton } from 'primeng/skeleton';
     InputNumberModule,
     SelectModule,
     FileUpload,
-    Skeleton
+    Skeleton,
+    Tooltip
   ],
   templateUrl: './form-productos.component.html',
   styleUrl: './form-productos.component.scss'
@@ -40,7 +42,7 @@ import { Skeleton } from 'primeng/skeleton';
 export class FormProductosComponent implements OnInit, OnDestroy {
   private APIProductos = inject(ProductosService)
   private APIToolkit = inject(ToolkitService);
-  private APICategoria = inject(CategoriaService)
+  private APICategoria = inject(CategoriaService);
   private authService = inject(AuthService);
 
   private route = inject(ActivatedRoute);
@@ -130,9 +132,6 @@ export class FormProductosComponent implements OnInit, OnDestroy {
 
   onEdit() {
     this.editar = !this.editar;
-    this.editar ?
-      this.messageService.add({ severity: 'contrast', summary: 'Editar', detail: 'Modo edición.' })
-      : this.messageService.add({ severity: 'contrast', summary: 'Visualiar', detail: 'Modo visualización.' });
   }
 
 

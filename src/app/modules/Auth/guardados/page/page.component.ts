@@ -2,7 +2,7 @@ import { Component, HostListener, inject, OnDestroy, OnInit } from '@angular/cor
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriaService } from '@app/core/services/api/categoria.service';
 import { GuardadosService } from '@app/core/services/api/guardados.service';
-import { Actualizar } from '@app/core/services/customs/actualizarcarrito.service';
+import { Actualizar } from '@app/core/services/customs/actualizar.service';
 import { AuthService } from '@app/core/services/customs/auth.service';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
