@@ -100,7 +100,7 @@ export class PageComponent implements OnInit {
     this.messageService.add({
       severity: 'error',
       summary: 'Error con el servidor',
-      detail: 'Error al intentar contactar con el servidor, intente más tarde.'
+      detail: 'Error al guardar datos.'
     })
   }
 

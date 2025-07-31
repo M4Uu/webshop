@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MessageService } from 'primeng/api';
-import { emailFormatValidator, nameValidator, numberValidator, passwordMatchValidator } from '../validators.form';
+import { emailFormatValidator, nameValidator, numberValidator, passwordMatchValidator, strongPasswordValidator, usernameValidator } from '../validators.form';
 import { ButtonModule } from 'primeng/button';
 import { UsersService } from '@app/core/services/api/users.service';
 import { PasswordModule } from 'primeng/password';
@@ -49,20 +49,25 @@ export class RegisterComponent {
     ]],
     'nombre_usuario': ['', [
       Validators.required,
-      nameValidator()
+      usernameValidator()
     ]],
-    'localidad': ['', []],
-    'credencial': ['', [Validators.required]],
+    'credencial': ['', [Validators.required, strongPasswordValidator()]],
     'correo': ['', [
       Validators.required,
       emailFormatValidator()
     ]],
-    'imagen_url': ['', []],
     'confirm_credencial': ['', [Validators.required]],
   }, { validator: passwordMatchValidator })
 
 
   onSubmit() {
+    console.log('Cédula válida?', this.registerForm.get('cedula')?.valid);
+    console.log('Nombres válido?', this.registerForm.get('nombres')?.valid);
+    console.log('Usuario válido?', this.registerForm.get('nombre_usuario')?.valid);
+    console.log('Credencial válida?', this.registerForm.get('credencial')?.valid);
+    console.log('Confirmación válida?', this.registerForm.get('confirm_credencial')?.valid);
+    console.log('Correo válido?', this.registerForm.get('correo')?.valid);
+
     this.registerForm.markAllAsTouched();
     if (this.registerForm.valid) {
       delete this.registerForm.value.confirm_credencial;

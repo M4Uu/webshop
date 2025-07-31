@@ -48,9 +48,9 @@ export class PasarelaPagoComponent implements OnInit {
   public user = this.authService.loadSessionStorage();
   public banklist: any;
   public movilForm = this.fb.group({
-    telefono: ['', []],
-    cedula: ['', []],
-    banco_num: [, []],
+    telefono: ['', [Validators.required]],
+    cedula: ['', [Validators.required]],
+    banco_num: [, [Validators.required]],
   });
 
 

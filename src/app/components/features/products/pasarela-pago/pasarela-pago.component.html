@@ -29,7 +29,11 @@
         routerLink="/usuarios/perfil">Perfil de
         Usuario.</a></small>
   </form>
-  <p-button label="Pagar ahora" (onClick)="onSubmit()" class="self-center" />
-
+  <div class="flex flex-col items-center justify-center gap-3">
+    <p-button [disabled]="this.movilForm.invalid" label="Pagar ahora" (onClick)="onSubmit()" class="self-center" />
+    <small class="text-red-700" *ngIf="this.movilForm.invalid">
+      Los datos para realizar el pago no son correctos.
+    </small>
+  </div>
 
 </div>

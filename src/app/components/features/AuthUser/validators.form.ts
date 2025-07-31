@@ -12,6 +12,19 @@ export function nameValidator(): ValidatorFn {
   };
 }
 
+export function usernameValidator(): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const value = control.value;
+    if (!value) return null;
+
+    // Permite letras, números, guiones bajos, guiones y puntos
+    const regex = /^[a-zA-Z0-9_.-]+$/;
+    const isValid = regex.test(value);
+
+    return !isValid ? { 'invalidUsername': true } : null;
+  };
+}
+
 export function numberValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
     const value = control.value;
@@ -19,7 +32,7 @@ export function numberValidator(): ValidatorFn {
 
     const regex = /^\d+$/;
     const isValid = regex.test(value);
-    return !isValid ? { 'invalidName': { value: control.value } } : null;
+    return !isValid ? { 'invalidNumber': { value: control.value } } : null;
   };
 }
 
@@ -41,13 +54,15 @@ export function strongPasswordValidator(): ValidatorFn {
 
 // Validador para confirmar contraseña
 export function passwordMatchValidator(control: AbstractControl) {
-  const password = control.get('password')?.value;
-  const confirmPassword = control.get('confirm_password')?.value;
+  const password = control.get('credencial')?.value;
+  const confirmPassword = control.get('confirm_credencial')?.value;
 
-  if (password == confirmPassword) {
-    return null;
+  if (password === confirmPassword) {
+    return null;  // Válido
   } else {
-    return { 'mismatch': true }
+    // Devuelve el error en el campo 'confirm_credencial'
+    control.get('confirm_credencial')?.setErrors({ 'mismatch': true });
+    return { 'mismatch': true };  // También marca el formulario como inválido
   }
 }
 
