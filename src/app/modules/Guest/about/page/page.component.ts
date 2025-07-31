@@ -18,9 +18,9 @@ export class PageComponent {
   }
 
   public textCards = [
-    { title: 'Objetivos', content: 'Lorem ipsum dolor sit amet...' },
-    { title: 'Misión', content: 'Lorem ipsum dolor sit amet...' },
-    { title: 'Metas', content: 'Lorem ipsum dolor sit amet...' }
+    { title: 'Objetivos', content: 'Fabricación y distribución de joyas artesanales, como también la venta de otros productos tales como ropa accesorios y artículos de cuidado personal.' },
+    { title: 'Misión', content: 'Establecerse como una empresa de lucro, encargada de diseñar, crear y comercializar joyería artesanal a nivel nacional e internacional.' },
+    { title: 'Metas', content: 'Producir joyería con materiales preciosos, promoviendo el desarrollo de nuevos artesanos en la zona, siendo un referente en la cultura comercial para mantener la creación de arte en productos de joyería.' }
   ];
 
   teamMembers = [
