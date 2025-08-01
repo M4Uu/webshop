@@ -12,19 +12,23 @@
     <div class=" fluid flex flex-col gap-3">
       <div class="field flex flex-col gap-1">
         <label class="text-lg" for="">Nombres</label>
-        <input [readOnly]="!editar" pInputText type="text" formControlName="nombres">
+        <input *ngIf="!loading" [readOnly]="!editar" pInputText type="text" formControlName="nombres">
+        <p-skeleton *ngIf="loading" height="2.5rem" styleClass="w-full" />
       </div>
       <div class="field flex flex-col gap-1">
         <label class="text-lg" for="">Nombre de Usuario</label>
-        <input [readOnly]="!editar" pInputText type="text" formControlName="nombre_usuario">
+        <input *ngIf="!loading" [readOnly]="!editar" pInputText type="text" formControlName="nombre_usuario">
+        <p-skeleton *ngIf="loading" height="2.5rem" styleClass="w-full" />
       </div>
       <div class="field flex flex-col gap-1">
         <label class="text-lg" for="">Localidad</label>
-        <input [readOnly]="!editar" pInputText type="text" formControlName="localidad">
+        <input *ngIf="!loading" [readOnly]="!editar" pInputText type="text" formControlName="localidad">
+        <p-skeleton *ngIf="loading" height="2.5rem" styleClass="w-full" />
       </div>
       <div class="field flex flex-col gap-1">
         <label class="text-lg" for="">Correo</label>
-        <input [readOnly]="!editar" pInputText type="text" formControlName="correo">
+        <input *ngIf="!loading" [readOnly]="!editar" pInputText type="text" formControlName="correo">
+        <p-skeleton *ngIf="loading" height="2.5rem" styleClass="w-full" />
       </div>
     </div>
     <div class="w-full flex justify-center">
@@ -32,9 +36,11 @@
         accept="image/jpeg,image/png,image/jpg" maxFileSize="1000000" (onSelect)="onSelectedFiles($event)"
         (onUpload)="handleUploadResponse($event)">
         <ng-template #header let-files let-chooseCallback="chooseCallback" let-clearCallback="clearCallback">
-          <div class="w-[23rem] bg-black">
-            <img (click)="selectEvent(chooseCallback, clearCallback)" (keyup.esc)="editar" [tabindex]="0"
-              class="hover:opacity-85 cursor-pointer" [src]="userForm?.value?.imagen_url" alt="usuario-avatar">
+          <div class="w-[23rem] bg-black rounded-lg">
+            <img *ngIf="!loading" (click)="selectEvent(chooseCallback, clearCallback)" (keyup.esc)="editar"
+              [tabindex]="0" class="hover:opacity-85 cursor-pointer" [src]="userForm?.value?.imagen_url"
+              alt="usuario-avatar">
+            <p-skeleton *ngIf="loading" height="23rem" styleClass="w-full" />
           </div>
         </ng-template>
       </p-fileupload>
@@ -50,7 +56,9 @@
     <form data-aos="fade-zoom-in" [formGroup]="movilForm" class="fluid flex flex-col gap-3">
       <div class="field flex flex-col gap-1">
         <label class="text-lg" for="">Número de Teléfono</label>
-        <input [readOnly]="!editarMovil" pInputText type="text" formControlName="telefono">
+        <input *ngIf="!loading" [readOnly]="!editarMovil" pInputText type="text" formControlName="telefono">
+        <p-skeleton *ngIf="loading" height="2.5rem" styleClass="w-full" />
+
         <small
           *ngIf="movilForm.get('telefono')?.invalid && (movilForm.get('telefono')?.touched || movilForm.get('telefono')?.dirty)"
           class="p-error">
@@ -65,12 +73,17 @@
       </div>
       <div class="field flex flex-col gap-1">
         <label class="text-lg" for="">Cédula de Identidad</label>
-        <p-inputnumber [min]="7000000" [max]="50000000" [readonly]="!editarMovil" mode="decimal" type="text"
-          formControlName="cedula" />
+        <p-inputnumber *ngIf="!loading" [min]="7000000" [max]="50000000" [readonly]="!editarMovil" mode="decimal"
+          type="text" formControlName="cedula" />
+        <p-skeleton *ngIf="loading" height="2.5rem" styleClass="w-full" />
+
       </div>
       <div class="field flex flex-col gap-1">
         <label class="text-lg" for="">Banco</label>
-        <p-select [readonly]="!editarMovil" [options]="banklist" filter="true" formControlName="banco_num" />
+        <p-select *ngIf="!loading" [readonly]="!editarMovil" [options]="banklist" filter="true"
+          formControlName="banco_num" />
+        <p-skeleton *ngIf="loading" height="2.5rem" styleClass="w-full" />
+
       </div>
     </form>
   </div>

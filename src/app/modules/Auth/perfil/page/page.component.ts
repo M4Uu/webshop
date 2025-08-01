@@ -37,6 +37,7 @@ export class PageComponent implements OnInit {
   public user = this.authService.loadSessionStorage();
   public editar: boolean = false;
   public editarMovil: boolean = false;
+  public loading: boolean = false;
 
   public ngOnInit(): void {
     this.userForm = this.fb.group({
@@ -48,6 +49,7 @@ export class PageComponent implements OnInit {
       imagen_url: [this.user.imagen_url, [Validators.required]]
     });
 
+    this.loading = true;
     this.APIUsers.getMovil(this.user.cedula).subscribe({
       next: (responseMovil) => {
         this.APIToolkit.getBankList().subscribe({
@@ -60,6 +62,7 @@ export class PageComponent implements OnInit {
             })
           },
           error: (reason) => this.messageError(reason),
+          complete: () => this.loading = false
         })
       },
       error: (reason) => this.messageError(reason),

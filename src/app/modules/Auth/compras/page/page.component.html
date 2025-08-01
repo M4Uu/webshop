@@ -1,6 +1,6 @@
 <div class="grid grid-cols-12 grid-rows-12 h-full gap-4">
   <div class="col-span-12 flex items-center justify-center mt-5">
-    <h3 data-aos="fade-down" data-aos-duration="800" class="text-4xl font-bold">Historial de Ventas</h3>
+    <h3 data-aos="fade-down" data-aos-duration="800" class="text-4xl font-bold">Historial de Compras</h3>
   </div>
   <div class="col-span-8 row-span-11">
     <p-table [loading]="loading" data-aos="fade-zoom-in" [paginator]="ventas?.length >= 5 ? true : false" size="large"
@@ -36,13 +36,13 @@
 
   <div data-aos="fade-left" data-aos-duration="1500"
     class="col-span-4 row-span-11 mt-3 p-4 bg-[#e9e9e9] text-center rounded-3xl">
-    <h2 class="text-xl font-semibold mb-4">Detalle de la Venta</h2>
+    <h2 class="text-xl font-semibold mb-4">Detalle de la Compra</h2>
     <div class="bg-black w-full h-2"></div>
     @if (ventasIndex !== -1) {
     <div class="flex flex-col items-center mt-6 gap-3">
       <p>Código: <span class="font-bold text-lg">{{generateCode(ventas[ventasIndex])}}</span></p>
-      <p>Total Bolívares: <span class="font-bold text-lg">{{ventas[ventasIndex].total_bolivares | currency}}</span></p>
-      <p>Dolar en compra: <span class="font-bold text-lg">{{ventas[ventasIndex].total_bolivares | currency}}</span></p>
+      <p>Total en bolívares: <span class="font-bold text-lg">Bs.{{ventas[ventasIndex].total_bolivares}}</span></p>
+      <p>Total en dolares: <span class="font-bold text-lg">{{ventas[ventasIndex].total | currency}}</span></p>
     </div>
     <p-table data-aos="fade-zoom-in" [paginator]="ventas[ventasIndex].productos?.length >= 5 ? true : false" [rows]="5"
       [value]="ventas[ventasIndex].productos" class="w-full pl-2">

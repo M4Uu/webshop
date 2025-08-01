@@ -52,9 +52,9 @@ export class PageComponent implements OnInit {
   }
 
   cantidadTotal = (venta: any) =>
-    venta.productos.reduce((total: number, producto: any) => total + producto.cantidad, 0);
+    venta?.productos.reduce((total: number, producto: any) => total + producto.cantidad, 0);
 
-  generateCode = (ventas: any) => 'COD-' + ventas.id;
+  generateCode = (ventas: any) => 'COD-' + ventas?.id;
 
   public filterByCategory() {
     if (this.selectCategoria && this.selectCategoria.length > 0) {
@@ -81,22 +81,24 @@ export class PageComponent implements OnInit {
 
     // Crear fechas en UTC para evitar problemas de zona horaria
     const startUTC = Date.UTC(
-      this.selectFecha[0].getFullYear(),
-      this.selectFecha[0].getMonth(),
-      this.selectFecha[0].getDate()
+      this.selectFecha[0]?.getFullYear(),
+      this.selectFecha[0]?.getMonth(),
+      this.selectFecha[0]?.getDate()
     );
 
     const endUTC = Date.UTC(
-      this.selectFecha[1].getFullYear(),
-      this.selectFecha[1].getMonth(),
-      this.selectFecha[1].getDate(),
+      this.selectFecha[1]?.getFullYear(),
+      this.selectFecha[1]?.getMonth(),
+      this.selectFecha[1]?.getDate(),
       23, 59, 59, 999
     );
 
-    this.ventas = this.ventas.filter((value: any) => {
+    this.ventas = this.ventas.filter(value => {
       const saleDate = new Date(value.fecha_compra).getTime();
-      return saleDate >= startUTC && saleDate <= endUTC;
+      return saleDate >= startUTC;
+      // return saleDate >= startUTC && saleDate <= endUTC;
     });
+    console.log(this.ventas);
   }
 
 

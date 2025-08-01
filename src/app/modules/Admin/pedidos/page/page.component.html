@@ -24,7 +24,7 @@
         <td>{{ pedido.prioridad }}</td>
         <td *ngIf="pedido.fecha_cita !== 'Sin asignar'">{{ pedido.fecha_cita | date: 'short' }}</td>
         <td *ngIf="pedido.fecha_cita === 'Sin asignar'">{{ pedido.fecha_cita }}</td>
-        <td>{{ pedido.fecha_creacion | date: 'dd:mm:yy' }}</td>
+        <td>{{ pedido.fecha_creacion | date: 'dd/mm/yy' }}</td>
         <td class="">
           <i (click)="showPedidoDetails(pedido.id)" [tabindex]="0" (keyup.esc)="visible = false"
             ngClass="rounded-lg pi pi-eye" class="text-indigo-400 cursor-pointer"></i>

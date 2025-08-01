@@ -8,6 +8,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { SelectModule } from 'primeng/select';
 import { Tooltip } from 'primeng/tooltip';
 import { FileUpload } from 'primeng/fileupload';
+import { Skeleton } from 'primeng/skeleton';
 
 const routes: Routes = [
   {
@@ -30,7 +31,8 @@ const routes: Routes = [
     InputNumberModule,
     SelectModule,
     Tooltip,
-    FileUpload
+    FileUpload,
+    Skeleton
   ]
 })
 export class PerfilModule { }

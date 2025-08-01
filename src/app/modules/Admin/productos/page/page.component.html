@@ -30,9 +30,10 @@
         <td><p-rating class="cursor-default" [readonly]="true" [(ngModel)]="producto.calificacion" /></td>
         <td class="">
           <i (click)="showProductoDetails(producto.id)" [tabindex]="0" (keyup.esc)="visible = false"
-            ngClass="rounded-lg pi pi-eye" class="text-indigo-400 cursor-pointer"></i>
-          <i *ngIf="producto.existencias > 0" (click)="deleteProducto(producto)" [tabindex]="0"
-            (keyup.esc)="visible = false" ngClass="rounded-lg pi pi-trash" class="text-red-400 ml-4 cursor-pointer"></i>
+            ngClass="rounded-lg pi pi-eye cursor-pointer  " class="text-indigo-400 cursor-pointer"></i>
+          <!-- <i *ngIf="producto.existencias > 0" (click)="deleteProducto(producto)" [tabindex]="0"
+            (keyup.esc)="visible = false" ngClass="rounded-lg pi pi-trash cursor-pointer"
+            class="text-red-400 ml-4 cursor-pointer"></i> -->
         </td>
       </tr>
     </ng-template>

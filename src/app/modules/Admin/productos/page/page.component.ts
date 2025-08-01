@@ -37,13 +37,14 @@ export class PageComponent implements OnInit {
 
   deleteProducto(producto: any) {
     const data = { producto_id: producto.id }
-    this.APIProductos.inhabilitar(data).subscribe({
-      next: (response) => {
-        this.productos = this.productos.filter(p => p.id !== producto.id);
-        this.messageService.add({ severity: 'success', summary: 'Inhabilitado', detail: 'Se ha reducido el stock del producto a 0, no será visible para los usuarios.', life: 3000 })
-      },
-      error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 }),
-    })
+    // this.productos = this.productos.filter(p => p.id !== producto.id);
+    producto.existencias = 0;
+    this.messageService.add({ severity: 'success', summary: 'Inhabilitado', detail: 'Se ha reducido el stock del producto a 0, no será visible para los usuarios.', life: 3000 })
+    // this.APIProductos.inhabilitar(data).subscribe({
+    //   next: (response) => {
+    //   },
+    //   error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 }),
+    // })
 
   }
 
