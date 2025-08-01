@@ -17,7 +17,7 @@ export const routes: Routes = [
   {
     path: 'usuarios',
     loadComponent: () => import('./components/features/layout/Auth/main-layout/main-layout.component').then(c => c.MainLayoutAuthComponent),
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
     children: [
       { path: '', loadChildren: () => import('./modules/Auth/homelogin/homelogin.module').then(m => m.HomeloginModule) },
       { path: 'catalogo', loadChildren: () => import('./modules/Auth/catalogo/catalogo.module').then(m => m.CatalogoModule) },
@@ -33,7 +33,7 @@ export const routes: Routes = [
   {
     path: 'administrador',
     loadComponent: () => import('./components/features/layout/Admin/main-layout/main-layout.component').then(c => c.MainLayoutAdminComponent),
-    // canActivate: [adminGuard],
+    canActivate: [adminGuard],
     children: [
       { path: '', loadChildren: () => import('./modules/Admin/homeadmin/homeadmin.module').then(m => m.HomeadminModule) },
       { path: 'usuarios', loadChildren: () => import('./modules/Admin/usuarios/usuarios.module').then(m => m.UsuariosModule) },
