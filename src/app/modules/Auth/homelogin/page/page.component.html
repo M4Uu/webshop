@@ -3,7 +3,7 @@
   <div>
     <p-galleria styleClass="custom-galeria" [value]="images" [showIndicators]="true" showIndicatorsOnItem="true"
       [responsiveOptions]="responsiveOptions" [autoPlay]="true" [circular]="true" [showThumbnails]="false"
-      [transitionInterval]="5000">
+      [transitionInterval]="3000">
       <ng-template pTemplate="item" let-item>
         <img [src]="item?.itemImageSrc" [alt]="item?.alt" class="container-layout object-cover" />
       </ng-template>

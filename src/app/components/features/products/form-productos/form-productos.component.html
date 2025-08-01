@@ -77,8 +77,8 @@
 
         </div>
       </div>
-
-      <p-button data-aos="fade-zoom-in" *ngIf="editar" pButton type="submit" label="Enviar"
-        [disabled]="productoForm.invalid"></p-button>
+      <div class="flex justify-center w-full">
+        <p-button *ngIf="editar" type="submit" label="Enviar" [disabled]="productoForm.invalid"></p-button>
+      </div>
     </div>
   </form>
