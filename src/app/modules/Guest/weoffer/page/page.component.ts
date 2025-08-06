@@ -17,27 +17,27 @@ export class PageComponent {
   products = [
     {
       title: 'Orfebrería y bisutería',
-      description: 'Mauris quam neque, ullamcorper sit amet lorem in, aliquet sagittis ante...',
+      description: 'Joyas artesanales en plata, oro y piedras preciosas para ocasiones especiales.',
       delay: 100
     },
     {
       title: 'Ropa y calzado',
-      description: 'Mauris quam neque, ullamcorper sit amet lorem in, aliquet sagittis ante...',
+      description: 'Moda con diseños exclusivos y calzado cómodo para todas las temporadas.',
       delay: 300
     },
     {
       title: 'Maquillaje',
-      description: 'Mauris quam neque, ullamcorper sit amet lorem in, aliquet sagittis ante...',
+      description: 'Productos para realzar tu belleza natural diaria.',
       delay: 500
     },
     {
       title: 'Artículos para el cuidado personal',
-      description: 'Mauris quam neque, ullamcorper sit amet lorem in, aliquet sagittis ante...',
+      description: 'Cosméticos para tu rutina diaria de belleza y bienestar.',
       delay: 700
     },
     {
       title: '¡Y mucho más!',
-      description: 'Mauris quam neque, ullamcorper sit amet lorem in, aliquet sagittis ante...',
+      description: 'Descubre nuestra exclusiva selección de accesorios y productos únicos para ti.',
       delay: 900
     },
   ];
