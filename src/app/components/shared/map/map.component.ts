@@ -9,7 +9,7 @@ import { Component, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
 })
 export class MapComponent implements AfterViewInit {
   private map: any;
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
 
   async ngAfterViewInit(): Promise<void> {
     if (isPlatformBrowser(this.platformId)) {
@@ -19,22 +19,28 @@ export class MapComponent implements AfterViewInit {
 
   private async initializeMap(): Promise<void> {
     const L = await import('leaflet');
+    await this.loadLeafletAssets(); // Nueva función para cargar assets
     this.createMap(L);
+  }
+
+  private async loadLeafletAssets(): Promise<void> {
+    // Carga explícita de módulos necesarios
+    await import('leaflet-defaulticon-compatibility');
   }
 
   private createMap(L: any): void {
     const markerPosition = [8.2580193, -62.8001552];
 
-    delete (L.Icon.Default.prototype as any)._getIconUrl;
-    L.Icon.Default.mergeOptions({
-      iconRetinaUrl: 'assets/marker-icon-2x.png',
-      iconUrl: 'assets/marker-icon.png',
-      shadowUrl: 'assets/marker-shadow.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41]
-    });
+    // delete (L.Icon.Default.prototype as any)._getIconUrl;
+    // L.Icon.Default.mergeOptions({
+    //   iconRetinaUrl: 'assets/marker-icon-2x.png',
+    //   iconUrl: 'assets/marker-icon.png',
+    //   shadowUrl: 'assets/marker-shadow.png',
+    //   iconSize: [25, 41],
+    //   iconAnchor: [12, 41],
+    //   popupAnchor: [1, -34],
+    //   shadowSize: [41, 41]
+    // });
 
     this.map = L.map('map', {
       preferCanvas: true,
@@ -49,11 +55,15 @@ export class MapComponent implements AfterViewInit {
     }).addTo(this.map);
 
     const customIcon = L.icon({
-      iconUrl: 'assets/marker-icon.png',
+      iconUrl: 'assets/marker-icon.png', // Asegura que la ruta sea correcta
+      iconRetinaUrl: 'assets/marker-icon-2x.png',
+      shadowUrl: 'assets/marker-shadow.png',
       iconSize: [25, 41],
       iconAnchor: [12, 41],
-      popupAnchor: [1, -34]
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
     });
+
 
     L.marker(markerPosition, { icon: customIcon })
       .addTo(this.map)

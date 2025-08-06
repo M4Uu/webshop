@@ -13,7 +13,4 @@ export class PageComponent {
   router = inject(Router);
   logged = inject(LoggedService);
   aosService = inject(AosService);
-  ngOnInit() {
-    // this.logged.ViewUserLogged();
-  }
 }
