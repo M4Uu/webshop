@@ -1,28 +1,29 @@
 <div class="px-10 pt-10 grid gap-5">
-  <div class="row-span-1 grid grid-cols-3 col-span-12 gap-5">
+  <div class="row-span-1 grid grid-cols-2 col-span-12 gap-5">
     <!-- box -->
     <div class="bg-emerald-500 h-24 grid grid-cols-4">
       <div class="text-center shadow-2xl col-span-3 flex items-center justify-center flex-col">
         <span class="font-bold text-lg">Vendido</span>
         <p class="text-sm">este mes</p>
       </div>
-      <div class="col-span-1 flex items-center justify-center flex-col text-xl font-bold">10</div>
+      <div class="col-span-1 flex items-center justify-center flex-col text-xl font-bold">{{ventas_ultimo_mes}}</div>
     </div>
     <!-- box -->
-    <div class="bg-sky-500 h-24 grid grid-cols-4">
+    <!-- <div class="bg-sky-500 h-24 grid grid-cols-4">
       <div class="text-center shadow-2xl col-span-3 flex items-center justify-center flex-col">
         <span class="font-bold text-lg">Visitas</span>
         <p class="text-sm">hasta ahora</p>
       </div>
       <div class="col-span-1 flex items-center justify-center flex-col text-xl font-bold">10</div>
-    </div>
+    </div> -->
     <!-- box -->
     <div class="bg-indigo-500 h-24 grid grid-cols-4">
       <div class="text-center shadow-2xl col-span-3 flex items-center justify-center flex-col">
         <span class="font-bold text-lg">Pedidos</span>
         <p class="text-sm">esta semana</p>
       </div>
-      <div class="col-span-1 flex items-center justify-center flex-col text-xl font-bold">10</div>
+      <div class="col-span-1 flex items-center justify-center flex-col text-xl font-bold">{{pedidos_ultima_semana}}
+      </div>
     </div>
     <!-- box -->
   </div>
@@ -31,18 +32,30 @@
       <p-chart type="line" [data]="data" [options]="options" class="h-[30rem]" />
     </div>
     <div class="shadow-lg">
-      <p-table class="h-[30rem]">
+      <p-table [value]="reportes" class="h-[30rem] text-sm">
         <ng-template pTemplate="header">
           <tr>
-            <th>Reseñas de Clientes</th>
+            <th colspan="3">Reseñas de Clientes</th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-rowData>
+        <ng-template pTemplate="body" class="group" let-rowData>
           <tr>
-            <td></td>
+            <td>
+              <!-- (click)="setIndexVenta(i)" (keyup.enter)="setIndexVenta(i)" tabindex="0" -->
+              <div (click)="getMessage($event, rowData.mensaje)" (keyup.enter)="getMessage($event,rowData.mensaje)"
+                tabindex="0"
+                class="rounded-full border-2 border-cyan-900 w-5 h-5 flex items-center justify-center cursor-pointer hover:bg-gray-200 transition-all duration-300">
+                <i class="pi pi-info !text-[10px]" role="button" aria-label="Ver detalles de la compra"></i>
+              </div>
+            </td>
+            <td>{{rowData.nombres}}</td>
+            <td>{{rowData.correo}}</td>
           </tr>
         </ng-template>
       </p-table>
+      <p-popover #op (onHide)="selectedMessage = ''">
+        <p *ngIf="selectedMessage">{{selectedMessage}}</p>
+      </p-popover>
     </div>
   </div>
   <div>

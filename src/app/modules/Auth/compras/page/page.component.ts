@@ -15,7 +15,9 @@ export class PageComponent {
   public messageService = inject(MessageService);
   public ventas: any;
   public ventasIndex: number = -1;
+
   public loading: boolean = false;
+  public visiblePDF: boolean = false;
 
   public user = this.authService.loadSessionStorage();
 
@@ -36,7 +38,9 @@ export class PageComponent {
   }
 
   cantidadTotal = (venta: any) =>
-    venta.productos.reduce((total: number, producto: any) => total + producto.cantidad, 0);
+    venta?.productos.reduce((total: number, producto: any) => total + producto.cantidad, 0);
 
   generateCode = (ventas: any) => 'COD-' + ventas.id;
+
+  showPDF = () => this.visiblePDF = !this.visiblePDF;
 }

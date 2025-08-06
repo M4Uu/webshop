@@ -1,7 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CategoriaService } from '@app/core/services/api/categoria.service';
 import { VentasService } from '@app/core/services/api/ventas.service';
+import { AuthService } from '@app/core/services/customs/auth.service';
 import { MessageService } from 'primeng/api';
+
 
 @Component({
   selector: 'app-page',
@@ -13,8 +15,13 @@ export class PageComponent implements OnInit {
   public APIVentas = inject(VentasService)
   public messageService = inject(MessageService);
   private APIcategorias = inject(CategoriaService);
+  private authService = inject(AuthService);
+
+  public user = this.authService.loadSessionStorage();
 
   public visibleFilter: boolean = false;
+  public visiblePDF: boolean = false;
+
   public ventas: any;
   public ventasBackup: any;
   public ventasIndex: number = -1;
@@ -23,7 +30,7 @@ export class PageComponent implements OnInit {
   public categorias: any[] = [];
   public selectCategoria: any;
   public selectFecha: any;
-
+  public tableProductosPDF: any[] = [];
 
   ngOnInit(): void {
     this.loading = true;
@@ -46,6 +53,7 @@ export class PageComponent implements OnInit {
 
   setIndexVenta(indexVenta: number): void {
     this.ventasIndex = indexVenta;
+    this.tableProductosPDF = this.ventas[indexVenta].productos;
     if (this.ventasIndex === -1) {
       this.messageService.add({ severity: 'info', summary: 'Información', detail: 'Seleccione una venta para ver los detalles.', life: 3000 });
     }
@@ -95,14 +103,16 @@ export class PageComponent implements OnInit {
 
     this.ventas = this.ventas.filter(value => {
       const saleDate = new Date(value.fecha_compra).getTime();
-      return saleDate >= startUTC;
-      // return saleDate >= startUTC && saleDate <= endUTC;
+      return saleDate >= startUTC && saleDate <= endUTC;
     });
-    console.log(this.ventas);
   }
 
 
   clearFechas() {
     this.ventas = [... this.ventasBackup]
+  }
+
+  showPDF() {
+    this.visiblePDF = !this.visiblePDF;
   }
 }

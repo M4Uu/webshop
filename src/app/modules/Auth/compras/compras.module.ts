@@ -5,6 +5,7 @@ import { RouterModule, RouterOutlet, Routes } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { DrawerModule } from 'primeng/drawer';
+import { FacturaComponent } from '@app/components/shared/factura/factura.component';
 
 
 export const routes: Routes = [
@@ -32,7 +33,8 @@ export const routes: Routes = [
     TableModule,
     ButtonModule,
     DrawerModule,
-    RouterOutlet
+    RouterOutlet,
+    FacturaComponent
   ]
 })
 export class ComprasModule { }

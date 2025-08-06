@@ -5,11 +5,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { FloatLabelModule } from 'primeng/floatlabel';
-import { MultiSelectModule } from 'primeng/multiselect';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { InputText } from 'primeng/inputtext';
 import { DatePickerModule } from 'primeng/datepicker';
+import { DialogModule } from 'primeng/dialog';
+import { FacturaComponent } from '@app/components/shared/factura/factura.component';
 
 const routes: Routes = [
   {
@@ -32,7 +33,9 @@ const routes: Routes = [
     ButtonModule,
     FormsModule,
     InputText,
-    DatePickerModule
+    DatePickerModule,
+    DialogModule,
+    FacturaComponent
   ]
 })
 export class VentasModule { }

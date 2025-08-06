@@ -36,6 +36,8 @@
     "cliui": "8.0.1",
     "dotenv": "16.6.1",
     "express": "4.21.2",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^3.0.1",
     "leaflet": "1.9.4",
     "ngx-cookie-service": "19.0.0",
     "primeicons": "7.0.0",

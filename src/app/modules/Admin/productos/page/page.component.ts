@@ -1,7 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductosService } from '@app/core/services/api/productos.service';
+import { Actualizar } from '@app/core/services/customs/actualizar.service';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-page',
@@ -11,7 +13,9 @@ import { MessageService } from 'primeng/api';
 })
 export class PageComponent implements OnInit {
   private APIProductos = inject(ProductosService);
+  private actualizar = inject(Actualizar);
 
+  private subscription!: Subscription;
   private route = inject(ActivatedRoute)
   private router = inject(Router);
   public messageService = inject(MessageService);
@@ -28,6 +32,9 @@ export class PageComponent implements OnInit {
       error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 }),
       complete: () => this.loading = false
     })
+    this.subscription = this.actualizar.productoActualizado$.subscribe(producto => {
+      this.productos.push(producto);
+    });
   }
 
   public createProducto() {
@@ -56,5 +63,9 @@ export class PageComponent implements OnInit {
   public hideDrawer() {
     this.visible = false;
     this.router.navigate(['.'], { relativeTo: this.route });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

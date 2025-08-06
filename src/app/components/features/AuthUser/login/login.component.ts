@@ -59,21 +59,23 @@ export class LoginComponent {
       this.messageService.add({ severity: 'contrast', summary: 'Formulario vacío', detail: 'Debe rellenar los datos.', life: 3000 });
       return;
     }
-    this.APIUser.loginUser(this.loginForm.value).subscribe({
-      next: () => this.router.navigate(['usuarios']),
-      error: (err) => {
-        switch (err.status) {
-          case 401:
-            this.messageService.add({ severity: 'contrast', summary: 'Alert', detail: 'Clave o Correo inválidos.', life: 3000 });
-            break;
-          case 500:
-            this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Error en el servidor, por favor, solicite al servicio técnico atención para su caso.', life: 3000 });
-            break;
-          case 0:
-            this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 });
-            break;
+    this.APIUser.logoutUser().subscribe(() => {
+      this.APIUser.loginUser(this.loginForm.value).subscribe({
+        next: () => this.router.navigate(['usuarios']),
+        error: (err) => {
+          switch (err.status) {
+            case 401:
+              this.messageService.add({ severity: 'contrast', summary: 'Alert', detail: 'Clave o Correo inválidos.', life: 3000 });
+              break;
+            case 500:
+              this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Error en el servidor, por favor, solicite al servicio técnico atención para su caso.', life: 3000 });
+              break;
+            case 0:
+              this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 });
+              break;
+          }
         }
-      }
+      })
     })
   }
 

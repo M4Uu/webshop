@@ -28,14 +28,14 @@ export class ProductosService {
   }
 
   updateProducto(producto: any): Observable<any> {
-    return this.http.put<any>(this.apiUrl.updateProducto, producto);
+    return this.http.post<any>(this.apiUrl.updateProducto, producto);
   }
 
   calificacion(producto: any): Observable<any> {
-    return this.http.put<any>(this.apiUrl.calificacion, producto);
+    return this.http.post<any>(this.apiUrl.calificacion, producto);
   }
 
   inhabilitar(producto: any): Observable<any> {
-    return this.http.put<any>(this.apiUrl.inhabilitar, producto);
+    return this.http.post<any>(this.apiUrl.inhabilitar, producto);
   }
 }

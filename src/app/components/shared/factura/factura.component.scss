@@ -1,0 +1,49 @@
+:host ::ng-deep .pdf-template {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  line-height: 1.4;
+  box-sizing: border-box;
+}
+
+.pdf-template header {
+  text-align: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #333;
+  padding-bottom: 15px;
+}
+
+.pdf-template h1 {
+  font-size: 24px;
+  margin: 0 0 10px 0;
+}
+
+.pdf-template .data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 12px;
+}
+
+.pdf-template .data-table th {
+  background-color: #f0f0f0;
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.pdf-template .data-table td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.pdf-template footer {
+  margin-top: 30px;
+  padding-top: 15px;
+  border-top: 1px solid #ccc;
+  text-align: center;
+  font-size: 10px;
+}
+
+.pdf-template .signature {
+  margin: 40px 0 20px;
+}

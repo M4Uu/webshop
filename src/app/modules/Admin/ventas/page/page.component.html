@@ -57,11 +57,12 @@
     class="col-span-4 row-span-10 mt-3 p-4 bg-[#e9e9e9] text-center rounded-3xl">
     <h2 class="text-xl font-semibold mb-4">Detalle de la Venta</h2>
     <div class="bg-black w-full h-2"></div>
-    @if (ventasIndex !== -1) {
-    <div class="flex flex-col items-center mt-6 gap-3">
+    @if (ventasIndex !== -1 && ventas[ventasIndex]) {
+    <div class="relative flex flex-col items-center mt-6 gap-3">
+      <p-button class="absolute right-5" icon="pi pi-file-pdf" (onClick)="showPDF()" />
       <p>Código: <span class="font-bold text-lg">{{generateCode(ventas[ventasIndex])}}</span></p>
       <p>Total: <span class="font-bold text-lg">{{ventas[ventasIndex]?.total | currency}}</span></p>
-      <p>Total Bolívares: <span class="font-bold text-lg">{{ventas[ventasIndex]?.total_bolivares | currency}}</span></p>
+      <p>Total Bolívares: <span class="font-bold text-lg">Bs. {{ventas[ventasIndex]?.total_bolivares}}</span></p>
       <p>Cantidad de Productos: <span class="font-bold text-lg">{{cantidadTotal(ventas[ventasIndex])}}</span></p>
     </div>
     <p-table data-aos="fade-zoom-in" [paginator]="ventas[ventasIndex]?.productos?.length >= 5 ? true : false" [rows]="5"
@@ -88,3 +89,6 @@
     </div>
   </div>
 </div>
+
+<app-factura [visible]="visiblePDF" [venta]="ventas[ventasIndex]"
+  [cantidadTotal]="cantidadTotal(ventas[ventasIndex])" />

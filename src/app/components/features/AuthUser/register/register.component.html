@@ -18,6 +18,10 @@
       <span *ngIf="registerForm.get('cedula')?.errors?.['invalidName']">
         Solo se permiten letras y espacios.
       </span>
+      <span
+        *ngIf="registerForm.get('cedula')?.errors?.['maxlength'] || registerForm.get('cedula')?.errors?.['minlength']">
+        La longitud de la cédula es incorrecta.
+      </span>
       <input class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" formControlName="cedula" id="cedula"
         placeholder="cedula" />
     </div>
@@ -57,7 +61,7 @@
         El correo es requerido.
       </span>
       <span *ngIf="registerForm.get('correo')?.errors?.['invalidEmail']">
-        {{"Formato de correo inválido."}}
+        Formato de correo inválido.
       </span>
       <input pInputText class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80" type="email" formControlName="correo"
         id="correo" placeholder="Correo electrónico" />

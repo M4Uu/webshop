@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { emailFormatValidator, telefonoValidator } from '@app/components/features/AuthUser/validators.form';
+import { emailFormatValidator, nameValidator, numberValidator, telefonoValidator, usernameValidator } from '@app/components/features/AuthUser/validators.form';
 import { ToolkitService } from '@app/core/services/api/toolkit.service';
 import { UsersService } from '@app/core/services/api/users.service';
 import { AuthService } from '@app/core/services/customs/auth.service';
@@ -42,8 +42,14 @@ export class PageComponent implements OnInit {
   public ngOnInit(): void {
     this.userForm = this.fb.group({
       cedula: [this.user.cedula, [Validators.required]],
-      nombres: [this.user.nombres, [Validators.required]],
-      nombre_usuario: [this.user.nombre_usuario, [Validators.required]],
+      nombres: [this.user.nombres, [
+        Validators.required,
+        nameValidator()
+      ]],
+      nombre_usuario: [this.user.nombre_usuario, [
+        Validators.required,
+        usernameValidator()
+      ]],
       localidad: [this.user.localidad, [Validators.required]],
       correo: [this.user.correo, [Validators.required, emailFormatValidator()]],
       imagen_url: [this.user.imagen_url, [Validators.required]]
@@ -56,8 +62,16 @@ export class PageComponent implements OnInit {
           next: (responseBank) => {
             this.banklist = responseBank.data
             this.movilForm = this.fb.group({
-              telefono: [responseMovil.data.telefono, [Validators.required, telefonoValidator()]],
-              cedula: [this.user.cedula, [Validators.required]],
+              telefono: [responseMovil.data.telefono, [
+                Validators.required,
+                telefonoValidator()
+              ]],
+              cedula: [this.user.cedula, [
+                Validators.required,
+                numberValidator(),
+                Validators.maxLength(8),
+                Validators.minLength(7)
+              ]],
               banco_num: [responseMovil.data.banco_num, [Validators.required]],
             })
           },
@@ -74,15 +88,23 @@ export class PageComponent implements OnInit {
   public changeEditarMovil = () => this.editarMovil = !this.editarMovil;
 
   public changeGuardar() {
-    this.APIUsers.updateUser(this.userForm.value).subscribe({
-      next: () => this.messageService.add({
-        severity: 'success',
-        summary: 'Datos guardados',
-        detail: 'Datos guardados exitosamente. Reiniciar sesión para visualizar cambios.'
-      }),
-      error: (reason) => this.messageError(reason),
-      complete: () => this.editar = !this.editar
-    })
+    if (this.userForm.valid) {
+      this.APIUsers.updateUser(this.userForm.value).subscribe({
+        next: () => this.messageService.add({
+          severity: 'success',
+          summary: 'Datos guardados',
+          detail: 'Datos guardados exitosamente. Reiniciar sesión para visualizar cambios.'
+        }),
+        error: (reason) => this.messageError(reason),
+        complete: () => this.editar = !this.editar
+      })
+    } else {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error en el formulario',
+        detail: 'El formulario no está completo.'
+      })
+    }
   }
 
   public changeGuardarMovil() {

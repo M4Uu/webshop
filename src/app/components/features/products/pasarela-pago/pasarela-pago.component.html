@@ -14,7 +14,7 @@
   <form data-aos="fade-zoom-in" [formGroup]="movilForm" class="fluid w-full flex flex-col gap-3">
     <div class="field flex flex-col gap-1">
       <label class="text-lg" for="">Número de Teléfono</label>
-      <input pInputText formControlName="telefono">
+      <input [readonly]="true" pInputText formControlName="telefono">
     </div>
     <div class="field flex flex-col gap-1">
       <label class="text-lg" for="">Cédula de Identidad</label>

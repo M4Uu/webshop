@@ -1,0 +1,51 @@
+<p-dialog [draggable]="false" [(visible)]="visible" [modal]="true" [style]="{ width: '55vw' }">
+  <div id="report-content" *ngIf="venta !== undefined" class="pdf-template px-10 pt-10">
+    <header>
+      <h1 class="font-bold">Julias Gioielli</h1>
+      <div class="text-xs flex flex-col items-center">
+        <span>Cerca de Urb. Villa Icabarú, Ciudad Guayana 8050, Bolívar.</span>
+        <span class="font-bold">RIF: V12559391</span>
+      </div>
+      <div class="text-xs flex justify-between">
+        <span><strong>Fecha:</strong> {{generateDate()}}</span>
+        <span><strong>Número de control:</strong> 00-{{venta.id}} </span>
+      </div>
+    </header>
+
+    <main>
+      <div class="text-xs flex flex-col gap-1">
+        <span><strong>Nombre o Razón Social:</strong> {{venta.nombres}}</span>
+        <span><strong>Domicilio Fiscal:</strong> {{venta.localidad}}</span>
+      </div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let producto of venta.productos">
+            <td>{{producto.nombre}}</td>
+            <td>{{producto.cantidad}}</td>
+            <td>{{producto.precio | currency}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="text-xs flex flex-col gap-1">
+        <p><strong>Total:</strong> {{venta.total | currency}}</p>
+        <p><strong>Total Bolívares:</strong> Bs. {{venta.total_bolivares | number}}</p>
+        <p><strong>Cantidad de Productos:</strong> {{cantidadTotal}} u</p>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-text">Factura generado automáticamente</div>
+      <div class="mt-10">.</div>
+    </footer>
+  </div>
+  <div *ngIf="venta !== undefined" class="w-full flex justify-center">
+    <p-button styleClass="text-sm" label="Obtener Factura" (onClick)="generarPDF()" />
+  </div>
+</p-dialog>

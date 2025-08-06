@@ -99,7 +99,10 @@ export class ProductDetailComponent implements OnInit {
     clearTimeout(timeout);
     timeout = setTimeout(() => {
       this.tenkiuTimer = false;
-      const data = { calificacion: this.item.calificacion }
+      const data = {
+        id: this.item.id,
+        calificacion: this.item.calificacion
+      }
       this.APIproductos.calificacion(data).subscribe({
         next: () => setTimeout(() => {
           this.tenkiuTimer = true;

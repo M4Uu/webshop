@@ -39,25 +39,43 @@
         </div>
 
         <div class="contact-form">
-          <form action="" id="contact-form">
+          <form [formGroup]="contactForm" (ngSubmit)="enviar()" id="contact-form">
             <h2>Envíanos un mensaje</h2>
             <div class="input-box">
-              <input type="text" required="true" name="">
-              <span>Nombre Completo</span>
+              <input InputText type="text" formControlName="nombres">
+              <span *ngIf="!contactForm.get('nombres')?.valid">Nombre Completo</span>
             </div>
+            <small class="text-red-600"
+              *ngIf="contactForm.get('nombres')?.errors?.['required'] && contactForm.get('nombres')?.touched">
+              El nombre de usuario es requerido.
+            </small>
+            <small class="text-red-600" *ngIf="contactForm.get('nombres')?.errors?.['invalidUsername']">
+              Solo se permiten letras, números, guiones bajos (_), guiones (-) y puntos (.)
+            </small>
 
             <div class="input-box">
-              <input type="email" required="true" name="">
-              <span>Correo</span>
+              <input InputText type="email" formControlName="correo">
+              <span *ngIf="!contactForm.get('correo')?.valid">Correo</span>
             </div>
+            <small class="text-red-600"
+              *ngIf="contactForm.get('correo')?.errors?.['required'] && contactForm.get('correo')?.touched">
+              El correo es requerido.
+            </small>
+            <small class="text-red-600" *ngIf="contactForm.get('correo')?.errors?.['invalidEmail']">
+              Formato de correo inválido.
+            </small>
 
             <div class="input-box">
-              <textarea required="true" name=""></textarea>
-              <span>Escribe tu mensaje...</span>
+              <textarea formControlName="mensaje"></textarea>
+              <span *ngIf="!contactForm.get('mensaje')?.valid">Escribe tu mensaje...</span>
             </div>
+            <small class="text-red-600"
+              *ngIf="contactForm.get('mensaje')?.errors?.['required'] && contactForm.get('mensaje')?.touched">
+              El mensaje es requerido.
+            </small>
 
             <div class="input-box">
-              <input type="submit" value="Envíar" name="">
+              <input type="submit" textContent="Enviar">
             </div>
           </form>
         </div>

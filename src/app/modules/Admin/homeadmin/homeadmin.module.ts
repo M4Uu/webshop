@@ -4,6 +4,8 @@ import { PageComponent } from './page/page.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ChartModule } from 'primeng/chart';
 import { TableModule } from 'primeng/table';
+import { InplaceModule } from 'primeng/inplace';
+import { PopoverModule } from 'primeng/popover';
 
 const routes: Routes = [
   {
@@ -21,7 +23,9 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     CommonModule,
     ChartModule,
-    TableModule
+    TableModule,
+    InplaceModule,
+    PopoverModule
   ]
 })
 export class HomeadminModule { }

@@ -30,6 +30,9 @@ export class UsersService {
   getUsuarios(): Observable<any> {
     return this.http.get<any>(this.apiUrl.getUsuarios, { withCredentials: false });
   }
+  getReportes(): Observable<any> {
+    return this.http.get<any>(this.apiUrl.viewReportes, { withCredentials: false });
+  }
 
   getMovil(cedula: any): Observable<any> {
     const data = { cedula: cedula };
@@ -66,6 +69,14 @@ export class UsersService {
   isActive(cedula: any) {
     const data = { cedula: cedula };
     return this.http.post<any>(this.apiUrl.isActive, data, { withCredentials: false });
+  }
+
+  enviarReporte(data: any) {
+    return this.http.post<any>(this.apiUrl.sendReporte, data, { withCredentials: false });
+  }
+
+  verReporte(data: any) {
+    return this.http.post<any>(this.apiUrl.viewReportes, data, { withCredentials: false });
   }
 
 }

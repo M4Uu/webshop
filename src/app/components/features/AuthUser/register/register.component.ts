@@ -41,7 +41,9 @@ export class RegisterComponent {
   registerForm = this.formBuilder.group({
     'cedula': ['', [
       Validators.required,
-      numberValidator()
+      numberValidator(),
+      Validators.maxLength(8),
+      Validators.minLength(7)
     ]],
     'nombres': ['', [
       Validators.required,

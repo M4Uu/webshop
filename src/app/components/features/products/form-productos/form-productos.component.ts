@@ -18,6 +18,8 @@ import { FileUpload } from 'primeng/fileupload';
 import { CategoriaService } from '@app/core/services/api/categoria.service';
 import { Skeleton } from 'primeng/skeleton';
 import { Tooltip } from 'primeng/tooltip';
+import { Actualizar } from '@app/core/services/customs/actualizar.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-form-productos',
@@ -44,6 +46,7 @@ export class FormProductosComponent implements OnInit, OnDestroy {
   private APIToolkit = inject(ToolkitService);
   private APICategoria = inject(CategoriaService);
   private authService = inject(AuthService);
+  private actualizar = inject(Actualizar);
 
   private route = inject(ActivatedRoute);
   private fb = inject(FormBuilder);
@@ -105,17 +108,16 @@ export class FormProductosComponent implements OnInit, OnDestroy {
       },
       error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al contectar con el servidor, intente más tarde.', life: 3000 }),
     })
-
-
   }
 
   onSubmit() {
     this.editar = false;
-    this.productoForm.value.categoria_id = this.productoForm.value.categoria_id.code
+    this.productoForm.value.categoria_id = this.productoForm.value.categoria_id?.code
     if (this.isCreate) {
       this.APIProductos.createProducto(this.productoForm.value).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Producto creado', detail: 'El producto se creó correctamente.' });
+          this.actualizar.notificarActualizacionProducto(this.productoForm.value);
           this.productoForm.reset();
         },
         error: () => this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al crear el producto, intente más tarde.', life: 3000 })
