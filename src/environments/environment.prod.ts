@@ -17,6 +17,8 @@ export const environment = {
       toggleAdmin: APIURL + '/users/toggleadmin',
       toggleStatus: APIURL + '/users/togglstatus',
       isActive: APIURL + '/users/isactive',
+      sendReporte: APIURL + '/users/sendreporte',
+      viewReportes: APIURL + '/users/viewreportes',
     },
     toolkit: {
       banklist: APIURL + '/toolkit/listbanks',
@@ -25,7 +27,8 @@ export const environment = {
     ventas: {
       getVentas: APIURL + '/ventas',
       getVentasByCedula: APIURL + '/ventas/get',
-      insertar: APIURL + '/ventas/insertar'
+      insertar: APIURL + '/ventas/insertar',
+      analiticas: APIURL + '/ventas/analiticas'
     },
     productos: {
       getProductos: APIURL + '/productos',
@@ -51,6 +54,16 @@ export const environment = {
       getGuardados: APIURL + '/guardados',
       insertar: APIURL + '/guardados/insertar',
       eliminar: APIURL + '/guardados/eliminar'
+    },
+    pedidos: {
+      getPedidos: APIURL + '/pedidos',
+      getByCedula: APIURL + '/pedidos/get',
+      getById: APIURL + '/pedidos/id',
+      getPrioridad: APIURL + '/pedidos/prioridad',
+      create: APIURL + '/pedidos/create',
+      update: APIURL + '/pedidos/update',
+      updateAdmin: APIURL + '/pedidos/updateadmin',
+      delete: APIURL + '/pedidos/delete',
     }
   }
 };
